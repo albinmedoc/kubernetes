@@ -22,11 +22,21 @@ spec:
           image: traefik:v3.3
           args:
             - "--entryPoints.web.address=:80"
+
             - "--entryPoints.websecure.address=:443"
+            - "--entryPoints.websecure.http.tls=true"
+            - "--entryPoints.websecure.http.tls.certResolver=cloudflare"
+
             - "--global.sendanonymoususage=false"
+            - "--api.insecure=true"
+
             - "--providers.kubernetescrd"
             - "--providers.kubernetesingress"
-            - "--api.insecure=true"
+
+            - "--certificatesresolvers.cloudflare.acme.dnsChallenge.provider=cloudflare"
+            - "--certificatesresolvers.cloudflare.acme.dnsChallenge.resolvers=1.1.1.1"
+            - "--certificatesresolvers.cloudflare.acme.email=kontakt@albinmedoc.se"
+            - "--certificatesresolvers.cloudflare.acme.storage=/ssl-certs/acme-cloudflare.json"
           ports:
             - name: web
               containerPort: 80
@@ -34,3 +44,16 @@ spec:
               containerPort: 443
             - name: traefik
               containerPort: 8080
+          env:
+            - name: CF_DNS_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: traefik-acme-cloudflare
+                  key: CF_DNS_API_TOKEN
+          volumeMounts:
+            - name: traefik-storage
+              mountPath: /ssl-certs
+      volumes:
+        - name: traefik-storage
+          persistentVolumeClaim:
+            claimName: traefik-storage-pvc
