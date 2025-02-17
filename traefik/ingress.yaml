@@ -1,0 +1,12 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  routes:
+    - match: Host(`kube-traefik.albinmedoc.se`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService

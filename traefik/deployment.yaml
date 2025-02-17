@@ -1,0 +1,36 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: traefik
+  namespace: traefik
+  labels:
+    app: traefik
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik
+  template:
+    metadata:
+      labels:
+        app: traefik
+    spec:
+      serviceAccountName: traefik-account
+      containers:
+        - name: traefik
+          image: traefik:v3.3
+          args:
+            - "--entryPoints.web.address=:80"
+            - "--entryPoints.websecure.address=:443"
+            - "--global.sendanonymoususage=false"
+            - "--providers.kubernetescrd"
+            - "--providers.kubernetesingress"
+            - "--api.insecure=true"
+          ports:
+            - name: web
+              containerPort: 80
+            - name: websecure
+              containerPort: 443
+            - name: traefik
+              containerPort: 8080
