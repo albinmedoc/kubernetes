@@ -10,5 +10,8 @@ spec:
     - match: Host(`resor.albinmedoc.se`)
       kind: Rule
       services:
-      - name: photoprism
-        port: 80
+        - name: photoprism
+          port: 80
+      middlewares:
+        - name: authentik
+          namespace: authentik

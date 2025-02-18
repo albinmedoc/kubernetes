@@ -11,3 +11,6 @@ parameters:
   csi.storage.k8s.io/node-stage-secret-namespace: default
 volumeBindingMode: Immediate
 allowVolumeExpansion: true
+mountOptions:
+  - dir_mode=0600
+  - file_mode=0600

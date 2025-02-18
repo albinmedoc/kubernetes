@@ -31,6 +31,7 @@ spec:
             - "--api.insecure=true"
 
             - "--providers.kubernetescrd"
+            - "--providers.kubernetescrd.allowCrossNamespace=true"
             - "--providers.kubernetesingress"
 
             - "--certificatesresolvers.cloudflare.acme.dnsChallenge.provider=cloudflare"
@@ -56,4 +57,4 @@ spec:
       volumes:
         - name: traefik-storage
           persistentVolumeClaim:
-            claimName: traefik-storage-pvc
+            claimName: traefik-pvc
