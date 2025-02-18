@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: photoprism
+  namespace: photoprism-resor
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`resor.albinmedoc.se`)
+      kind: Rule
+      services:
+      - name: photoprism
+        port: 80

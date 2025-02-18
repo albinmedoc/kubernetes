@@ -1,0 +1,18 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: photoprism-resor
+provisioner: smb.csi.k8s.io
+parameters:
+  source: //192.168.86.107/Kubernetes/photoprism-resor
+  csi.storage.k8s.io/provisioner-secret-name: omv-credentials
+  csi.storage.k8s.io/provisioner-secret-namespace: default
+  csi.storage.k8s.io/node-stage-secret-name: omv-credentials
+  csi.storage.k8s.io/node-stage-secret-namespace: default
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+mountOptions:
+  - dir_mode=0700
+  - file_mode=0700
+  - uid=1000
+  - gid=1000
