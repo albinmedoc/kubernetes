@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: photoprism
+  namespace: photoprism-minnen
+spec:
+  selector:
+    matchLabels:
+      app: photoprism
+  serviceName: photoprism
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: photoprism
+    spec:
+      containers:
+        - name: photoprism
+          image: photoprism/photoprism:latest
+          env:
+            - name: PHOTOPRISM_SITE_URL
+              value: https://minnen.albinmedoc.se
+            - name: PHOTOPRISM_DISABLE_CHOWN
+              value: "true"
+            - name: PHOTOPRISM_DATABASE_DRIVER
+              value: mysql
+            - name: PHOTOPRISM_SITE_CAPTION
+              value: "Minnen"
+            - name: PHOTOPRISM_AUTH_MODE
+              value: "public"
+            - name: PHOTOPRISM_DISABLE_SETTINGS
+              value: "true"
+            - name: PHOTOPRISM_UPLOAD_NSFW
+              value: "true"
+            - name: PHOTOPRISM_DISABLE_VECTORS
+              value: "false"
+            - name: PHOTOPRISM_HTTP_HOST
+              value: 0.0.0.0
+            - name: PHOTOPRISM_HTTP_PORT
+              value: "2342"
+          # Load database environment variables from secret
+          envFrom:
+            - secretRef:
+                name: photoprism-secrets
+                optional: false
+          ports:
+            - containerPort: 2342
+              name: http
+          volumeMounts:
+            - mountPath: /photoprism/originals
+              name: originals
+            - mountPath: /photoprism/storage
+              name: storage
+          readinessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: http
+      volumes:
+        - name: originals
+          nfs:
+            path: /export/Minnen
+            server: 192.168.86.107
+        - name: storage
+          nfs:
+            path: /export/Kubernetes/photoprism-minnen/storage
+            server: 192.168.86.107
