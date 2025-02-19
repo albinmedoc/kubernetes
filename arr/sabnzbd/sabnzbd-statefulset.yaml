@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sabnzbd
+  namespace: arr
+spec:
+  serviceName: sabnzbd
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sabnzbd
+  template:
+    metadata:
+      labels:
+        app: sabnzbd
+    spec:
+      containers:
+        - name: sabnzbd
+          image: linuxserver/sabnzbd:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /downloads
+              name: downloads
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/arr/sabnzbd
+            server: 192.168.86.107
+        - name: downloads
+          nfs:
+            path: /export/Media/Downloads/SABnzbd
+            server: 192.168.86.107
