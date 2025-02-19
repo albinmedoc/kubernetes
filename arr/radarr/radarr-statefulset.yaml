@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: radarr
+  namespace: arr
+spec:
+  serviceName: radarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+        - name: radarr
+          image: linuxserver/radarr:latest
+          ports:
+            - containerPort: 7878
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /media
+              name: media
+          env:
+            - name: DOCKER_MODS
+              value: "linuxserver/mods:radarr-striptracks"
+            - name: STRIPTRACKS_ARGS
+              value: "--audio :org:eng:swe --subs :org:eng:swe"
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/arr/radarr
+            server: 192.168.86.107
+        - name: media
+          nfs:
+            path: /export/Media
+            server: 192.168.86.107
