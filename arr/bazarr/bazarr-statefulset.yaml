@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bazarr
+  namespace: arr
+spec:
+  serviceName: bazarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bazarr
+  template:
+    metadata:
+      labels:
+        app: bazarr
+    spec:
+      containers:
+        - name: bazarr
+          image: linuxserver/bazarr:latest
+          ports:
+            - containerPort: 6767
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /media
+              name: media
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/arr/bazarr
+            server: 192.168.86.107
+        - name: media
+          nfs:
+            path: /export/Media/Completed
+            server: 192.168.86.107
