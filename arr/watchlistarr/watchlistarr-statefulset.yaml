@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: watchlistarr
+  namespace: arr
+spec:
+  serviceName: watchlistarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: watchlistarr
+  template:
+    metadata:
+      labels:
+        app: watchlistarr
+    spec:
+      containers:
+        - name: watchlistarr
+          image: nylonee/watchlistarr:latest
+          ports:
+            - containerPort: 6246
+          volumeMounts:
+            - mountPath: /app/config
+              name: config
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/arr/watchlistarr
+            server: 192.168.86.107
