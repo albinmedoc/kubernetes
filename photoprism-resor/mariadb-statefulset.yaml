@@ -17,19 +17,16 @@ spec:
       containers:
         - name: mariadb
           image: mariadb:latest
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              value: your_password_here
           ports:
             - containerPort: 3306
           volumeMounts:
             - mountPath: /var/lib/mysql
-              subPath: database
-              name: photoprism-data
+              name: database
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
       volumes:
-        - name: photoprism-data
-          persistentVolumeClaim:
-            claimName: mariadb-pvc
+        - name: database
+          nfs:
+            path: /export/Kubernetes/photoprism-resor/database
+            server: 192.168.86.107
