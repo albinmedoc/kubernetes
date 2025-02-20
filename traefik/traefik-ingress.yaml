@@ -4,8 +4,10 @@ metadata:
   name: traefik
   namespace: traefik
 spec:
+  entryPoints:
+    - websecure
   routes:
-    - match: Host(`kube-traefik.albinmedoc.se`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+    - match: Host(`kube-traefik.albinmedoc.se`)
       kind: Rule
       services:
         - name: api@internal
