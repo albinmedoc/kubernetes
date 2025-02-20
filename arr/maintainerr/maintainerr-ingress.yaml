@@ -1,0 +1,18 @@
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: maintainerr
+  namespace: arr
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`maintainerr.flexflix.top`)
+      kind: Rule
+      services:
+        - name: maintainerr
+          port: 6246
+      middlewares:
+        - name: authentik
+          namespace: authentik

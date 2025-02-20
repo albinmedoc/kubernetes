@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: maintainerr
+  namespace: arr
+spec:
+  serviceName: maintainerr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maintainerr
+  template:
+    metadata:
+      labels:
+        app: maintainerr
+    spec:
+      containers:
+        - name: maintainerr
+          image: jorenn92/maintainerr:latest
+          ports:
+            - containerPort: 6246
+          volumeMounts:
+            - mountPath: /opt/data
+              name: config
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/arr/maintainerr
+            server: 192.168.86.107
