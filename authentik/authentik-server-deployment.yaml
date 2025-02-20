@@ -14,9 +14,9 @@ spec:
         app: authentik-server
     spec:
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+        runAsUser: 1004
+        runAsGroup: 100
+        fsGroup: 100
       containers:
         - name: authentik-server
           image: ghcr.io/goauthentik/server:latest
@@ -52,11 +52,12 @@ spec:
           volumeMounts:
             - mountPath: /media
               subPath: media
-              name: authentik-data
+              name: config
             - mountPath: /templates
               subPath: custom-templates
-              name: authentik-data
+              name: config
       volumes:
-        - name: authentik-data
-          persistentVolumeClaim:
-            claimName: authentik-pvc
+        - name: config
+          nfs:
+            path: /export/Kubernetes/authentik
+            server: 192.168.86.107
