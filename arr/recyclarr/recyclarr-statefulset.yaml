@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: recyclarr
+  namespace: arr
+spec:
+  serviceName: recyclarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recyclarr
+  template:
+    metadata:
+      labels:
+        app: recyclarr
+    spec:
+      containers:
+        - name: recyclarr
+          image: recyclarr/recyclarr:6
+          volumeMounts:
+            - mountPath: /config
+              name: config
+          env:
+            - name: CRON_SCHEDULE
+              value: "@weekly"
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/arr/recyclarr
+            server: 192.168.86.107
