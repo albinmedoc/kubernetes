@@ -17,8 +17,6 @@ spec:
       containers:
         - name: watchlistarr
           image: nylonee/watchlistarr:latest
-          ports:
-            - containerPort: 6246
           volumeMounts:
             - mountPath: /app/config
               name: config
