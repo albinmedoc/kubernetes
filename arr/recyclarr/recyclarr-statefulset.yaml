@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: recyclarr
-          image: recyclarr/recyclarr:6
+          image: recyclarr/recyclarr:7
           volumeMounts:
             - mountPath: /config
               name: config
