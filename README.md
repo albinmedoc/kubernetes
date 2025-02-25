@@ -20,3 +20,6 @@
 ## Adding new worker
 
 1. `talosctl apply-config --insecure --nodes <IP_OF_WORKER_NODE> --file worker.yaml`
+
+## set kubeconfig
+`export KUBECONFIG=kubeconfig`
