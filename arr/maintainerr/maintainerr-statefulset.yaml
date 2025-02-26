@@ -23,8 +23,8 @@ spec:
             - mountPath: /opt/data
               name: config
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: 1004
+            runAsGroup: 100
       volumes:
         - name: config
           nfs:
