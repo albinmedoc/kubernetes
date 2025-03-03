@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wishlist
+  namespace: wishlist
+spec:
+  serviceName: wishlist
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wishlist
+  template:
+    metadata:
+      labels:
+        app: wishlist
+    spec:
+      securityContext:
+        fsGroup: 100
+      containers:
+        - name: wishlist
+          image: cmintey/wishlist:latest
+          env:
+            - name: ORIGIN
+              value: "https://wishlist.albinmedoc.se"
+            - name: HEADER_AUTH_ENABLED
+              value: "true"
+            - name: HEADER_USERNAME
+              value: "X-authentik-username"
+            - name: HEADER_NAME
+              value: "X-authentik-name"
+            - name: HEADER_EMAIL
+              value: "X-authentik-email"
+          volumeMounts:
+            - mountPath: /usr/src/app/uploads
+              subPath: uploads
+              name: config
+            - mountPath: /usr/src/app/data
+              subPath: data
+              name: config
+          securityContext:
+            runAsUser: 1004
+            runAsGroup: 100
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/wishlist
+            server: 192.168.86.107

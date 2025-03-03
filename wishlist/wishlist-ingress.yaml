@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: wishlist
+  namespace: wishlist
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`wishlist.albinmedoc.se`)
+      kind: Rule
+      services:
+        - name: wishlist
+          port: 3280
+      middlewares:
+        - name: authentik
+          namespace: authentik
