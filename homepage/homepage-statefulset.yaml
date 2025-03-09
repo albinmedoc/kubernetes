@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: homepage
+  namespace: homepage
+spec:
+  serviceName: homepage
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homepage
+  template:
+    metadata:
+      labels:
+        app: homepage
+    spec:
+      containers:
+        - name: homepage
+          image: gethomepage/homepage:latest
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - mountPath: /app/config
+              name: config
+          env:
+            - name: PUID
+              value: "1004"
+            - name: PGID
+              value: "100"
+          securityContext:
+            runAsUser: 1004
+            runAsGroup: 100
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/homepage
+            server: 192.168.86.107
