@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kometa
+  namespace: arr
+spec:
+  schedule: "0 1,7,13,19 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          securityContext:
+            runAsUser: 1004
+            runAsGroup: 100
+          containers:
+            - name: kometa
+              image: kometateam/kometa:latest
+              args: [ "--run", "--read-only-config" ]
+              volumeMounts:
+                - name: config
+                  mountPath: /config
+          volumes:
+            - name: config
+              nfs:
+                path: /export/Kubernetes/arr/kometa
+                server: 192.168.86.107
