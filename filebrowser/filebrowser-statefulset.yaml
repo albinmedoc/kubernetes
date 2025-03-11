@@ -27,7 +27,11 @@ spec:
               subPath: database.db
               name: config
             - mountPath: /srv
-              name: srv
+              name: data
+            - mountPath: /srv/Kubernetes
+              name: kubernetes
+            - mountPath: /srv/Media
+              name: media
           securityContext:
             runAsUser: 1004
             runAsGroup: 100
@@ -36,7 +40,15 @@ spec:
           nfs:
             path: /export/Kubernetes/filebrowser
             server: 192.168.86.107
-        - name: srv
+        - name: data
+          nfs:
+            path: /export/Data
+            server: 192.168.86.107
+        - name: kubernetes
           nfs:
             path: /export/Kubernetes
+            server: 192.168.86.107
+        - name: media
+          nfs:
+            path: /export/Media
             server: 192.168.86.107
