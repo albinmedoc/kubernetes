@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: filebrowser
+  namespace: filebrowser
+spec:
+  serviceName: filebrowser
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filebrowser
+  template:
+    metadata:
+      labels:
+        app: filebrowser
+    spec:
+      containers:
+        - name: filebrowser
+          image: filebrowser/filebrowser:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /.filebrowser.json
+              subPath: filebrowser.json
+              name: config
+            - mountPath: /database.db
+              subPath: database.db
+              name: config
+            - mountPath: /srv
+              name: srv
+          securityContext:
+            runAsUser: 1004
+            runAsGroup: 100
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/filebrowser
+            server: 192.168.86.107
+        - name: srv
+          nfs:
+            path: /export/Kubernetes
+            server: 192.168.86.107
