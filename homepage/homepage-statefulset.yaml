@@ -22,11 +22,15 @@ spec:
           volumeMounts:
             - mountPath: /app/config
               name: config
+            - mountPath: /mnt/disk
+              name: disk
           env:
             - name: PUID
               value: "1004"
             - name: PGID
               value: "100"
+            - name: KUBECONFIG
+              value: /app/config/kubeconfig
           securityContext:
             runAsUser: 1004
             runAsGroup: 100
@@ -34,4 +38,8 @@ spec:
         - name: config
           nfs:
             path: /export/Kubernetes/homepage
+            server: 192.168.86.107
+        - name: disk
+          nfs:
+            path: /export/Disk
             server: 192.168.86.107
