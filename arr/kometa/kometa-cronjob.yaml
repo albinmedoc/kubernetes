@@ -9,6 +9,7 @@ spec:
     spec:
       template:
         spec:
+          restartPolicy: OnFailure
           securityContext:
             runAsUser: 1004
             runAsGroup: 100
