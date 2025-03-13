@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: isponsorblocktv
+  namespace: isponsorblocktv
+spec:
+  serviceName: isponsorblocktv
+  replicas: 1
+  selector:
+    matchLabels:
+      app: isponsorblocktv
+  template:
+    metadata:
+      labels:
+        app: isponsorblocktv
+    spec:
+      securityContext:
+        fsGroup: 100
+      containers:
+        - name: isponsorblocktv
+          image: dmunozv04/isponsorblocktv:latest
+          volumeMounts:
+            - mountPath: /app/data
+              name: config
+          securityContext:
+            runAsUser: 1004
+            runAsGroup: 100
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/isponsorblocktv
+            server: 192.168.86.107
