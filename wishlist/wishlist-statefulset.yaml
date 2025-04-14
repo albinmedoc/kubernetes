@@ -22,14 +22,6 @@ spec:
           env:
             - name: ORIGIN
               value: "https://wishlist.albinmedoc.se"
-            - name: HEADER_AUTH_ENABLED
-              value: "true"
-            - name: HEADER_USERNAME
-              value: "X-authentik-username"
-            - name: HEADER_NAME
-              value: "X-authentik-name"
-            - name: HEADER_EMAIL
-              value: "X-authentik-email"
           volumeMounts:
             - mountPath: /usr/src/app/uploads
               subPath: uploads

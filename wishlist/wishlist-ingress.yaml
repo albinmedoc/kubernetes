@@ -12,6 +12,3 @@ spec:
       services:
         - name: wishlist
           port: 3280
-      middlewares:
-        - name: authentik
-          namespace: authentik
