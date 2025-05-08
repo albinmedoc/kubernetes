@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: authentik-worker
-          image: ghcr.io/goauthentik/server:latest
+          image: ghcr.io/goauthentik/server:2025.2
           args:
             - worker
           env:

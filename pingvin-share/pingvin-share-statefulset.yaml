@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pingvin-share
+  namespace: pingvin-share
+spec:
+  serviceName: pingvin-share
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingvin-share
+  template:
+    metadata:
+      labels:
+        app: pingvin-share
+    spec:
+      containers:
+        - name: pingvin-share
+          image: stonith404/pingvin-share:latest
+          ports:
+            - containerPort: 3333
+          volumeMounts:
+            - mountPath: /opt/app/backend/data
+              name: config
+            - mountPath: /opt/app/frontend/public/img
+              name: config
+              subPath: images
+          env:
+            - name: PUID
+              value: "1004"
+            - name: PGID
+              value: "100"
+            - name: TRUST_PROXY
+              value: "true"
+          securityContext:
+            runAsUser: 1004
+            runAsGroup: 100
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/pingvin-share
+            server: 192.168.86.107

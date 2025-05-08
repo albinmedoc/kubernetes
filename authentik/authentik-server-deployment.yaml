@@ -19,7 +19,7 @@ spec:
         fsGroup: 100
       containers:
         - name: authentik-server
-          image: ghcr.io/goauthentik/server:latest
+          image: ghcr.io/goauthentik/server:2025.2
           args:
             - server
           env:
