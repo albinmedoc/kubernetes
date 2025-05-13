@@ -1,14 +1,15 @@
+
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik
-  namespace: traefik
+  name: portainer
+  namespace: portainer-web
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik.albinmedoc.se`)
+    - match: Host(`portainer.albinmedoc.se`)
       kind: Rule
       services:
-        - name: api@internal
-          kind: TraefikService
+        - name: portainer
+          port: 9000
