@@ -29,8 +29,6 @@ spec:
               value: "1004"
             - name: PGID
               value: "100"
-            - name: KUBECONFIG
-              value: /app/config/kubeconfig
           securityContext:
             runAsUser: 1004
             runAsGroup: 100
