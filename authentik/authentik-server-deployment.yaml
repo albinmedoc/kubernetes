@@ -13,10 +13,6 @@ spec:
       labels:
         app: authentik-server
     spec:
-      securityContext:
-        runAsUser: 1004
-        runAsGroup: 100
-        fsGroup: 100
       containers:
         - name: authentik-server
           image: ghcr.io/goauthentik/server:2025.4

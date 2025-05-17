@@ -24,9 +24,6 @@ spec:
               name: config
             - mountPath: /downloads
               name: downloads
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: config
           nfs:

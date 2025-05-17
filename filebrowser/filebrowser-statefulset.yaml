@@ -32,9 +32,6 @@ spec:
               name: kubernetes
             - mountPath: /srv/Media
               name: media
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: config
           nfs:

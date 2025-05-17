@@ -22,9 +22,6 @@ spec:
           volumeMounts:
             - mountPath: 	/data
               name: data
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: data
           nfs:

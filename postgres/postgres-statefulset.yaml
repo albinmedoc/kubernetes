@@ -32,9 +32,6 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: database
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: database
           nfs:

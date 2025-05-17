@@ -14,8 +14,6 @@ spec:
       labels:
         app: wishlist
     spec:
-      securityContext:
-        fsGroup: 100
       containers:
         - name: wishlist
           image: cmintey/wishlist:latest
@@ -29,9 +27,6 @@ spec:
             - mountPath: /usr/src/app/data
               subPath: data
               name: config
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: config
           nfs:

@@ -18,7 +18,7 @@ spec:
         - name: pingvin-share
           image: stonith404/pingvin-share:latest
           ports:
-            - containerPort: 3333
+            - containerPort: 3000
           volumeMounts:
             - mountPath: /opt/app/backend/data
               name: config
@@ -26,15 +26,8 @@ spec:
               name: config
               subPath: images
           env:
-            - name: PUID
-              value: "1004"
-            - name: PGID
-              value: "100"
             - name: TRUST_PROXY
               value: "true"
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: config
           nfs:

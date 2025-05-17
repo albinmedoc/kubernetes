@@ -22,9 +22,6 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: database
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: database
           nfs:

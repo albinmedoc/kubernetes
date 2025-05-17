@@ -14,17 +14,12 @@ spec:
       labels:
         app: isponsorblocktv
     spec:
-      securityContext:
-        fsGroup: 100
       containers:
         - name: isponsorblocktv
           image: dmunozv04/isponsorblocktv:latest
           volumeMounts:
             - mountPath: /app/data
               name: config
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: config
           nfs:

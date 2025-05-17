@@ -25,15 +25,8 @@ spec:
             - mountPath: /mnt/disk
               name: disk
           env:
-            - name: PUID
-              value: "1004"
-            - name: PGID
-              value: "100"
             - name: HOMEPAGE_ALLOWED_HOSTS
               value: "hub.albinmedoc.se"
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: config
           nfs:

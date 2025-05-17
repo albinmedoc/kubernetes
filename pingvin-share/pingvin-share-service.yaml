@@ -8,5 +8,5 @@ spec:
     app: pingvin-share
   ports:
     - protocol: TCP
-      port: 3333
-      targetPort: 3333
+      port: 3000
+      targetPort: 3000

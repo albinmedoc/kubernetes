@@ -16,10 +16,6 @@ spec:
       labels:
         app: traefik
     spec:
-      securityContext:
-        runAsUser: 1004
-        runAsGroup: 100
-        fsGroup: 100
       serviceAccountName: traefik-account
       containers:
         - name: traefik

@@ -29,9 +29,6 @@ spec:
               value: "linuxserver/mods:radarr-striptracks"
             - name: STRIPTRACKS_ARGS
               value: "--audio :org:eng:swe --subs :org:eng:swe"
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: config
           nfs:

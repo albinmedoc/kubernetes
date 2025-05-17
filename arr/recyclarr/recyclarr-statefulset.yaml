@@ -1,3 +1,4 @@
+# Setup this as an CronJob to run weekly
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -23,9 +24,6 @@ spec:
           env:
             - name: CRON_SCHEDULE
               value: "@weekly"
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: config
           nfs:

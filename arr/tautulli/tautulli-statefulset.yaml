@@ -22,9 +22,6 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
       volumes:
         - name: config
           nfs:

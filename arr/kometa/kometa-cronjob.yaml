@@ -10,9 +10,6 @@ spec:
       template:
         spec:
           restartPolicy: OnFailure
-          securityContext:
-            runAsUser: 1004
-            runAsGroup: 100
           containers:
             - name: kometa
               image: kometateam/kometa:latest
