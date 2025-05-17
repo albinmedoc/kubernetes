@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: traefik
+  name: traefik-nodeport
   namespace: traefik
 spec:
   type: NodePort
@@ -14,3 +14,16 @@ spec:
     nodePort: 30443
   selector:
     app: traefik
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-clusterip
+  namespace: traefik
+spec:
+  selector:
+    app: traefik
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
