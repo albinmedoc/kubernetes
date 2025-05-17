@@ -29,6 +29,8 @@ spec:
               value: "1004"
             - name: PGID
               value: "100"
+            - name: HOMEPAGE_ALLOWED_HOSTS
+              value: "hub.albinmedoc.se"
           securityContext:
             runAsUser: 1004
             runAsGroup: 100
@@ -41,3 +43,4 @@ spec:
           nfs:
             path: /export/Disk
             server: 192.168.86.107
+      serviceAccountName: homepage-account
