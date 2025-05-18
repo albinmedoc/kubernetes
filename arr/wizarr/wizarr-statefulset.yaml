@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wizarr
+  namespace: arr
+spec:
+  serviceName: wizarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wizarr
+  template:
+    metadata:
+      labels:
+        app: wizarr
+    spec:
+      containers:
+        - name: wizarr
+          image: ghcr.io/wizarrrr/wizarr:latest
+          ports:
+            - containerPort: 5690
+          volumeMounts:
+            - mountPath: /data/database
+              name: data
+          env:
+            - name: WIZARR_PORT
+              value: "5690"
+      volumes:
+        - name: data
+          nfs:
+            path: /export/Kubernetes/arr/wizarr
+            server: 192.168.86.107
