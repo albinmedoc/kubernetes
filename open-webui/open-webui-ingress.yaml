@@ -1,0 +1,15 @@
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: open-webui
+  namespace: open-webui
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`ai.albinmedoc.se`)
+      kind: Rule
+      services:
+        - name: open-webui
+          port: 8080
