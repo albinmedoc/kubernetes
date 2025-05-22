@@ -25,6 +25,9 @@ spec:
           env:
             - name: OLLAMA_BASE_URL
               value: "http://192.168.86.35:11434"
+          envFrom:
+            - secretRef:
+                name: open-webui-secrets
       volumes:
         - name: data
           nfs:
