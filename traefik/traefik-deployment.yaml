@@ -17,6 +17,12 @@ spec:
         app: traefik
     spec:
       serviceAccountName: traefik-account
+      nodeSelector:
+        traefik: "true"
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
       containers:
         - name: traefik
           image: traefik:v3.3

@@ -4,7 +4,8 @@ metadata:
   name: traefik-nodeport
   namespace: traefik
 spec:
-  type: NodePort
+  type: LoadBalancer
+  externalTrafficPolicy: Local
   ports:
   - name: web
     port: 80
