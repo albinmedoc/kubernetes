@@ -19,7 +19,6 @@ spec:
           image: docker.gitea.com/gitea:1.23.8
           ports:
             - containerPort: 3000
-            - containerPort: 22
           volumeMounts:
             - mountPath: /data
               name: data
