@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: gitea
+  namespace: gitea
+spec:
+  serviceName: gitea
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitea
+  template:
+    metadata:
+      labels:
+        app: gitea
+    spec:
+      containers:
+        - name: gitea
+          image: docker.gitea.com/gitea:1.23.8
+          ports:
+            - containerPort: 3000
+            - containerPort: 22
+          volumeMounts:
+            - mountPath: /data
+              name: data
+      volumes:
+        - name: data
+          nfs:
+            path: /export/Kubernetes/gitea
+            server: 192.168.86.107
