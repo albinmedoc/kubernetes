@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: authentik-server
+  namespace: authentik
+spec:
+  serviceName: authentik-server
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentik-server
+  template:
+    metadata:
+      labels:
+        app: authentik-server
+    spec:
+      containers:
+        - name: authentik-server
+          image: ghcr.io/goauthentik/server:2025.4
+          args:
+            - server
+          envFrom:
+            - secretRef:
+                name: authentik-secrets
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - mountPath: /media
+              subPath: media
+              name: config
+            - mountPath: /templates
+              subPath: custom-templates
+              name: config
+      volumes:
+        - name: config
+          nfs:
+            path: /export/Kubernetes/authentik
+            server: 192.168.86.107

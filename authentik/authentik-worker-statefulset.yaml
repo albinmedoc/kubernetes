@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: authentik-worker
+  namespace: authentik
+spec:
+  serviceName: authentik-worker
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentik-worker
+  template:
+    metadata:
+      labels:
+        app: authentik-worker
+    spec:
+      containers:
+        - name: authentik-worker
+          image: ghcr.io/goauthentik/server:2025.4
+          args:
+            - worker
+          envFrom:
+            - secretRef:
+                name: authentik-secrets
