@@ -31,6 +31,10 @@ spec:
             - "--global.sendanonymoususage=false"
 
             - "--entryPoints.web.address=:80"
+            - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
+            - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
+            - "--entryPoints.web.http.redirections.entrypoint.permanent=true"
+
             - "--entryPoints.websecure.address=:443"
             - "--entryPoints.websecure.http.tls=true"
             - "--entryPoints.websecure.http.tls.certResolver=cloudflare"
@@ -62,6 +66,13 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
       volumes:
         - name: config
           nfs:
