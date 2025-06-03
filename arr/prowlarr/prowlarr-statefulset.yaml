@@ -3,16 +3,23 @@ kind: StatefulSet
 metadata:
   name: prowlarr
   namespace: arr
+  labels:
+    app.kubernetes.io/name: prowlarr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: prowlarr
   replicas: 1
   selector:
     matchLabels:
-      app: prowlarr
+      app.kubernetes.io/name: prowlarr
+      app.kubernetes.io/part-of: arr
   template:
     metadata:
       labels:
-        app: prowlarr
+        app.kubernetes.io/name: prowlarr
+        app.kubernetes.io/part-of: arr
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: prowlarr

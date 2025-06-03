@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: prowlarr
   namespace: arr
+  labels:
+    app.kubernetes.io/name: prowlarr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: prowlarr
+    app.kubernetes.io/name: prowlarr
+    app.kubernetes.io/part-of: arr
   ports:
     - protocol: TCP
       port: 9696
