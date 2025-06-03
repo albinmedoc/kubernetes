@@ -3,9 +3,13 @@ kind: Service
 metadata:
   name: adminer
   namespace: adminer
+  labels:
+    app.kubernetes.io/name: adminer
+    app.kubernetes.io/component: management
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: adminer
+    app.kubernetes.io/name: adminer
   ports:
     - protocol: TCP
       port: 8080

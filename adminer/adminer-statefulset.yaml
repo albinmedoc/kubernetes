@@ -3,16 +3,22 @@ kind: StatefulSet
 metadata:
   name: adminer
   namespace: adminer
+  labels:
+    app.kubernetes.io/name: adminer
+    app.kubernetes.io/component: management
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: adminer
   replicas: 1
   selector:
     matchLabels:
-      app: adminer
+      app.kubernetes.io/name: adminer
   template:
     metadata:
       labels:
-        app: adminer
+        app.kubernetes.io/name: adminer
+        app.kubernetes.io/component: management
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - image: adminer:latest
