@@ -1,0 +1,15 @@
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: adminer
+  namespace: adminer
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`db.albinmedoc.se`)
+      kind: Rule
+      services:
+        - name: adminer
+          port: 8080

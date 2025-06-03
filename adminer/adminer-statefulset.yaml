@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: adminer
+  namespace: adminer
+spec:
+  serviceName: adminer
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adminer
+  template:
+    metadata:
+      labels:
+        app: adminer
+    spec:
+      containers:
+        - image: adminer:latest
+          name: adminer
+          ports:
+            - containerPort: 8080
