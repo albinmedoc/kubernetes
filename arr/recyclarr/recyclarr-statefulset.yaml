@@ -4,16 +4,23 @@ kind: StatefulSet
 metadata:
   name: recyclarr
   namespace: arr
+  labels:
+    app.kubernetes.io/name: recyclarr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: recyclarr
   replicas: 1
   selector:
     matchLabels:
-      app: recyclarr
+      app.kubernetes.io/name: recyclarr
+      app.kubernetes.io/part-of: arr
   template:
     metadata:
       labels:
-        app: recyclarr
+        app.kubernetes.io/name: recyclarr
+        app.kubernetes.io/part-of: arr
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: recyclarr
