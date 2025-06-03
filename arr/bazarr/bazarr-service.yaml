@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: bazarr
   namespace: arr
+  labels:
+    app.kubernetes.io/name: bazarr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: bazarr
+    app.kubernetes.io/name: bazarr
+    app.kubernetes.io/part-of: arr
   ports:
     - protocol: TCP
       port: 6767

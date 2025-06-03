@@ -3,16 +3,22 @@ kind: StatefulSet
 metadata:
   name: bazarr
   namespace: arr
+  labels:
+    app.kubernetes.io/name: bazarr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: bazarr
   replicas: 1
   selector:
     matchLabels:
-      app: bazarr
+      app.kubernetes.io/name: bazarr
   template:
     metadata:
       labels:
-        app: bazarr
+        app.kubernetes.io/name: bazarr
+        app.kubernetes.io/part-of: arr
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: bazarr
