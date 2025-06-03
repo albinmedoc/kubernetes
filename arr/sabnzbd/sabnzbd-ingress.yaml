@@ -3,6 +3,10 @@ kind: IngressRoute
 metadata:
   name: sabnzbd
   namespace: arr
+  labels:
+    app.kubernetes.io/name: sabnzbd
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   entryPoints:
     - websecure
