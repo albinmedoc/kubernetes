@@ -3,11 +3,20 @@ kind: CronJob
 metadata:
   name: kometa
   namespace: arr
+  labels:
+    app.kubernetes.io/name: kometa
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   schedule: "0 1,7,13,19 * * *"
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: kometa
+            app.kubernetes.io/part-of: arr
+            app.kubernetes.io/managed-by: kubectl
         spec:
           restartPolicy: OnFailure
           containers:
