@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: maintainerr
   namespace: arr
+  labels:
+    app.kubernetes.io/name: maintainerr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: maintainerr
+    app.kubernetes.io/name: maintainerr
+    app.kubernetes.io/part-of: arr
   ports:
     - protocol: TCP
       port: 6246
