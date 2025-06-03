@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: radarr
   namespace: arr
+  labels:
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: radarr
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/part-of: arr
   ports:
     - protocol: TCP
       port: 7878
