@@ -2,3 +2,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: photoprism-resor
+  labels:
+    app.kubernetes.io/name: photoprism
+    app.kubernetes.io/instance: resor
+    app.kubernetes.io/component: photo-manager
+    app.kubernetes.io/managed-by: kubectl
