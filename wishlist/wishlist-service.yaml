@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: wishlist
   namespace: wishlist
+  labels:
+    app.kubernetes.io/name: wishlist
+    app.kubernetes.io/component: wishlist-manager
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: wishlist
+    app.kubernetes.io/name: wishlist
+    app.kubernetes.io/component: wishlist-manager
   ports:
     - protocol: TCP
       port: 3280
