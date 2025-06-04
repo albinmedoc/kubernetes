@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: gitea
   namespace: gitea
+  labels:
+    app.kubernetes.io/name: gitea
+    app.kubernetes.io/component: git-server
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: gitea
+    app.kubernetes.io/name: gitea
+    app.kubernetes.io/component: git-server
   ports:
     - protocol: TCP
       port: 3000
