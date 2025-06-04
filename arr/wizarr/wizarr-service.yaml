@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: wizarr
   namespace: arr
+  labels:
+    app.kubernetes.io/name: wizarr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: wizarr
+    app.kubernetes.io/name: wizarr
+    app.kubernetes.io/part-of: arr
   ports:
     - protocol: TCP
       port: 5690
