@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: tautulli
   namespace: arr
+  labels:
+    app.kubernetes.io/name: tautulli
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: tautulli
+    app.kubernetes.io/name: tautulli
+    app.kubernetes.io/part-of: arr
   ports:
     - protocol: TCP
       port: 8181

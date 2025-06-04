@@ -3,6 +3,10 @@ kind: IngressRoute
 metadata:
   name: tautulli
   namespace: arr
+  labels:
+    app.kubernetes.io/name: tautulli
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   entryPoints:
     - websecure
