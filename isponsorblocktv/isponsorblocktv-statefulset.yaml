@@ -3,16 +3,23 @@ kind: StatefulSet
 metadata:
   name: isponsorblocktv
   namespace: isponsorblocktv
+  labels:
+    app.kubernetes.io/name: isponsorblocktv
+    app.kubernetes.io/component: content-filter
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: isponsorblocktv
   replicas: 1
   selector:
     matchLabels:
-      app: isponsorblocktv
+      app.kubernetes.io/name: isponsorblocktv
+      app.kubernetes.io/component: content-filter
   template:
     metadata:
       labels:
-        app: isponsorblocktv
+        app.kubernetes.io/name: isponsorblocktv
+        app.kubernetes.io/component: content-filter
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: isponsorblocktv
