@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: vaultwarden
   namespace: vaultwarden
+  labels:
+    app.kubernetes.io/name: vaultwarden
+    app.kubernetes.io/component: password-manager
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: vaultwarden
+    app.kubernetes.io/name: vaultwarden
+    app.kubernetes.io/component: password-manager
   ports:
     - protocol: TCP
       port: 80

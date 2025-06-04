@@ -3,16 +3,23 @@ kind: StatefulSet
 metadata:
   name: vaultwarden
   namespace: vaultwarden
+  labels:
+    app.kubernetes.io/name: vaultwarden
+    app.kubernetes.io/component: password-manager
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: vaultwarden
   replicas: 1
   selector:
     matchLabels:
-      app: vaultwarden
+      app.kubernetes.io/name: vaultwarden
+      app.kubernetes.io/component: password-manager
   template:
     metadata:
       labels:
-        app: vaultwarden
+        app.kubernetes.io/name: vaultwarden
+        app.kubernetes.io/component: password-manager
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: vaultwarden
