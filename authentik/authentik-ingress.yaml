@@ -3,6 +3,11 @@ kind: IngressRoute
 metadata:
   name: authentik
   namespace: authentik
+  labels:
+    app.kubernetes.io/name: authentik
+    app.kubernetes.io/component: ingress
+    app.kubernetes.io/part-of: authentik
+    app.kubernetes.io/managed-by: kubectl
 spec:
   entryPoints:
     - websecure

@@ -3,16 +3,25 @@ kind: StatefulSet
 metadata:
   name: authentik-server
   namespace: authentik
+  labels:
+    app.kubernetes.io/name: authentik
+    app.kubernetes.io/component: authentik-server
+    app.kubernetes.io/part-of: authentik
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: authentik-server
   replicas: 1
   selector:
     matchLabels:
-      app: authentik-server
+      app.kubernetes.io/name: authentik
+      app.kubernetes.io/component: authentik-server
   template:
     metadata:
       labels:
-        app: authentik-server
+        app.kubernetes.io/name: authentik
+        app.kubernetes.io/component: authentik-server
+        app.kubernetes.io/part-of: authentik
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: authentik-server

@@ -3,9 +3,15 @@ kind: Service
 metadata:
   name: authentik
   namespace: authentik
+  labels:
+    app.kubernetes.io/name: authentik
+    app.kubernetes.io/component: authentik-server
+    app.kubernetes.io/part-of: authentik
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: authentik-server
+    app.kubernetes.io/name: authentik
+    app.kubernetes.io/component: authentik-server
   ports:
     - protocol: TCP
       port: 80

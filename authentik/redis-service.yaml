@@ -3,9 +3,15 @@ kind: Service
 metadata:
   name: redis
   namespace: authentik
+  labels:
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/component: cache
+    app.kubernetes.io/part-of: authentik
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: redis
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/component: cache
   ports:
     - protocol: TCP
       port: 6379
