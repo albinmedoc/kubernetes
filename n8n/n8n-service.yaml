@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: n8n
   namespace: n8n
+  labels:
+    app.kubernetes.io/name: n8n
+    app.kubernetes.io/component: workflow-automation
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: n8n
+    app.kubernetes.io/name: n8n
+    app.kubernetes.io/component: workflow-automation
   ports:
     - protocol: TCP
       port: 5678
