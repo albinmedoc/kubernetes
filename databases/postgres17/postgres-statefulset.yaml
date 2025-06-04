@@ -1,38 +1,37 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres17
+  name: postgres
   namespace: postgres17
+  labels:
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/component: database
+    app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: postgres17
+  serviceName: postgres
   replicas: 1
   selector:
     matchLabels:
-      app: postgres17
+      app.kubernetes.io/name: postgres
+      app.kubernetes.io/component: database
   template:
     metadata:
       labels:
-        app: postgres17
+        app.kubernetes.io/name: postgres
+        app.kubernetes.io/component: database
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
-        - name: postgres17
+        - name: postgres
           image: postgres:17
-          env:
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres17-secret
-                  key: POSTGRES_USER
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres17-secret
-                  key: POSTGRES_PASSWORD
           ports:
             - containerPort: 5432
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: database
+          envFrom:
+            - secretRef:
+                name: postgres-secrets
       volumes:
         - name: database
           nfs:
