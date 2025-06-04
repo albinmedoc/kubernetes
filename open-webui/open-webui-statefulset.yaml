@@ -3,16 +3,23 @@ kind: StatefulSet
 metadata:
   name: open-webui
   namespace: open-webui
+  labels:
+    app.kubernetes.io/name: open-webui
+    app.kubernetes.io/component: ai-interface
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: open-webui
   replicas: 1
   selector:
     matchLabels:
-      app: open-webui
+      app.kubernetes.io/name: open-webui
+      app.kubernetes.io/component: ai-interface
   template:
     metadata:
       labels:
-        app: open-webui
+        app.kubernetes.io/name: open-webui
+        app.kubernetes.io/component: ai-interface
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: open-webui
