@@ -3,9 +3,15 @@ kind: Service
 metadata:
   name: portainer
   namespace: portainer-web
+  labels:
+    app.kubernetes.io/name: portainer-web
+    app.kubernetes.io/component: container-manager
+    app.kubernetes.io/part-of: portainer
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: portainer
+    app.kubernetes.io/name: portainer-web
+    app.kubernetes.io/component: container-manager
   ports:
     - protocol: TCP
       port: 9000

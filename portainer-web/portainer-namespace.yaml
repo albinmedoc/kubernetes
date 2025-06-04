@@ -2,3 +2,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: portainer-web
+  labels:
+    app.kubernetes.io/name: portainer-web
+    app.kubernetes.io/component: container-manager
+    app.kubernetes.io/part-of: portainer
+    app.kubernetes.io/managed-by: kubectl

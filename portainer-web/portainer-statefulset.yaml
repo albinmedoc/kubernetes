@@ -3,16 +3,25 @@ kind: StatefulSet
 metadata:
   name: portainer
   namespace: portainer-web
+  labels:
+    app.kubernetes.io/name: portainer-web
+    app.kubernetes.io/component: container-manager
+    app.kubernetes.io/part-of: portainer
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: portainer
   replicas: 1
   selector:
     matchLabels:
-      app: portainer
+      app.kubernetes.io/name: portainer-web
+      app.kubernetes.io/component: container-manager
   template:
     metadata:
       labels:
-        app: portainer
+        app.kubernetes.io/name: portainer-web
+        app.kubernetes.io/component: container-manager
+        app.kubernetes.io/part-of: portainer
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: portainer
@@ -20,7 +29,7 @@ spec:
           ports:
             - containerPort: 9000
           volumeMounts:
-            - mountPath: 	/data
+            - mountPath: /data
               name: data
       volumes:
         - name: data
