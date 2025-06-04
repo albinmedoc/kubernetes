@@ -3,16 +3,26 @@ kind: StatefulSet
 metadata:
   name: wordpress
   namespace: wordpress-ameasalong
+  labels:
+    app.kubernetes.io/name: wordpress
+    app.kubernetes.io/instance: ameasalong
+    app.kubernetes.io/component: cms
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: wordpress
   replicas: 1
   selector:
     matchLabels:
-      app: wordpress
+      app.kubernetes.io/name: wordpress
+      app.kubernetes.io/instance: ameasalong
+      app.kubernetes.io/component: cms
   template:
     metadata:
       labels:
-        app: wordpress
+        app.kubernetes.io/name: wordpress
+        app.kubernetes.io/instance: ameasalong
+        app.kubernetes.io/component: cms
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: wordpress
