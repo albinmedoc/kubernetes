@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: homepage
   namespace: homepage
+  labels:
+    app.kubernetes.io/name: homepage
+    app.kubernetes.io/component: dashboard
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: homepage
+    app.kubernetes.io/name: homepage
+    app.kubernetes.io/component: dashboard
   ports:
     - protocol: TCP
       port: 3000

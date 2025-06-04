@@ -4,5 +4,10 @@ type: kubernetes.io/service-account-token
 metadata:
   name: homepage-token
   namespace: homepage
+  labels:
+    app.kubernetes.io/name: homepage
+    app.kubernetes.io/component: configuration
+    app.kubernetes.io/part-of: homepage
+    app.kubernetes.io/managed-by: kubectl
   annotations:
     kubernetes.io/service-account.name: homepage-account
