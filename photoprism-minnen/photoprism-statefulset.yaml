@@ -3,16 +3,26 @@ kind: StatefulSet
 metadata:
   name: photoprism
   namespace: photoprism-minnen
+  labels:
+    app.kubernetes.io/name: photoprism
+    app.kubernetes.io/instance: minnen
+    app.kubernetes.io/component: photo-manager
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
     matchLabels:
-      app: photoprism
+      app.kubernetes.io/name: photoprism
+      app.kubernetes.io/instance: minnen
+      app.kubernetes.io/component: photo-manager
   serviceName: photoprism
   replicas: 1
   template:
     metadata:
       labels:
-        app: photoprism
+        app.kubernetes.io/name: photoprism
+        app.kubernetes.io/instance: minnen
+        app.kubernetes.io/component: photo-manager
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: photoprism
