@@ -2,20 +2,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    k8s-app: metrics-server
+    app.kubernetes.io/name: metrics-server
+    app.kubernetes.io/component: metrics-collector
+    app.kubernetes.io/part-of: kubernetes-system
+    app.kubernetes.io/managed-by: kubectl
   name: metrics-server
   namespace: kube-system
 spec:
   selector:
     matchLabels:
-      k8s-app: metrics-server
+      app.kubernetes.io/name: metrics-server
+      app.kubernetes.io/component: metrics-collector
   strategy:
     rollingUpdate:
       maxUnavailable: 0
   template:
     metadata:
       labels:
-        k8s-app: metrics-server
+        app.kubernetes.io/name: metrics-server
+        app.kubernetes.io/component: metrics-collector
+        app.kubernetes.io/part-of: kubernetes-system
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
       - args:

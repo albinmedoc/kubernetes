@@ -2,7 +2,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    k8s-app: metrics-server
+    app.kubernetes.io/name: metrics-server
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/part-of: kubernetes-system
+    app.kubernetes.io/managed-by: kubectl
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-view: "true"
@@ -22,7 +25,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    k8s-app: metrics-server
+    app.kubernetes.io/name: metrics-server
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/part-of: kubernetes-system
+    app.kubernetes.io/managed-by: kubectl
   name: system:metrics-server
 rules:
 - apiGroups:
