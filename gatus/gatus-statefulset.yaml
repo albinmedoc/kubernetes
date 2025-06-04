@@ -3,16 +3,23 @@ kind: StatefulSet
 metadata:
   name: gatus
   namespace: gatus
+  labels:
+    app.kubernetes.io/name: gatus
+    app.kubernetes.io/component: health-monitor
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: gatus
   replicas: 1
   selector:
     matchLabels:
-      app: gatus
+      app.kubernetes.io/name: gatus
+      app.kubernetes.io/component: health-monitor
   template:
     metadata:
       labels:
-        app: gatus
+        app.kubernetes.io/name: gatus
+        app.kubernetes.io/component: health-monitor
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: gatus

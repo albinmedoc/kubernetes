@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: gatus
   namespace: gatus
+  labels:
+    app.kubernetes.io/name: gatus
+    app.kubernetes.io/component: health-monitor
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: gatus
+    app.kubernetes.io/name: gatus
+    app.kubernetes.io/component: health-monitor
   ports:
     - protocol: TCP
       port: 8080
