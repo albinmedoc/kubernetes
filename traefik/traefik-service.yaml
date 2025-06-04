@@ -3,6 +3,11 @@ kind: Service
 metadata:
   name: traefik-nodeport
   namespace: traefik
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/component: networking
+    app.kubernetes.io/part-of: traefik
+    app.kubernetes.io/managed-by: kubectl
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Local
@@ -14,16 +19,23 @@ spec:
     port: 443
     nodePort: 30443
   selector:
-    app: traefik
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/component: ingress-controller
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: traefik-clusterip
   namespace: traefik
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/component: networking
+    app.kubernetes.io/part-of: traefik
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: traefik
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/component: ingress-controller
   ports:
     - protocol: TCP
       port: 8080

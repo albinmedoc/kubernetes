@@ -4,17 +4,21 @@ metadata:
   name: traefik
   namespace: traefik
   labels:
-    app: traefik
-
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/component: ingress-controller
+    app.kubernetes.io/managed-by: kubectl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: traefik
+      app.kubernetes.io/name: traefik
+      app.kubernetes.io/component: ingress-controller
   template:
     metadata:
       labels:
-        app: traefik
+        app.kubernetes.io/name: traefik
+        app.kubernetes.io/component: ingress-controller
+        app.kubernetes.io/managed-by: kubectl
     spec:
       serviceAccountName: traefik-account
       nodeSelector:
@@ -57,12 +61,9 @@ spec:
               containerPort: 443
             - name: traefik
               containerPort: 8080
-          env:
-            - name: CF_DNS_API_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: traefik-acme-cloudflare
-                  key: CF_DNS_API_TOKEN
+          envFrom:
+            - secretRef:
+                name: traefik-secrets
           volumeMounts:
             - name: config
               mountPath: /config
