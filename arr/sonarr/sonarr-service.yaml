@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: sonarr
   namespace: arr
+  labels:
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app: sonarr
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/part-of: arr
   ports:
     - protocol: TCP
       port: 8989

@@ -3,16 +3,23 @@ kind: StatefulSet
 metadata:
   name: sonarr
   namespace: arr
+  labels:
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
 spec:
   serviceName: sonarr
   replicas: 1
   selector:
     matchLabels:
-      app: sonarr
+      app.kubernetes.io/name: sonarr
+      app.kubernetes.io/part-of: arr
   template:
     metadata:
       labels:
-        app: sonarr
+        app.kubernetes.io/name: sonarr
+        app.kubernetes.io/part-of: arr
+        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: sonarr
