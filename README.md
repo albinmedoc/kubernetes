@@ -67,9 +67,6 @@ kubectl top pods --all-namespaces
 
 # Check Traefik routes
 kubectl get ingressroute --all-namespaces
-
-# Monitor services with Gatus
-kubectl port-forward -n gatus svc/gatus 8080:80
 ```
 
 ## 🔧 Maintenance
