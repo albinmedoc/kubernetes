@@ -1,10 +1,6 @@
 .DS_Store
 
-# Ignore all top-level files
-/*
-# Except these files
-!README.md
-!.gitignore
-
-# Ensure all files in subdirectories are tracked
-!*/
+controlplane.yaml
+worker.yaml
+kubeconfig
+talosconfig
