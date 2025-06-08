@@ -31,12 +31,12 @@ kubectl get pods --all-namespaces
 Each application follows a consistent deployment pattern:
 
 ```
-application-name/
-├── namespace.yaml          # Kubernetes namespace
-├── statefulset.yaml       # Main application deployment
-├── service.yaml           # Service definition
-├── ingress.yaml          # Traefik ingress rules
-├── secrets.yaml          # Sensitive configuration (if needed)
+<application-name>/
+├── <application-name>-namespace.yaml        # Kubernetes namespace
+├── <application-name>-statefulset.yaml      # Main application deployment
+├── <application-name>-service.yaml          # Service definition
+├── <application-name>-ingress.yaml          # Traefik ingress rules
+├── <application-name>-secrets.yaml          # Sensitive configuration (if needed)
 ```
 
 ### Security Considerations
