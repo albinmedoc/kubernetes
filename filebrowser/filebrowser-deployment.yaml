@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: filebrowser
   namespace: filebrowser
@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/component: file-manager
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: filebrowser
   replicas: 1
   selector:
     matchLabels:
@@ -26,6 +25,13 @@ spec:
           image: filebrowser/filebrowser:latest
           ports:
             - containerPort: 80
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 256Mi
           volumeMounts:
             - mountPath: /.filebrowser.json
               subPath: filebrowser.json
