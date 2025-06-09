@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: n8n
   namespace: n8n
@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/component: workflow-automation
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: n8n
   replicas: 1
   selector:
     matchLabels:
@@ -38,6 +37,13 @@ spec:
             - sleep 5; n8n start
           ports:
             - containerPort: 5678
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 256Mi
           env:
             - name: N8N_PROTOCOL
               value: http
