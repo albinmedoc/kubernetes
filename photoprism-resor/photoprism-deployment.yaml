@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: photoprism
   namespace: photoprism-resor
@@ -14,7 +14,6 @@ spec:
       app.kubernetes.io/name: photoprism
       app.kubernetes.io/instance: resor
       app.kubernetes.io/component: photo-manager
-  serviceName: photoprism
   replicas: 1
   template:
     metadata:
@@ -56,6 +55,13 @@ spec:
           ports:
             - containerPort: 2342
               name: http
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 4Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
           volumeMounts:
             - mountPath: /photoprism/originals
               name: originals
