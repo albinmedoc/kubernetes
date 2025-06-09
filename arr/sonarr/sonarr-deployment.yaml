@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: sonarr
   namespace: arr
@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/part-of: arr
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: sonarr
   replicas: 1
   selector:
     matchLabels:
@@ -26,6 +25,13 @@ spec:
           image: linuxserver/sonarr:latest
           ports:
             - containerPort: 8989
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 256Mi
           volumeMounts:
             - mountPath: /config
               name: config
