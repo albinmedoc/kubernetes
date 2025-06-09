@@ -60,8 +60,34 @@ fi
 echo ""
 echo "Review the generated deployment file, then run:"
 if [ -n "$NAMESPACE" ]; then
-    echo "kubectl delete statefulset $ACTUAL_STS_NAME -n $NAMESPACE"
+    DELETE_CMD="kubectl delete statefulset $ACTUAL_STS_NAME -n $NAMESPACE"
 else
-    echo "kubectl delete statefulset $ACTUAL_STS_NAME"
+    DELETE_CMD="kubectl delete statefulset $ACTUAL_STS_NAME"
 fi
-echo "kubectl apply -f $DEPLOYMENT_FILE"
+
+echo ""
+read -p "Do you want to delete the StatefulSet now? (y/N): " DELETE_STS
+if [[ "$DELETE_STS" =~ ^[Yy]$ ]]; then
+    echo "Running: $DELETE_CMD"
+    eval "$DELETE_CMD"
+    if [ $? -eq 0 ]; then
+        echo "StatefulSet deleted successfully."
+    else
+        echo "Failed to delete StatefulSet. Please check the error above."
+        exit 1
+    fi
+fi
+
+echo ""
+read -p "Do you want to apply the new Deployment now? (y/N): " APPLY_DEPLOYMENT
+if [[ "$APPLY_DEPLOYMENT" =~ ^[Yy]$ ]]; then
+    APPLY_CMD="kubectl apply -f $DEPLOYMENT_FILE"
+    echo "Running: $APPLY_CMD"
+    eval "$APPLY_CMD"
+    if [ $? -eq 0 ]; then
+        echo "Deployment applied successfully."
+    else
+        echo "Failed to apply Deployment. Please check the error above."
+        exit 1
+    fi
+fi
