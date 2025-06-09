@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: homepage
   namespace: homepage
@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/component: dashboard
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: homepage
   replicas: 1
   selector:
     matchLabels:
@@ -26,6 +25,13 @@ spec:
           image: gethomepage/homepage:latest
           ports:
             - containerPort: 3000
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           volumeMounts:
             - mountPath: /app/config
               name: config
