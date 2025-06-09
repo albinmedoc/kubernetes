@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: gatus
   namespace: gatus
@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/component: health-monitor
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: gatus
   replicas: 1
   selector:
     matchLabels:
@@ -26,6 +25,13 @@ spec:
           image: twinproduction/gatus:latest
           ports:
             - containerPort: 8080
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           volumeMounts:
             - mountPath: /config
               name: config
