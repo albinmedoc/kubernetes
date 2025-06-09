@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: watchlistarr
   namespace: arr
@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/part-of: arr
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: watchlistarr
   replicas: 1
   selector:
     matchLabels:
@@ -24,6 +23,13 @@ spec:
       containers:
         - name: watchlistarr
           image: nylonee/watchlistarr:latest
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
           volumeMounts:
             - mountPath: /app/config
               name: config
