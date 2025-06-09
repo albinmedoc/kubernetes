@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: maintainerr
   namespace: arr
@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/part-of: arr
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: maintainerr
   replicas: 1
   selector:
     matchLabels:
@@ -26,6 +25,13 @@ spec:
           image: jorenn92/maintainerr:latest
           ports:
             - containerPort: 6246
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           volumeMounts:
             - mountPath: /opt/data
               name: config
