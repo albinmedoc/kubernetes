@@ -4,3 +4,8 @@ controlplane.yaml
 worker.yaml
 kubeconfig
 talosconfig
+
+# Exclude regular secret files to prevent committing sensitive data
+*-secrets.yaml
+# Allow sealed secrets to be committed (they are encrypted)
+!*-sealed-secrets.yaml
