@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: authentik-worker
   namespace: authentik
@@ -9,7 +9,6 @@ metadata:
     app.kubernetes.io/part-of: authentik
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: authentik-worker
   replicas: 1
   selector:
     matchLabels:
@@ -28,6 +27,13 @@ spec:
           image: ghcr.io/goauthentik/server:2025.4
           args:
             - worker
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 256Mi
           envFrom:
             - secretRef:
                 name: authentik-secrets
