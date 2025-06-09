@@ -36,12 +36,13 @@ Each application follows a consistent deployment pattern:
 ├── <application-name>-statefulset.yaml      # Main application deployment
 ├── <application-name>-service.yaml          # Service definition
 ├── <application-name>-ingress.yaml          # Traefik ingress rules
-├── <application-name>-secrets.yaml          # Sensitive configuration (if needed)
+├── <application-name>-sealed-secrets.yaml   # Encrypted sensitive configuration (if needed)
 ```
 
 ### Security Considerations
 - All applications use dedicated namespaces for isolation
-- Secrets are properly managed and not committed to repository
+- **Sealed Secrets**: Sensitive configuration is encrypted using [Sealed Secrets](sealed-secrets/README.md) and safely stored in Git
+- Regular secrets containing plain text are never committed to the repository
 - Ingress routes are configured with appropriate middleware
 - Authentication is handled through Authentik where applicable
 
