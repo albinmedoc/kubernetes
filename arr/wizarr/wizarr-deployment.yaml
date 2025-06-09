@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: wizarr
   namespace: arr
@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/part-of: arr
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: wizarr
   replicas: 1
   selector:
     matchLabels:
@@ -21,11 +20,25 @@ spec:
         app.kubernetes.io/part-of: arr
         app.kubernetes.io/managed-by: kubectl
     spec:
+      initContainers:
+        - name: volume-permissions
+          image: busybox:1.36
+          command: ["sh", "-c", "chown 1000:1000 /data"]
+          volumeMounts:
+            - mountPath: /data
+              name: data
       containers:
         - name: wizarr
           image: ghcr.io/wizarrrr/wizarr:latest
           ports:
             - containerPort: 5690
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           volumeMounts:
             - mountPath: /data/database
               name: data
