@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: piwigo
+  namespace: piwigo
+  labels:
+    app.kubernetes.io/name: piwigo
+    app.kubernetes.io/component: photo-manager
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: piwigo
+      app.kubernetes.io/component: photo-manager
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: piwigo
+        app.kubernetes.io/component: photo-manager
+        app.kubernetes.io/managed-by: kubectl
+    spec:
+      containers:
+        - name: piwigo
+          image: linuxserver/piwigo:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 4Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+          volumeMounts:
+            - mountPath: /config
+              name: data
+              subPath: config
+            - mountPath: /gallery
+              name: data
+              subPath: gallery
+          env:
+            - name: TZ
+              value: Europe/Stockholm
+      volumes:
+        - name: data
+          nfs:
+            path: /export/Kubernetes/piwigo
+            server: 192.168.86.107
