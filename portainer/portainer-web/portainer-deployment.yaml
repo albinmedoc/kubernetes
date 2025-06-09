@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: portainer
   namespace: portainer-web
@@ -9,7 +9,6 @@ metadata:
     app.kubernetes.io/part-of: portainer
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: portainer
   replicas: 1
   selector:
     matchLabels:
@@ -28,6 +27,13 @@ spec:
           image: portainer/portainer-ce:latest
           ports:
             - containerPort: 9000
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           volumeMounts:
             - mountPath: /data
               name: data
