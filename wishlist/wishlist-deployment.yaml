@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: wishlist
   namespace: wishlist
@@ -8,7 +8,6 @@ metadata:
     app.kubernetes.io/component: wishlist-manager
     app.kubernetes.io/managed-by: kubectl
 spec:
-  serviceName: wishlist
   replicas: 1
   selector:
     matchLabels:
@@ -26,6 +25,13 @@ spec:
           image: cmintey/wishlist:latest
           ports:
             - containerPort: 3280
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
           env:
             - name: ORIGIN
               value: "https://wishlist.albinmedoc.se"
