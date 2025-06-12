@@ -32,11 +32,14 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
+          envFrom:
+            - secretRef:
+                name: gatus-secrets
           volumeMounts:
             - mountPath: /config
               name: config
+              readOnly: true
       volumes:
         - name: config
-          nfs:
-            path: /export/Kubernetes/gatus
-            server: 192.168.86.107
+          configMap:
+            name: gatus-config
