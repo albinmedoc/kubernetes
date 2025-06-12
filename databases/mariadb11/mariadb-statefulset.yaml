@@ -29,9 +29,12 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: database
-          envFrom:
-            - secretRef:
-                name: mariadb-secrets
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secrets
+                  key: MARIADB_ROOT_PASSWORD
       volumes:
         - name: database
           nfs:
