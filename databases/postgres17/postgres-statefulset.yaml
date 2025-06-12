@@ -29,9 +29,22 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: database
-          envFrom:
-            - secretRef:
-                name: postgres-secrets
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secrets
+                  key: POSTGRES_DB
       volumes:
         - name: database
           nfs:
