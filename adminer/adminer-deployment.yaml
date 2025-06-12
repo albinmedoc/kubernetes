@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/component: management
     app.kubernetes.io/managed-by: kubectl
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: adminer
