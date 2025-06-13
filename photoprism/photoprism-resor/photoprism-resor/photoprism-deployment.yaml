@@ -2,24 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: photoprism
-  namespace: photoprism-minnen
+  namespace: photoprism-resor
   labels:
     app.kubernetes.io/name: photoprism
-    app.kubernetes.io/instance: minnen
+    app.kubernetes.io/instance: resor
     app.kubernetes.io/component: photo-manager
     app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: photoprism
-      app.kubernetes.io/instance: minnen
+      app.kubernetes.io/instance: resor
       app.kubernetes.io/component: photo-manager
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
         app.kubernetes.io/name: photoprism
-        app.kubernetes.io/instance: minnen
+        app.kubernetes.io/instance: resor
         app.kubernetes.io/component: photo-manager
         app.kubernetes.io/managed-by: kubectl
     spec:
@@ -28,13 +28,13 @@ spec:
           image: photoprism/photoprism:latest
           env:
             - name: PHOTOPRISM_SITE_URL
-              value: https://minnen.albinmedoc.se
+              value: https://resor.albinmedoc.se
             - name: PHOTOPRISM_DISABLE_CHOWN
               value: "true"
             - name: PHOTOPRISM_DATABASE_DRIVER
               value: mysql
             - name: PHOTOPRISM_SITE_CAPTION
-              value: "Minnen"
+              value: "Resor"
             - name: PHOTOPRISM_AUTH_MODE
               value: "public"
             - name: PHOTOPRISM_DISABLE_SETTINGS
@@ -74,9 +74,9 @@ spec:
       volumes:
         - name: originals
           nfs:
-            path: /export/Minnen
+            path: /export/Resor
             server: 192.168.86.107
         - name: storage
           nfs:
-            path: /export/Kubernetes/photoprism-minnen/storage
+            path: /export/Kubernetes/photoprism/photoprism-resor/storage
             server: 192.168.86.107

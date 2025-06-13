@@ -7,7 +7,7 @@ spec:
   project: photoprism
   source:
     repoURL: https://github.com/albinmedoc/kubernetes
-    path: photoprism-minnen
+    path: photoprism/photoprism-minnen
     targetRevision: HEAD
     directory:
       recurse: true

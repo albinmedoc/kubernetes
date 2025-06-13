@@ -7,7 +7,7 @@ spec:
   project: photoprism
   source:
     repoURL: https://github.com/albinmedoc/kubernetes
-    path: photoprism-resor
+    path: photoprism/photoprism-resor
     targetRevision: HEAD
     directory:
       recurse: true
