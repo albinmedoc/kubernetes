@@ -14,7 +14,7 @@ spec:
       app.kubernetes.io/name: photoprism
       app.kubernetes.io/instance: resor
       app.kubernetes.io/component: photo-manager
-  replicas: 1
+  replicas: 0
   template:
     metadata:
       labels:
