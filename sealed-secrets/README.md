@@ -23,6 +23,21 @@ The problem it solves: You want to store Kubernetes Secret manifests in Git, but
 4. Apply the SealedSecret to your cluster
 5. The controller automatically decrypts it into a regular Kubernetes Secret
 
+## Usage
+
+### Creating a Sealed Secret
+
+To convert a regular Kubernetes Secret to a SealedSecret:
+
+```bash
+kubeseal -f <input-secret>.yaml -w <output-sealed-secret>.yaml -o yaml
+```
+
+**Command flags:**
+- `-f` (or `--secret-file`): Input file containing the original secret
+- `-w` (or `--sealed-secret-file`): Output file for the sealed secret
+- `-o yaml`: Output format (YAML instead of default JSON)
+
 ## Installation
 
 Installed using the official Kubernetes manifests from the releases page: [Sealed Secrets Releases](https://github.com/bitnami-labs/sealed-secrets/releases)
