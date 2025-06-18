@@ -39,8 +39,6 @@ spec:
           env:
             - name: APACHE_SERVERNAME
               value: "staging.ameasalong.se"
-            - name: WORDPRESS_DEBUG
-              value: "true"
             - name: WORDPRESS_CONFIG_EXTRA
               value: |
                 define('WP_HOME','https://staging.ameasalong.se');
