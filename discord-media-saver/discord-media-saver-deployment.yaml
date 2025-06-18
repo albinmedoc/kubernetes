@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: discord-media-saver
-          image: ghcr.io/albinmedoc/discord-media-saver:PR-7
+          image: ghcr.io/albinmedoc/discord-media-saver:latest
           ports:
             - containerPort: 80
           resources:
