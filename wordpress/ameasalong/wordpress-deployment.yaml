@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: wordpress
     app.kubernetes.io/instance: ameasalong
-    app.kubernetes.io/component: configuration
+    app.kubernetes.io/component: cms
     app.kubernetes.io/part-of: wordpress
     app.kubernetes.io/managed-by: kubectl
 spec:
@@ -15,13 +15,13 @@ spec:
     matchLabels:
       app.kubernetes.io/name: wordpress
       app.kubernetes.io/instance: ameasalong
-      app.kubernetes.io/component: configuration
+      app.kubernetes.io/component: cms
   template:
     metadata:
       labels:
         app.kubernetes.io/name: wordpress
         app.kubernetes.io/instance: ameasalong
-        app.kubernetes.io/component: configuration
+        app.kubernetes.io/component: cms
         app.kubernetes.io/managed-by: kubectl
     spec:
       containers:

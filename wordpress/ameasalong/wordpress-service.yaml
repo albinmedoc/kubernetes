@@ -6,13 +6,13 @@ metadata:
   labels:
     app.kubernetes.io/name: wordpress
     app.kubernetes.io/instance: ameasalong
-    app.kubernetes.io/component: ingress
+    app.kubernetes.io/component: cms
     app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
     app.kubernetes.io/name: wordpress
     app.kubernetes.io/instance: ameasalong
-    app.kubernetes.io/component: ingress
+    app.kubernetes.io/component: cms
   ports:
     - protocol: TCP
       port: 80
