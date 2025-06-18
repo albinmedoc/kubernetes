@@ -39,6 +39,8 @@ spec:
           env:
             - name: WORDPRESS_CONFIG_EXTRA
               value: |
+                define('WP_HOME','https://staging.ameasalong.se')
+                define('WP_SITEURL','https://staging.ameasalong.se');
                 define('WP_MEMORY_LIMIT', '512M');
                 define('WP_MAX_MEMORY_LIMIT', '1024M');
                 define('WP_CACHE', true);
