@@ -45,10 +45,10 @@ spec:
       volumes:
         - name: data
           nfs:
-            path: /export/Kubernetes/photoview
+            path: /export/Discord-Saver/Content
             server: 192.168.86.107
             readOnly: true
         - name: cache
           nfs:
-            path: /export/Kubernetes/photoview/cache
+            path: /export/Discord-Saver/Cache
             server: 192.168.86.107
