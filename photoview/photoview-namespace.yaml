@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: photoview
+  labels:
+    app.kubernetes.io/name: photoview
+    app.kubernetes.io/component: photo-manager
+    app.kubernetes.io/managed-by: kubectl
