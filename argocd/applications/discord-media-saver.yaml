@@ -3,6 +3,9 @@ kind: Application
 metadata:
   name: discord-media-saver
   namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: discord-media-saver=ghcr.io/albinmedoc/discord-media-saver:latest
+    argocd-image-updater.argoproj.io/discord-media-saver.update-strategy: digest
 spec:
   project: default
   source:
