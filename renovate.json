@@ -19,8 +19,8 @@
   "commitMessagePrefix": "chore:",
   "kubernetes": {
     "managerFilePatterns": [
-      "\\.yaml$",
-      "\\.yml$"
+      ".*\\.yaml$",
+      ".*\\.yml$"
     ]
   },
   "packageRules": [
