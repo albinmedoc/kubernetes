@@ -24,6 +24,14 @@
   ],
   "packageRules": [
     {
+      "description": "PhotoPrism version updates",
+      "matchPackageNames": [
+        "photoprism/photoprism"
+      ],
+      "allowedVersions": "/^\\d{6}$/",
+      "automerge": false
+    },
+    {
       "description": "Auto-merge patch and minor updates",
       "matchDatasources": [
         "docker"
