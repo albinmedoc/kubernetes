@@ -21,7 +21,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: recyclarr
-              image: recyclarr/recyclarr:7
+              image: recyclarr/recyclarr:7.4.1
               command: ["/bin/sh"]
               args: ["-c", "recyclarr sync sonarr && recyclarr sync radarr"]
               resources:

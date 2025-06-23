@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: portainer
-          image: portainer/portainer-ce:latest
+          image: portainer/portainer-ce:2.31.1
           ports:
             - containerPort: 9000
           resources:

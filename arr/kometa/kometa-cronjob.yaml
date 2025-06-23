@@ -21,7 +21,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: kometa
-              image: kometateam/kometa:latest
+              image: kometateam/kometa:v2.2.0
               args: [ "--run", "--read-only-config" ]
               volumeMounts:
                 - name: config

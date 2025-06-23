@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: isponsorblocktv
-          image: dmunozv04/isponsorblocktv:latest
+          image: dmunozv04/isponsorblocktv:v2.5.3
           resources:
             limits:
               cpu: 200m

@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: wordpress
-          image: wordpress:6
+          image: wordpress:6.8.1
           ports:
             - containerPort: 80
           resources:

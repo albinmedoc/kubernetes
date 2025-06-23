@@ -29,7 +29,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: traefik
-          image: traefik:v3.3
+          image: traefik:v3.4.1
           args:
             - "--global.checkNewVersion=false"
             - "--global.sendanonymoususage=false"

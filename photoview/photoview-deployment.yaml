@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: photoview
-          image: photoview/photoview:2
+          image: photoview/photoview:2.4.0
           ports:
             - containerPort: 80
           resources:

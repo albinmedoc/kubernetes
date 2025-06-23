@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: homepage
-          image: gethomepage/homepage:latest
+          image: gethomepage/homepage:v1.3.2
           ports:
             - containerPort: 3000
           resources:

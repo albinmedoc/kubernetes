@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: prowlarr
-          image: linuxserver/prowlarr:latest
+          image: linuxserver/prowlarr:1.37.0
           ports:
             - containerPort: 8989
           resources:

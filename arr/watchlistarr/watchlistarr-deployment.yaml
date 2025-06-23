@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: watchlistarr
-          image: nylonee/watchlistarr:latest
+          image: nylonee/watchlistarr:0.2.6
           resources:
             limits:
               cpu: 200m

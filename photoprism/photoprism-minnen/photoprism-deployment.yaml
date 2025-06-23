@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: photoprism
-          image: photoprism/photoprism:latest
+          image: photoprism/photoprism:250425
           env:
             - name: PHOTOPRISM_SITE_URL
               value: https://minnen.albinmedoc.se
