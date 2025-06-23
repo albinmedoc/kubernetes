@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: piwigo
-  labels:
-    app.kubernetes.io/name: piwigo
-    app.kubernetes.io/component: photo-manager
-    app.kubernetes.io/managed-by: kubectl
