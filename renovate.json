@@ -18,13 +18,10 @@
   "prConcurrentLimit": 10,
   "commitMessagePrefix": "chore:",
   "kubernetes": {
-    "fileMatch": [
-      "**/*.yaml",
-      "**/*.yml"
+    "managerFilePatterns": [
+      "\\.yaml$",
+      "\\.yml$"
     ]
-  },
-  "docker": {
-    "enabled": true
   },
   "packageRules": [
     {
