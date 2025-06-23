@@ -17,11 +17,6 @@ ArgoCD is a declarative, GitOps continuous delivery tool for Kubernetes. It foll
 
 Installed following the official guide: [ArgoCD Getting Started](https://argo-cd.readthedocs.io/en/stable/getting_started/#1-install-argo-cd)
 
-### ArgoCD Image updater
-
-
-Installed following the official guide: [ArgoCD Image Updater Getting Started](https://argocd-image-updater.readthedocs.io/en/stable/install/installation/#method-1-installing-as-kubernetes-workload-in-argo-cd-namespace)
-
 ## Upgrading
 
 1. **Check Release Notes**: Always review the [ArgoCD Release Notes](https://github.com/argoproj/argo-cd/releases) before upgrading
