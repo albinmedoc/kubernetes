@@ -33,8 +33,7 @@ spec:
               cpu: 200m
               memory: 256Mi
           volumeMounts:
-            - mountPath: /.filebrowser.json
-              subPath: filebrowser.json
+            - mountPath: /config
               name: config
             - mountPath: /database.db
               subPath: database.db
