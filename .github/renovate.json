@@ -3,10 +3,37 @@
   "extends": [
     "config:base"
   ],
+  "schedule": [
+    "at 06:00"
+  ],
+  "prConcurrentLimit": 5,
   "kubernetes": {
     "fileMatch": [
       ".*\\.yaml$",
       ".*\\.yml$"
     ]
-  }
+  },
+  "labels": [
+    "dependencies"
+  ],
+  "assignees": [
+    "albinmedoc"
+  ],
+  "reviewers": [
+    "albinmedoc"
+  ],
+  "packageRules": [
+    {
+      "description": "Auto-merge patch and minor updates",
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true
+    },
+    {
+      "description": "Create PR for major updates (manual review required)",
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ]
 }
