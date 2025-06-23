@@ -1,6 +1,43 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:base"
+  ],
+  "schedule": [
+    "before 8am on monday"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "assignees": [
+    "albinmedoc"
+  ],
+  "reviewers": [
+    "albinmedoc"
+  ],
+  "prConcurrentLimit": 10,
+  "commitMessagePrefix": "chore:",
+  "kubernetes": {
+    "fileMatch": [
+      "**/*.yaml",
+      "**/*.yml"
+    ]
+  },
+  "docker": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "description": "Auto-merge patch and minor updates",
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true
+    },
+    {
+      "description": "Create PR for major updates (manual review required)",
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
   ]
 }
