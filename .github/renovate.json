@@ -32,22 +32,22 @@
       "automerge": false
     },
     {
-      "description": "Auto-merge patch and minor updates",
+      "description": "Auto-merge patch updates",
       "matchDatasources": [
         "docker"
       ],
       "matchUpdateTypes": [
-        "patch",
-        "minor"
+        "patch"
       ],
       "automerge": true
     },
     {
-      "description": "Create PR for major updates (manual review required)",
+      "description": "Create PR for minor and major updates (manual review required)",
       "matchDatasources": [
         "docker"
       ],
       "matchUpdateTypes": [
+        "minor",
         "major"
       ],
       "automerge": false
