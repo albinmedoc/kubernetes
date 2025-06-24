@@ -18,3 +18,5 @@ spec:
       services:
         - name: wordpress-production
           port: 80
+  tls:
+    certResolver: letsencrypt-http

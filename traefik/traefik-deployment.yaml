@@ -54,6 +54,10 @@ spec:
             - "--certificatesresolvers.cloudflare.acme.dnsChallenge.resolvers=1.1.1.1"
             - "--certificatesresolvers.cloudflare.acme.email=kontakt@albinmedoc.se"
             - "--certificatesresolvers.cloudflare.acme.storage=/config/certs/acme-cloudflare.json"
+
+            - "--certificatesresolvers.letsencrypt-http.acme.httpChallenge.entryPoint=web"
+            - "--certificatesresolvers.letsencrypt-http.acme.email=kontakt@albinmedoc.se"
+            - "--certificatesresolvers.letsencrypt-http.acme.storage=/config/certs/acme-http.json"
           ports:
             - name: web
               containerPort: 80
