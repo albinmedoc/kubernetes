@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless-ngx
+  namespace: paperless-ngx
+  labels:
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/component: file-manager
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: paperless-ngx
+      app.kubernetes.io/component: file-manager
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: paperless-ngx
+        app.kubernetes.io/component: file-manager
+        app.kubernetes.io/managed-by: kubectl
+    spec:
+      containers:
+        - name: paperless-ngx
+          image: paperless-ngx/paperless-ngx:v2.33.4
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+          envFrom:
+            - configMapRef:
+                name: paperless-ngx-config
+            - secretRef:
+                name: paperless-ngx-secrets
+          volumeMounts:
+            - name: paperless
+              subPath: data
+              mountPath: /usr/src/paperless/data
+            - name: paperless
+              subPath: media
+              mountPath: /usr/src/paperless/media
+            - name: paperless
+              subPath: export
+              mountPath: /usr/src/paperless/export
+            - name: paperless
+              subPath: consume
+              mountPath: /usr/src/paperless/consume
+      volumes:
+        - name: paperless
+          nfs:
+            path: /export/Kubernetes/paperless-ngx
+            server: 192.168.86.107
