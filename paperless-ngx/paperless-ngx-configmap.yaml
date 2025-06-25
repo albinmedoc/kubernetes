@@ -10,4 +10,4 @@ data:
   PAPERLESS_URL: "https://paperless.albinmedoc.se"
   PAPERLESS_TIME_ZONE: "Europe/Stockholm"
   PAPERLESS_OCR_LANGUAGE: "swe"
-  PAPERLESS_OCR_LANGUAGES: "eng"
+  PAPERLESS_OCR_LANGUAGES: "eng swe"
