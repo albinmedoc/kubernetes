@@ -1,10 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ],
-  "schedule": [
-    "* 0-3 * * *"
+    "config:recommended",
+    "schedule:automergeDaily",
+    "schedule:daily"
   ],
   "prConcurrentLimit": 5,
   "kubernetes": {
