@@ -5,6 +5,7 @@
     "schedule:automergeDaily",
     "schedule:daily"
   ],
+  "ignoreUnstable": true,
   "prConcurrentLimit": 5,
   "kubernetes": {
     "managerFilePatterns": [
