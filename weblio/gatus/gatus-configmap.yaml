@@ -42,16 +42,24 @@ data:
 
     # Weblio
       - name: Website
+        group: Weblio
         url: "https://weblio.se"
         <<: *http-defaults
-      - name: API
-        url: "https://api.weblio.se"
+      - name: Form
+        group: Weblio
+        url: "https://form.weblio.se"
+        <<: *http-defaults
+      - name: Form API
+        group: Weblio
+        url: "https://api.form.weblio.se"
         <<: *http-defaults
     
     # Clients
       - name: Mulo
+        group: Clients
         url: "https://mulo.se"
         <<: *http-defaults
       - name: AMEA Salong
+        group: Clients
         url: "https://ameasalong.se"
         <<: *http-defaults
