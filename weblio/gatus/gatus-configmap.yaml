@@ -28,7 +28,13 @@ data:
       title: "Weblio Status"
       description: "Monitoring the status of Weblio and its clients."
       logo: "https://weblio.se/assets/icon.svg"
-      dark-mode: true
+      group:
+        - name: Weblio
+          description: "Monitoring the Weblio services."
+          icon: "https://weblio.se/assets/icon.svg"
+        - name: Clients
+          description: "Monitoring the clients of Weblio."
+          icon: "https://weblio.se/assets/icon.svg"
 
     defaults: &defaults
       interval: ${DEFAULT_INTERVAL}
