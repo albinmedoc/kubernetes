@@ -1,0 +1,21 @@
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gatus
+  namespace: weblio
+  labels:
+    app.kubernetes.io/name: gatus
+    app.kubernetes.io/component: health-monitor
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`status.weblio.se`)
+      kind: Rule
+      services:
+        - name: gatus
+          port: 8080
+  tls:
+    certResolver: weblio-letsencrypt-http

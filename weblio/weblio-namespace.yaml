@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: weblio
+  labels:
+    app.kubernetes.io/name: weblio
+    app.kubernetes.io/managed-by: kubectl

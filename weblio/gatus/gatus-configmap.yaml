@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gatus-config
+  namespace: weblio
+  labels:
+    app.kubernetes.io/name: gatus
+    app.kubernetes.io/component: health-monitor
+data:
+  config.yaml: |
+    storage:
+      type: "${STORAGE_TYPE}"
+      path: "${STORAGE_PATH}"
+      
+    alerting:
+      email:
+        from: "${ALERTING_EMAIL_FROM}"
+        username: "${ALERTING_EMAIL_USERNAME}"
+        password: "${ALERTING_EMAIL_PASSWORD}"
+        host: "${ALERTING_EMAIL_HOST}"
+        port: ${ALERTING_EMAIL_PORT}
+        to: "${ALERTING_EMAIL_TO}"
+        default-alert:
+          send-on-resolved: true
+          failure-threshold: ${ALERTING_EMAIL_FAILURE_THRESHOLD}
+          success-threshold: ${ALERTING_EMAIL_SUCCESS_THRESHOLD}
+
+    defaults: &defaults
+      interval: ${DEFAULT_INTERVAL}
+      alerts:
+        - type: email
+
+    http-conditions: &http-conditions
+      - "[STATUS] == 200"
+      - "[CERTIFICATE_EXPIRATION] > 48h"
+      
+    http-defaults: &http-defaults
+      <<: *defaults
+      conditions: *http-conditions
+      
+    endpoints:
+
+    # Weblio
+      - name: Website
+        url: "https://weblio.se"
+      - name: API
+        url: "https://api.weblio.se"
