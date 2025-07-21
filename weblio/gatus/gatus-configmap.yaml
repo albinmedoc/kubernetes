@@ -28,13 +28,6 @@ data:
       title: "Weblio Status"
       description: "Monitoring the status of Weblio and its clients."
       logo: "https://weblio.se/assets/icon.svg"
-      group:
-        - name: Weblio
-          description: "Monitoring the Weblio services."
-          icon: "https://weblio.se/assets/icon.svg"
-        - name: Clients
-          description: "Monitoring the clients of Weblio."
-          icon: "https://weblio.se/assets/icon.svg"
 
     defaults: &defaults
       interval: ${DEFAULT_INTERVAL}
@@ -53,24 +46,24 @@ data:
 
     # Weblio
       - name: Website
-        group: Weblio
+        group: 1. Weblio
         url: "https://weblio.se"
         <<: *http-defaults
       - name: Form
-        group: Weblio
+        group: 1. Weblio
         url: "https://form.weblio.se"
         <<: *http-defaults
       - name: Form API
-        group: Weblio
+        group: 1. Weblio
         url: "https://api.form.weblio.se"
         <<: *http-defaults
     
     # Clients
       - name: Mulo
-        group: Clients
+        group: 2. Clients
         url: "https://mulo.se"
         <<: *http-defaults
       - name: AMEA Salong
-        group: Clients
+        group: 2. Clients
         url: "https://ameasalong.se"
         <<: *http-defaults
