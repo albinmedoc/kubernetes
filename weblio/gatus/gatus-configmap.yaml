@@ -24,6 +24,11 @@ data:
           send-on-resolved: true
           failure-threshold: ${ALERTING_EMAIL_FAILURE_THRESHOLD}
           success-threshold: ${ALERTING_EMAIL_SUCCESS_THRESHOLD}
+    ui:
+      title: "Weblio Status"
+      description: "Monitoring the status of Weblio and its clients."
+      logo: "https://weblio.se/assets/icon.svg"
+      dark-mode: true
 
     defaults: &defaults
       interval: ${DEFAULT_INTERVAL}
