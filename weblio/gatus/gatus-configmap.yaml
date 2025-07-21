@@ -43,5 +43,15 @@ data:
     # Weblio
       - name: Website
         url: "https://weblio.se"
+        <<: *http-defaults
       - name: API
         url: "https://api.weblio.se"
+        <<: *http-defaults
+    
+    # Clients
+      - name: Mulo
+        url: "https://mulo.se"
+        <<: *http-defaults
+      - name: AMEA Salong
+        url: "https://ameasalong.se"
+        <<: *http-defaults
