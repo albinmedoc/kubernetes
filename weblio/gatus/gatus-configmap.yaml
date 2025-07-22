@@ -55,7 +55,7 @@ data:
         <<: *http-defaults
       - name: Form API
         group: 1. Weblio
-        url: "https://api.form.weblio.se"
+        url: "https://api.form.weblio.se/health"
         <<: *http-defaults
     
     # Clients
