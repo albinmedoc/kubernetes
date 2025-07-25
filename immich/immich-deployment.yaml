@@ -38,6 +38,8 @@ spec:
           volumeMounts:
             - mountPath: /usr/src/app/upload
               name: upload
+            - mountPath: /external-libraries/discord-saver
+              name: discord-saver
           env:
             - name: TZ
               value: "Europe/Stockholm"
@@ -48,4 +50,8 @@ spec:
         - name: upload
           nfs:
             path: /export/Kubernetes/immich/upload
+            server: 192.168.86.107
+        - name: discord-saver
+          nfs:
+            path: /export/Discord-Saver/Content
             server: 192.168.86.107
