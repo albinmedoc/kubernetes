@@ -58,5 +58,5 @@ spec:
       volumes:
         - name: database
           nfs:
-            path: /export/Kubernetes/immich/database
+            path: /export/Discord-Saver/Database
             server: 192.168.86.107
