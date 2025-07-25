@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich
+  namespace: immich
+  labels:
+    app.kubernetes.io/name: immich
+    app.kubernetes.io/component: photo-manager
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: immich
+      app.kubernetes.io/component: photo-manager
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: immich
+        app.kubernetes.io/component: photo-manager
+        app.kubernetes.io/managed-by: kubectl
+    spec:
+      containers:
+        - name: immich
+          image: ghcr.io/immich-app/immich-server:v1.136.0
+          ports:
+            - containerPort: 2283
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
+          volumeMounts:
+            - mountPath: /usr/src/app/upload
+              name: upload
+          environment:
+            - name: TZ
+              value: "Europe/Stockholm"
+          envFrom:
+            - secretRef:
+                name: immich-secrets
+      volumes:
+        - name: upload
+          nfs:
+            path: /export/Kubernetes/immich/upload
+            server: 192.168.86.107
