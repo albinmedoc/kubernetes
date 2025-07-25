@@ -38,7 +38,7 @@ spec:
           volumeMounts:
             - mountPath: /usr/src/app/upload
               name: upload
-          environment:
+          env:
             - name: TZ
               value: "Europe/Stockholm"
           envFrom:
