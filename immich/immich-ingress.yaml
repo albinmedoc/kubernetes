@@ -6,6 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: immich
     app.kubernetes.io/component: ingress
+    app.kubernetes.io/part-of: immich
     app.kubernetes.io/managed-by: kubectl
 spec:
   entryPoints:

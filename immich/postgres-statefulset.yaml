@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: immich
+  labels:
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/component: database
+    app.kubernetes.io/part-of: immich
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  serviceName: postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: postgres
+      app.kubernetes.io/component: database
+      app.kubernetes.io/part-of: immich
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: postgres
+        app.kubernetes.io/component: database
+        app.kubernetes.io/part-of: immich
+        app.kubernetes.io/managed-by: kubectl
+    spec:
+      containers:
+        - name: postgres
+          image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: database
+          env:
+            - name: POSTGRES_INITDB_ARGS
+              value: '--data-checksums'
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: immich-secrets
+                  key: DB_USERNAME
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: immich-secrets
+                  key: DB_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: immich-secrets
+                  key: DB_DATABASE_NAME
+      volumes:
+        - name: database
+          nfs:
+            path: /export/Kubernetes/immich/database
+            server: 192.168.86.107
