@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/albinmedoc/kubernetes
+    repoURL: https://github.com/weblio-ab/kubernetes
     path: weblio/gatus
     targetRevision: HEAD
     directory:
