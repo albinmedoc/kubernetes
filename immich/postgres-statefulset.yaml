@@ -50,6 +50,11 @@ spec:
                 secretKeyRef:
                   name: immich-secrets
                   key: DB_DATABASE_NAME
+            - name: DB_STORAGE_TYPE
+              valueFrom:
+                secretKeyRef:
+                  name: immich-secrets
+                  key: DB_STORAGE_TYPE
       volumes:
         - name: database
           nfs:
