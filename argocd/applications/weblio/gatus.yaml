@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/weblio-ab/kubernetes
-    path: weblio/gatus
+    path: gatus
     targetRevision: HEAD
     directory:
       recurse: true
