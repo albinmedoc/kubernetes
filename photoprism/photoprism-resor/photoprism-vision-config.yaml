@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: photoprism-vision-config
+  namespace: photoprism-resor
+data:
+  vision.yml: |
+    Models:
+      - Name: "photoprism-vision-caption"
+        Type: caption 
+        Source: "http://photoprism-vision.photoprism-vision.svc.cluster.local:5000/api/v1/vision/caption"
+        Default: true
+        MaxWords: 50
+        Resolution: 224
+        
+      - Name: "photoprism-vision-labels" 
+        Type: labels
+        Source: "http://photoprism-vision.photoprism-vision.svc.cluster.local:5000/api/v1/vision/labels"
+        Default: true
+        Resolution: 224
+        
+      - Name: "photoprism-vision-nsfw"
+        Type: nsfw
+        Source: "http://photoprism-vision.photoprism-vision.svc.cluster.local:5000/api/v1/vision/nsfw"
+        Default: true
+        Resolution: 224

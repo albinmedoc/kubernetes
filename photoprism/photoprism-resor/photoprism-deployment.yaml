@@ -67,6 +67,10 @@ spec:
               name: originals
             - mountPath: /photoprism/storage
               name: storage
+            - name: vision-config
+              mountPath: /photoprism/storage/config/vision.yml
+              subPath: vision.yml
+              readOnly: true
           readinessProbe:
             httpGet:
               path: /api/v1/status
@@ -80,3 +84,6 @@ spec:
           nfs:
             path: /export/Kubernetes/photoprism/photoprism-resor/storage
             server: 192.168.86.107
+        - name: vision-config
+          configMap:
+            name: photoprism-vision-config
