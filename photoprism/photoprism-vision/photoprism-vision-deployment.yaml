@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: photoprism
+  name: photoprism-vision
   namespace: photoprism-vision
   labels:
     app.kubernetes.io/name: photoprism-vision
@@ -23,7 +23,7 @@ spec:
           image: photoprism/vision-describe:240730
           envFrom:
             - configMapRef:
-                name: photoprism-vision-env
+                name: photoprism-vision-config
           ports:
             - containerPort: 5000
               name: http
