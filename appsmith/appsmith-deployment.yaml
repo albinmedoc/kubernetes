@@ -37,5 +37,5 @@ spec:
       volumes:
         - name: stacks
           nfs:
-            path: /export/appsmith/stacks
+            path: /export/Kubernetes/appsmith/stacks
             server: 192.168.86.107
