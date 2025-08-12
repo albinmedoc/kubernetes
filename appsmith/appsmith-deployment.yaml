@@ -20,7 +20,7 @@ spec:
         app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
-        - image: appsmith/appsmith-ce:v1.84
+        - image: appsmith/appsmith-ce:v1.8.15 
           name: appsmith
           ports:
             - containerPort: 80
