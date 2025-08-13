@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: appsmith
-  labels:
-    app.kubernetes.io/name: appsmith
-    app.kubernetes.io/managed-by: kubectl
