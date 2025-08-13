@@ -47,8 +47,11 @@ spec:
 
             - "--providers.kubernetescrd"
             - "--providers.kubernetescrd.allowCrossNamespace=true"
+
             - "--providers.file.directory=/config"
             - "--providers.file.watch=true"
+
+            - "--providers.docker.endpoint=http://192.168.86.169:2376"
 
             - "--certificatesresolvers.cloudflare.acme.dnsChallenge.provider=cloudflare"
             - "--certificatesresolvers.cloudflare.acme.dnsChallenge.resolvers=1.1.1.1"
