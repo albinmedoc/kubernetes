@@ -20,7 +20,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: mariadb-backup
-              image: mariadb:11
+              image: mariadb:12
               command:
                 - /bin/bash
                 - -c
