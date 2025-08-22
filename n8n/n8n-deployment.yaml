@@ -49,6 +49,10 @@ spec:
               value: http
             - name: N8N_PORT
               value: "5678"
+            - name: WEBHOOK_URL
+              value: "https://n8n.albinmedoc.se"
+            - name: GENERIC_TIMEZONE
+              value: Europe/Stockholm
           envFrom:
             - secretRef:
                 name: n8n-secrets
