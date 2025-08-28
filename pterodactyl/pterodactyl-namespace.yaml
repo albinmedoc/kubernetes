@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pterodactyl
+  labels:
+    app.kubernetes.io/name: pterodactyl
+    app.kubernetes.io/component: server-manager
+    app.kubernetes.io/part-of: pterodactyl
+    app.kubernetes.io/managed-by: kubectl
