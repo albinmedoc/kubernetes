@@ -136,7 +136,7 @@ data:
         <<: *http-defaults
       - name: Pterodactyl
         group: Infrastructure
-        url: "https://pterodactyl.albinmedoc.se"
+        url: "https://servers.flexflix.top"
         <<: *http-defaults
         
     # AI
@@ -176,9 +176,9 @@ data:
         <<: *defaults
         conditions:
           - "[CONNECTED] == true"
-      - name: "MariaDB 11"
+      - name: "MariaDB 12"
         group: Databases
-        url: "tcp://mariadb.mariadb11.svc.cluster.local:3306"
+        url: "tcp://mariadb.mariadb12.svc.cluster.local:3306"
         <<: *defaults
         conditions:
           - "[CONNECTED] == true"
