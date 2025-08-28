@@ -115,5 +115,5 @@ spec:
           volumes:
             - name: backup-storage
               nfs:
-                path: /export/Kubernetes/databases/mariadb11/backups
+                path: /export/Kubernetes/databases/mariadb12/backups
                 server: 192.168.86.107
