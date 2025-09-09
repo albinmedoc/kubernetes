@@ -20,7 +20,7 @@ spec:
         app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
-        - image: adminer:5.3.0
+        - image: adminer:5.4.0
           name: adminer
           ports:
             - containerPort: 8080
