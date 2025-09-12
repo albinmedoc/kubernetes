@@ -25,6 +25,13 @@ spec:
           image: twinproduction/gatus:v5.23.2
           ports:
             - containerPort: 8080
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                - /bin/sh
+                - -c
+                - sleep 300  # 5 minutes delay before starting health checks
           resources:
             limits:
               cpu: 500m
