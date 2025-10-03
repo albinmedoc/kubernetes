@@ -89,5 +89,5 @@ spec:
       volumes:
         - name: config
           nfs:
-            path: /export/Kubernetes/traefik
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Kubernetes/traefik
+            server: 192.168.86.109
