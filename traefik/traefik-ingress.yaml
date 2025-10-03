@@ -17,6 +17,7 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
-      middlewares:
-        - name: authentik
-          namespace: authentik
+# Todo: Enable authentik
+#      middlewares:
+#        - name: authentik
+#          namespace: authentik
