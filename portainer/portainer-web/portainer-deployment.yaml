@@ -40,5 +40,5 @@ spec:
       volumes:
         - name: data
           nfs:
-            path: /export/Kubernetes/portainer
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Kubernetes/portainer
+            server: 192.168.86.109
