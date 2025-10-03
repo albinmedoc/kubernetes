@@ -47,17 +47,17 @@ spec:
       volumes:
         - name: config
           nfs:
-            path: /export/Kubernetes/filebrowser
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Kubernetes/filebrowser
+            server: 192.168.86.109
         - name: data
           nfs:
-            path: /export/Data
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Data
+            server: 192.168.86.109
         - name: kubernetes
           nfs:
-            path: /export/Kubernetes
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Kubernetes
+            server: 192.168.86.109
         - name: media
           nfs:
-            path: /export/Media
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Media
+            server: 192.168.86.109
