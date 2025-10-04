@@ -123,5 +123,5 @@ spec:
           volumes:
             - name: backup-storage
               nfs:
-                path: /export/Kubernetes/databases/postgres17/backups
-                server: 192.168.86.107
+                path: /mnt/Datapool1/Kubernetes/databases/postgres17/backups
+                server: 192.168.86.109

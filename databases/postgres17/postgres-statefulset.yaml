@@ -48,5 +48,5 @@ spec:
       volumes:
         - name: database
           nfs:
-            path: /export/Kubernetes/databases/postgres17
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Kubernetes/databases/postgres17
+            server: 192.168.86.109
