@@ -24,6 +24,13 @@ controller:
     image:
       tag: next
 
+node:
+  hostPID: true
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      effect: NoSchedule
+
 driver:
   config:
     driver: freenas-api-nfs
