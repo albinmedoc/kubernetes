@@ -44,6 +44,5 @@ spec:
               name: config
       volumes:
         - name: config
-          nfs:
-            path: /export/Kubernetes/wishlist
-            server: 192.168.86.107
+          persistentVolumeClaim:
+            claimName: wishlist
