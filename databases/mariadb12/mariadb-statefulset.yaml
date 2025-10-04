@@ -21,6 +21,20 @@ spec:
         app.kubernetes.io/component: database
         app.kubernetes.io/managed-by: kubectl
     spec:
+      initContainers:
+        - name: permissions
+          image: busybox:latest
+          command:
+            - sh
+            - -c
+            - |
+              echo "=== Fixing permissions on /mnt/data ==="
+              chown -R 999:999 /mnt/data
+              chmod -R 755 /mnt/data
+              echo "=== Permissions fixed ==="
+          volumeMounts:
+            - name: data
+              mountPath: /mnt/data
       containers:
         - name: mariadb
           image: mariadb:12.0.2
@@ -28,7 +42,7 @@ spec:
             - containerPort: 3306
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: database
+              name: data
           env:
             - name: MARIADB_ROOT_PASSWORD
               valueFrom:
@@ -36,7 +50,7 @@ spec:
                   name: mariadb-secrets
                   key: MARIADB_ROOT_PASSWORD
       volumes:
-        - name: database
+        - name: data
           nfs:
             path: /mnt/Datapool1/Kubernetes/databases/mariadb12
             server: 192.168.86.109
