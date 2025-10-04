@@ -1,0 +1,49 @@
+csiDriver:
+  name: "org.democratic-csi.truenas-nfs"
+
+storageClasses:
+  - name: truenas-nfs
+    defaultClass: false
+    reclaimPolicy: Delete
+    volumeBindingMode: Immediate
+    allowVolumeExpansion: true
+    parameters:
+      fsType: nfs
+    mountOptions:
+      - nfsvers=4
+      - noatime
+    secrets:
+      provisioner-secret:
+      controller-publish-secret:
+      node-stage-secret:
+      node-publish-secret:
+      controller-expand-secret:
+
+controller:
+  driver:
+    image:
+      tag: next
+
+driver:
+  config:
+    driver: freenas-api-nfs
+    httpConnection:
+      protocol: http
+      host: 192.168.86.109
+      port: 80
+      apiKey: APITOKEN
+      allowInsecure: true
+    zfs:
+      datasetParentName: Datapool1/k8s/nfs/vols
+      detachedSnapshotsDatasetParentName: Datapool1/k8s/nfs/snaps
+      datasetProperties:
+        "org.freenas:description": "democratic-csi nfs volume"
+    nfs:
+      shareHost: 192.168.86.109
+      shareAlldirs: false
+      shareAllowedHosts: []
+      shareAllowedNetworks: []
+      shareMaprootUser: root
+      shareMaprootGroup: wheel
+      shareMapallUser: ""
+      shareMapallGroup: ""
