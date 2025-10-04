@@ -39,10 +39,9 @@ spec:
               name: downloads
       volumes:
         - name: config
-          nfs:
-            path: /export/Kubernetes/arr/sabnzbd
-            server: 192.168.86.107
+          persistentVolumeClaim:
+            claimName: sabnzbd
         - name: downloads
           nfs:
-            path: /export/Media/Downloads/SABnzbd
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Media/Downloads/SABnzbd
+            server: 192.168.86.109
