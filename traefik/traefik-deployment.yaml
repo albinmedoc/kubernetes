@@ -62,10 +62,6 @@ spec:
             - "--certificatesresolvers.letsencrypt-http.acme.httpChallenge.entryPoint=web"
             - "--certificatesresolvers.letsencrypt-http.acme.email=kontakt@albinmedoc.se"
             - "--certificatesresolvers.letsencrypt-http.acme.storage=/config/certs/acme-http.json"
-
-            - "--certificatesresolvers.weblio-letsencrypt-http.acme.httpChallenge.entryPoint=web"
-            - "--certificatesresolvers.weblio-letsencrypt-http.acme.email=info@weblio.se.se"
-            - "--certificatesresolvers.weblio-letsencrypt-http.acme.storage=/config/certs/weblio-acme-http.json"
           ports:
             - name: web
               containerPort: 80
