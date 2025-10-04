@@ -38,5 +38,5 @@ spec:
       volumes:
         - name: database
           nfs:
-            path: /export/Kubernetes/databases/mariadb12
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Kubernetes/databases/mariadb12
+            server: 192.168.86.109

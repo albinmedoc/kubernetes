@@ -36,7 +36,7 @@ spec:
                   
                   # Check if MariaDB is accessible before backup
                   echo "Checking MariaDB connectivity..."
-                  if ! mariadb --host=mariadb.mariadb11.svc.cluster.local --port=3306 --user=root --password="${MARIADB_ROOT_PASSWORD}" -e "SELECT 1;" &>/dev/null; then
+                  if ! mariadb --host=mariadb.mariadb12.svc.cluster.local --port=3306 --user=root --password="${MARIADB_ROOT_PASSWORD}" -e "SELECT 1;" &>/dev/null; then
                     echo "ERROR: Cannot connect to MariaDB server"
                     exit 1
                   fi
@@ -45,7 +45,7 @@ spec:
                   # Perform the backup
                   echo "Starting database dump..."
                   mariadb-dump \
-                    --host=mariadb.mariadb11.svc.cluster.local \
+                    --host=mariadb.mariadb12.svc.cluster.local \
                     --port=3306 \
                     --user=root \
                     --password="${MARIADB_ROOT_PASSWORD}" \
@@ -115,5 +115,5 @@ spec:
           volumes:
             - name: backup-storage
               nfs:
-                path: /export/Kubernetes/databases/mariadb12/backups
-                server: 192.168.86.107
+                path: /mnt/Datapool1/Kubernetes/databases/mariadb12/backups
+                server: 192.168.86.109
