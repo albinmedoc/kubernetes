@@ -39,6 +39,5 @@ spec:
               name: data
       volumes:
         - name: data
-          nfs:
-            path: /mnt/Datapool1/Kubernetes/portainer
-            server: 192.168.86.109
+          persistentVolumeClaim:
+            claimName: portainer
