@@ -38,5 +38,5 @@ spec:
       volumes:
         - name: config
           nfs:
-            path: /export/Kubernetes/vaultwarden
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Kubernetes/vaultwarden
+            server: 192.168.86.109
