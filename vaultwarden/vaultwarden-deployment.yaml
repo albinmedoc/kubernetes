@@ -37,6 +37,5 @@ spec:
               name: config
       volumes:
         - name: config
-          nfs:
-            path: /mnt/Datapool1/Kubernetes/vaultwarden
-            server: 192.168.86.109
+          persistentVolumeClaim:
+            claimName: vaultwarden
