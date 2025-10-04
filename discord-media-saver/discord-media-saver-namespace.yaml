@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: discord-media-saver
-  labels:
-    app.kubernetes.io/name: discord-media-saver
-    app.kubernetes.io/component: file-manager
-    app.kubernetes.io/managed-by: kubectl
