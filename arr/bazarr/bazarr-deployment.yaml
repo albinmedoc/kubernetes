@@ -43,5 +43,5 @@ spec:
             claimName: bazarr
         - name: media
           nfs:
-            path: /export/Media/Completed
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Media/Completed
+            server: 192.168.86.109
