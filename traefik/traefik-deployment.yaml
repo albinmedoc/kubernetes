@@ -49,14 +49,13 @@ spec:
             - "--providers.kubernetescrd.allowCrossNamespace=true"
 
             - "--providers.file.directory=/config"
-            - "--providers.file.watch=true"
 
             - "--providers.docker.endpoint=http://192.168.86.169:2376"
             - "--providers.docker.useBindPortIP=true"
 
             - "--certificatesresolvers.letsencrypt-http.acme.httpChallenge.entryPoint=web"
             - "--certificatesresolvers.letsencrypt-http.acme.email=kontakt@albinmedoc.se"
-            - "--certificatesresolvers.letsencrypt-http.acme.storage=/config/certs/acme-http.json"
+            - "--certificatesresolvers.letsencrypt-http.acme.storage=/certs/acme-http.json"
           ports:
             - name: web
               containerPort: 80
@@ -67,6 +66,8 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+            - name: certs
+              mountPath: /certs
           resources:
             requests:
               cpu: 200m
@@ -77,4 +78,7 @@ spec:
       volumes:
         - name: config
           persistentVolumeClaim:
-            claimName: traefik
+            claimName: config
+        - name: certs
+          persistentVolumeClaim:
+            claimName: certs

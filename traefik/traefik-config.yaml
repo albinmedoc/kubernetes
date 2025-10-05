@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+  namespace: traefik
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/managed-by: kubectl
+data:
+  plex.yaml: |
+    http:
+      routers:
+        plex:
+          rule: "Host(`flexflix.top`)"
+          service: plex
+          entrypoints: websecure
+
+      services:
+        plex:
+          loadBalancer:
+            servers:
+              - url: "http://192.168.86.28:32400"
