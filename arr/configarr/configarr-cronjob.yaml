@@ -21,9 +21,6 @@ spec:
               image: ghcr.io/raydak-labs/configarr:1.16.0
               imagePullPolicy: Always
               tty: true
-              envFrom:
-                - configMapRef:
-                    name: common-deployment-environment
               volumeMounts:
                 - mountPath: /app/repos # Cache repositories
                   name: repos
