@@ -77,8 +77,8 @@ spec:
               memory: 512Mi
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: config
+          configMap:
+            name: config
         - name: certs
           persistentVolumeClaim:
             claimName: certs
