@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configarr
+  namespace: arr
+  labels:
+    app.kubernetes.io/name: configarr
+    app.kubernetes.io/part-of: arr
+    app.kubernetes.io/managed-by: kubectl
+data:
+  config.yml: |
+    trashGuideUrl: https://github.com/TRaSH-Guides/Guides
+    recyclarrConfigUrl: https://github.com/recyclarr/config-templates
+
+    sonarr:
+      series:
+        base_url: http://sonarr.arr.svc.cluster.local:8989
+        api_key: !secret SONARR_API_KEY
+
+        quality_definition:
+          type: series
+
+        include:
+          # WEB-1080p
+          - template: sonarr-quality-definition-series
+          - template: sonarr-v4-quality-profile-web-1080p
+          - template: sonarr-v4-custom-formats-web-1080p
+
+          # WEB-2160p
+          - template: sonarr-v4-quality-profile-web-2160p
+          - template: sonarr-v4-custom-formats-web-2160p
+
+        custom_formats:
+          # Swedish Language - Highest Priority
+          - trash_ids:
+              - 2016d1676f5ee13a5b7257ff86ac9a93  # Swedish
+            quality_profiles:
+              - name: WEB-1080p
+                score: 1000
+              - name: WEB-2160p
+                score: 1000
+
+          # English Language - Secondary Priority
+          - trash_ids:
+              - 418ec0ebc5f12d3c6f8a857f7e18e4b7  # English
+            quality_profiles:
+              - name: WEB-1080p
+                score: 500
+              - name: WEB-2160p
+                score: 500
+
+    radarr:
+      movies:
+        base_url: http://radarr.arr.svc.cluster.local:7878
+        api_key: !secret RADARR_API_KEY
+
+        quality_definition:
+          type: movie
+
+        include:
+          # WEB-1080p
+          - template: radarr-quality-definition-movie
+          - template: radarr-quality-profile-hd-bluray-web
+          - template: radarr-custom-formats-hd-bluray-web
+
+          # WEB-2160p
+          - template: radarr-quality-profile-uhd-bluray-web
+          - template: radarr-custom-formats-uhd-bluray-web
+
+        custom_formats:
+          # Swedish Language - Highest Priority
+          - trash_ids:
+              - 2016d1676f5ee13a5b7257ff86ac9a93  # Swedish
+            quality_profiles:
+              - name: HD Bluray + WEB
+                score: 1000
+              - name: UHD Bluray + WEB
+                score: 1000
+
+          # English Language - Secondary Priority
+          - trash_ids:
+              - 418ec0ebc5f12d3c6f8a857f7e18e4b7  # English
+            quality_profiles:
+              - name: HD Bluray + WEB
+                score: 500
+              - name: UHD Bluray + WEB
+                score: 500
