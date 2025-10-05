@@ -34,7 +34,7 @@ data:
           # Swedish Language - Highest Priority
           - trash_ids:
               - 2016d1676f5ee13a5b7257ff86ac9a93  # Swedish
-            quality_profiles:
+            assign_scores_to:
               - name: WEB-1080p
                 score: 1000
               - name: WEB-2160p
@@ -43,7 +43,7 @@ data:
           # English Language - Secondary Priority
           - trash_ids:
               - 418ec0ebc5f12d3c6f8a857f7e18e4b7  # English
-            quality_profiles:
+            assign_scores_to:
               - name: WEB-1080p
                 score: 500
               - name: WEB-2160p
@@ -71,7 +71,7 @@ data:
           # Swedish Language - Highest Priority
           - trash_ids:
               - 2016d1676f5ee13a5b7257ff86ac9a93  # Swedish
-            quality_profiles:
+            assign_scores_to:
               - name: HD Bluray + WEB
                 score: 1000
               - name: UHD Bluray + WEB
@@ -80,7 +80,7 @@ data:
           # English Language - Secondary Priority
           - trash_ids:
               - 418ec0ebc5f12d3c6f8a857f7e18e4b7  # English
-            quality_profiles:
+            assign_scores_to:
               - name: HD Bluray + WEB
                 score: 500
               - name: UHD Bluray + WEB
