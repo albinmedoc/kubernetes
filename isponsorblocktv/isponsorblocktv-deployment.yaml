@@ -35,6 +35,5 @@ spec:
               name: config
       volumes:
         - name: config
-          nfs:
-            path: /export/Kubernetes/isponsorblocktv
-            server: 192.168.86.107
+          persistentVolumeClaim:
+            claimName: isponsorblocktv
