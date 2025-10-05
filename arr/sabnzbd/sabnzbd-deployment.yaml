@@ -35,12 +35,18 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
+            - name: scripts
+              mountPath: /scripts
             - mountPath: /downloads
               name: downloads
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: sabnzbd
+        - name: scripts
+          configMap:
+            name: sabnzbd-script
+            defaultMode: 0755
         - name: downloads
           nfs:
             path: /mnt/Datapool1/Media/Downloads/SABnzbd
