@@ -41,7 +41,7 @@ spec:
 
             - "--entryPoints.websecure.address=:443"
             - "--entryPoints.websecure.http.tls=true"
-            - "--entryPoints.websecure.http.tls.certResolver=cloudflare"
+            - "--entryPoints.websecure.http.tls.certResolver=letsencrypt-http"
 
             - "--api.insecure=true"
 
@@ -54,11 +54,6 @@ spec:
             - "--providers.docker.endpoint=http://192.168.86.169:2376"
             - "--providers.docker.useBindPortIP=true"
 
-            - "--certificatesresolvers.cloudflare.acme.dnsChallenge.provider=cloudflare"
-            - "--certificatesresolvers.cloudflare.acme.dnsChallenge.resolvers=1.1.1.1"
-            - "--certificatesresolvers.cloudflare.acme.email=kontakt@albinmedoc.se"
-            - "--certificatesresolvers.cloudflare.acme.storage=/config/certs/acme-cloudflare.json"
-
             - "--certificatesresolvers.letsencrypt-http.acme.httpChallenge.entryPoint=web"
             - "--certificatesresolvers.letsencrypt-http.acme.email=kontakt@albinmedoc.se"
             - "--certificatesresolvers.letsencrypt-http.acme.storage=/config/certs/acme-http.json"
@@ -69,9 +64,6 @@ spec:
               containerPort: 443
             - name: traefik
               containerPort: 8080
-          envFrom:
-            - secretRef:
-                name: traefik-secrets
           volumeMounts:
             - name: config
               mountPath: /config
