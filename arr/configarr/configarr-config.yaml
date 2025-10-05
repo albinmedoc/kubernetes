@@ -30,25 +30,6 @@ data:
           - template: sonarr-v4-quality-profile-web-2160p
           - template: sonarr-v4-custom-formats-web-2160p
 
-        custom_formats:
-          # Swedish Language - Highest Priority
-          - trash_ids:
-              - 2016d1676f5ee13a5b7257ff86ac9a93  # Swedish
-            assign_scores_to:
-              - name: WEB-1080p
-                score: 1000
-              - name: WEB-2160p
-                score: 1000
-
-          # English Language - Secondary Priority
-          - trash_ids:
-              - 418ec0ebc5f12d3c6f8a857f7e18e4b7  # English
-            assign_scores_to:
-              - name: WEB-1080p
-                score: 500
-              - name: WEB-2160p
-                score: 500
-
     radarr:
       movies:
         base_url: http://radarr.arr.svc.cluster.local:7878
@@ -66,22 +47,3 @@ data:
           # WEB-2160p
           - template: radarr-quality-profile-uhd-bluray-web
           - template: radarr-custom-formats-uhd-bluray-web
-
-        custom_formats:
-          # Swedish Language - Highest Priority
-          - trash_ids:
-              - 2016d1676f5ee13a5b7257ff86ac9a93  # Swedish
-            assign_scores_to:
-              - name: HD Bluray + WEB
-                score: 1000
-              - name: UHD Bluray + WEB
-                score: 1000
-
-          # English Language - Secondary Priority
-          - trash_ids:
-              - 418ec0ebc5f12d3c6f8a857f7e18e4b7  # English
-            assign_scores_to:
-              - name: HD Bluray + WEB
-                score: 500
-              - name: UHD Bluray + WEB
-                score: 500
