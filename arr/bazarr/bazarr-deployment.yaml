@@ -39,9 +39,8 @@ spec:
               name: media
       volumes:
         - name: config
-          nfs:
-            path: /export/Kubernetes/arr/bazarr
-            server: 192.168.86.107
+          persistentVolumeClaim:
+            claimName: bazarr
         - name: media
           nfs:
             path: /export/Media/Completed
