@@ -32,8 +32,8 @@ spec:
               memory: 64Mi
           volumeMounts:
             - mountPath: /app/data
-              name: config
+              name: data
       volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: isponsorblocktv
+        - name: data
+          secret:
+            secretName: isponsorblocktv
