@@ -35,5 +35,5 @@ spec:
               name: config
       volumes:
         - name: config
-          persistentVolumeClaim:
-            claimName: watchlistarr
+          secret:
+            secretName: watchlistarr
