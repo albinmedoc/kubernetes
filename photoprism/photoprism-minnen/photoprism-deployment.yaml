@@ -74,9 +74,8 @@ spec:
       volumes:
         - name: originals
           nfs:
-            path: /export/Minnen
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Data/Minnen
+            server: 192.168.86.109
         - name: storage
-          nfs:
-            path: /export/Kubernetes/photoprism/photoprism-minnen/storage
-            server: 192.168.86.107
+          persistentVolumeClaim:
+            claimName: photoprism
