@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: postgres17
+  name: postgres18
   labels:
     app.kubernetes.io/name: postgres
     app.kubernetes.io/component: database
