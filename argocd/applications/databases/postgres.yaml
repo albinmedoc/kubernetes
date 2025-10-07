@@ -7,7 +7,7 @@ spec:
   project: databases
   source:
     repoURL: https://github.com/albinmedoc/kubernetes
-    path: databases/postgres18
+    path: databases/postgres17
     targetRevision: HEAD
     directory:
       recurse: true
