@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: photoprism
+  namespace: photoprism-resor
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: truenas-nfs
+  resources:
+    requests:
+      storage: 20Gi

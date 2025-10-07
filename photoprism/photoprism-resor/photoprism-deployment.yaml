@@ -74,9 +74,8 @@ spec:
       volumes:
         - name: originals
           nfs:
-            path: /export/Resor
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Data/Resor
+            server: 192.168.86.109
         - name: storage
-          nfs:
-            path: /export/Kubernetes/photoprism/photoprism-resor/storage
-            server: 192.168.86.107
+          persistentVolumeClaim:
+            claimName: photoprism
