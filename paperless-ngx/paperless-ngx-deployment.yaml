@@ -38,20 +38,22 @@ spec:
             - secretRef:
                 name: paperless-ngx-secrets
           volumeMounts:
-            - name: paperless
-              subPath: data
+            - name: data
               mountPath: /usr/src/paperless/data
-            - name: paperless
-              subPath: media
+            - name: documents
+              subPath: Media
               mountPath: /usr/src/paperless/media
-            - name: paperless
-              subPath: export
+            - name: documents
+              subPath: Export
               mountPath: /usr/src/paperless/export
-            - name: paperless
-              subPath: consume
+            - name: documents
+              subPath: Consume
               mountPath: /usr/src/paperless/consume
       volumes:
-        - name: paperless
+        - name: data
+          persistentVolumeClaim:
+            claimName: paperless-ngx
+        - name: documents
           nfs:
-            path: /export/Kubernetes/paperless-ngx
-            server: 192.168.86.107
+            path: /mnt/Datapool1/Data/Documents
+            server: 192.168.86.109
