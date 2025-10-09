@@ -37,6 +37,10 @@ spec:
               name: config
             - mountPath: /media
               name: media
+          envFrom:
+            - secretRef:
+                name: sonarr-secrets
+                optional: true
           env:
             - name: DOCKER_MODS
               value: "linuxserver/mods:radarr-striptracks"

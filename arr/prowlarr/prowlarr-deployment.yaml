@@ -32,6 +32,10 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
+          envFrom:
+            - secretRef:
+                name: prowlarr-secrets
+                optional: true
           volumeMounts:
             - mountPath: /config
               name: config

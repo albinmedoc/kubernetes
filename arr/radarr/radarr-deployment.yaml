@@ -42,6 +42,10 @@ spec:
               value: "linuxserver/mods:radarr-striptracks"
             - name: STRIPTRACKS_ARGS
               value: "--audio :org:eng:swe --subs :org:eng:swe"
+          envFrom:
+            - secretRef:
+                name: radarr-secrets
+                optional: true
       volumes:
         - name: config
           persistentVolumeClaim:
