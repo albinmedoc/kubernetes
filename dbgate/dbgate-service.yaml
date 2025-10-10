@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: adminer
-  namespace: adminer
+  name: dbgate
+  namespace: dbgate
   labels:
-    app.kubernetes.io/name: adminer
+    app.kubernetes.io/name: dbgate
     app.kubernetes.io/component: management
     app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
-    app.kubernetes.io/name: adminer
+    app.kubernetes.io/name: dbgate
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 3000
+      targetPort: 3000

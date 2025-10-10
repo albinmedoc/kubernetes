@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: adminer
-  namespace: adminer
+  name: dbgate
+  namespace: dbgate
   labels:
-    app.kubernetes.io/name: adminer
+    app.kubernetes.io/name: dbgate
     app.kubernetes.io/component: management
     app.kubernetes.io/managed-by: kubectl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: adminer
+      app.kubernetes.io/name: dbgate
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: adminer
+        app.kubernetes.io/name: dbgate
         app.kubernetes.io/component: management
         app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
-        - image: adminer:5.4.0
-          name: adminer
+        - image: dbgate/dbgate:6.6.4
+          name: dbgate
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
           resources:
             limits:
               cpu: 500m
@@ -31,3 +31,6 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
+          envFrom:
+            - secretRef:
+                name: dbgate-secrets

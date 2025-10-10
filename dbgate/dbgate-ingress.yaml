@@ -2,10 +2,10 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: adminer
-  namespace: adminer
+  name: dbgate
+  namespace: dbgate
   labels:
-    app.kubernetes.io/name: adminer
+    app.kubernetes.io/name: dbgate
     app.kubernetes.io/component: management
     app.kubernetes.io/managed-by: kubectl
 spec:
@@ -15,5 +15,5 @@ spec:
     - match: Host(`db.albinmedoc.se`)
       kind: Rule
       services:
-        - name: adminer
-          port: 8080
+        - name: dbgate
+          port: 3000

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: adminer
+  name: dbgate
   labels:
-    app.kubernetes.io/name: adminer
+    app.kubernetes.io/name: dbgate
     app.kubernetes.io/managed-by: kubectl
