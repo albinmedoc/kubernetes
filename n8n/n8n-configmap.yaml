@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: n8n-config
+  namespace: n8n
+  labels:
+    app.kubernetes.io/name: n8n
+    app.kubernetes.io/component: workflow-automation
+data:
+  N8N_PROTOCOL: http
+  N8N_PORT: "5678"
+  N8N_HOST: "n8n.albinmedoc.se"
+  N8N_PROXY_HOPS: "1"
+  GENERIC_TIMEZONE: Europe/Stockholm
+  TZ: Europe/Stockholm
+  N8N_RUNNERS_ENABLED: "true"
+  N8N_HIRING_BANNER_ENABLED: "false"
