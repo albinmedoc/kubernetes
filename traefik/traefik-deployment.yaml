@@ -50,9 +50,6 @@ spec:
 
             - "--providers.file.directory=/config"
 
-            - "--providers.docker.endpoint=http://192.168.86.169:2376"
-            - "--providers.docker.useBindPortIP=true"
-
             - "--certificatesresolvers.letsencrypt-dns.acme.dnsChallenge.provider=cloudflare"
             - "--certificatesresolvers.letsencrypt-dns.acme.dnsChallenge.delayBeforeCheck=10"
             - "--certificatesresolvers.letsencrypt-dns.acme.email=kontakt@albinmedoc.se"
