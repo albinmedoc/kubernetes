@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: immich
-          image: ghcr.io/immich-app/immich-server:v1.143.1
+          image: ghcr.io/immich-app/immich-server:v2.1.0
           securityContext:
             runAsUser: 3001
             runAsGroup: 3001
