@@ -49,5 +49,5 @@ spec:
             defaultMode: 0755
         - name: downloads
           nfs:
-            path: /mnt/Datapool1/Media/Downloads/SABnzbd
+            path: /mnt/Datapool2/Media/Downloads/SABnzbd
             server: 192.168.86.109

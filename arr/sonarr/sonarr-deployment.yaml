@@ -52,5 +52,5 @@ spec:
             claimName: sonarr
         - name: media
           nfs:
-            path: /mnt/Datapool1/Media
+            path: /mnt/Datapool2/Media
             server: 192.168.86.109
