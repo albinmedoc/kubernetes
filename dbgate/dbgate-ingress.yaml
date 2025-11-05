@@ -17,3 +17,6 @@ spec:
       services:
         - name: dbgate
           port: 3000
+      middlewares:
+        - name: local-network
+          namespace: traefik

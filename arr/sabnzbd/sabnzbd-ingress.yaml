@@ -17,5 +17,7 @@ spec:
         - name: sabnzbd
           port: 8080
       middlewares:
+        - name: local-network
+          namespace: traefik
         - name: authentik
           namespace: authentik

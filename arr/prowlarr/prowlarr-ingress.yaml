@@ -17,5 +17,7 @@ spec:
         - name: prowlarr
           port: 9696
       middlewares:
+        - name: local-network
+          namespace: traefik
         - name: authentik
           namespace: authentik
