@@ -18,6 +18,9 @@ data:
           rule: "Host(`adguard.albinmedoc.se`)"
           service: adguard
           entrypoints: websecure
+          middlewares:
+            - traefik-local-network@kubernetescrd
+            - authentik-authentik@kubernetescrd
 
       services:
         plex:
