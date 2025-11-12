@@ -14,6 +14,12 @@ data:
           rule: "Host(`flexflix.top`)"
           service: plex
           entrypoints: websecure
+        proxmox:
+          rule: "Host(`proxmox.albinmedoc.se`)"
+          service: proxmox
+          entrypoints: websecure
+          middlewares:
+            - traefik-local-network@kubernetescrd
         adguard:
           rule: "Host(`adguard.albinmedoc.se`)"
           service: adguard
@@ -27,7 +33,16 @@ data:
           loadBalancer:
             servers:
               - url: "http://192.168.86.122:32400"
+        proxmox:
+          loadBalancer:
+            serversTransport: proxmox
+            servers:
+              - url: "https://192.168.86.106:8006"
         adguard:
           loadBalancer:
             servers:
               - url: "http://192.168.86.238"
+
+      serversTransports:
+        proxmox:
+          insecureSkipVerify: true
