@@ -26,22 +26,9 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
-          env:
-            - name: UPSTASH_REDIS_REST_URL
-              valueFrom:
-                secretKeyRef:
-                  name: redis-rest-secrets
-                  key: UPSTASH_REDIS_REST_URL
-            - name: UPSTASH_REDIS_REST_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: redis-rest-secrets
-                  key: UPSTASH_REDIS_REST_PASSWORD
-            - name: UPSTASH_REDIS_REST_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: redis-rest-secrets
-                  key: UPSTASH_REDIS_REST_TOKEN
+          envFrom:
+            - secretRef:
+                name: redis-rest-secrets
           resources:
             limits:
               cpu: 500m
