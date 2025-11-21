@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: redis-rest
+  labels:
+    app.kubernetes.io/name: redis-rest
+    app.kubernetes.io/component: database
+    app.kubernetes.io/managed-by: kubectl
