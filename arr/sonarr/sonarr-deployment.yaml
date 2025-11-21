@@ -45,7 +45,7 @@ spec:
             - name: DOCKER_MODS
               value: "linuxserver/mods:radarr-striptracks"
             - name: STRIPTRACKS_ARGS
-              value: "--audio :org:eng:swe --subs :org:eng:swe"
+              value: "--audio :swe+1d:eng+1:org+1:und+1 --subs :swe+1d:eng+1:org+1:und+1 --reorder"
       volumes:
         - name: config
           persistentVolumeClaim:
