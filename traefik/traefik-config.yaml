@@ -27,6 +27,10 @@ data:
           middlewares:
             - traefik-local-network@kubernetescrd
             - authentik-authentik@kubernetescrd
+        immich:
+          rule: "Host(`immich.albinmedoc.se`)"
+          service: immich
+          entrypoints: websecure
 
       services:
         plex:
@@ -42,6 +46,10 @@ data:
           loadBalancer:
             servers:
               - url: "http://192.168.86.238"
+        immich:
+          loadBalancer:
+            servers:
+              - url: "http://192.168.86.109:30041"
 
       serversTransports:
         proxmox:
