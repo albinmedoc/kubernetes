@@ -14,6 +14,12 @@ data:
           rule: "Host(`flexflix.top`)"
           service: plex
           entrypoints: websecure
+        truenas:
+          rule: "Host(`truenas.albinmedoc.se`)"
+          service: truenas
+          entrypoints: websecure
+          middlewares:
+            - traefik-local-network@kubernetescrd
         proxmox:
           rule: "Host(`proxmox.albinmedoc.se`)"
           service: proxmox
@@ -37,6 +43,10 @@ data:
           loadBalancer:
             servers:
               - url: "http://192.168.86.122:32400"
+        truenas:
+          loadBalancer:
+            servers:
+              - url: "http://192.168.86.109"
         proxmox:
           loadBalancer:
             serversTransport: proxmox
