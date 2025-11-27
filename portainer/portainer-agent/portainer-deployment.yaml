@@ -24,7 +24,7 @@ spec:
       serviceAccountName: portainer-sa-clusteradmin
       containers:
       - name: portainer-agent
-        image: portainer/agent:2.35.0
+        image: portainer/agent:2.36.0
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
