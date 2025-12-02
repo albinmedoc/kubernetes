@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: convertx
-          image: c4illin/convertx:v0.15.1
+          image: c4illin/convertx:v0.16.0
           ports:
             - containerPort: 3000
           envFrom:
