@@ -39,6 +39,11 @@ spec:
               mountPath: /scripts
             - mountPath: /downloads
               name: downloads
+          env:
+            - name: DOCKER_MODS
+              value: "ghcr.io/themepark-dev/theme.park:sabnzbd"
+            - name: TP_THEME
+              value: "plex"
       volumes:
         - name: config
           persistentVolumeClaim:

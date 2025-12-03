@@ -32,6 +32,11 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
+          env:
+            - name: DOCKER_MODS
+              value: "ghcr.io/themepark-dev/theme.park:bazarr"
+            - name: TP_THEME
+              value: "plex"
           volumeMounts:
             - mountPath: /config
               name: config

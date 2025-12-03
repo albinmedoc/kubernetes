@@ -32,6 +32,11 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
+          env:
+            - name: DOCKER_MODS
+              value: "ghcr.io/themepark-dev/theme.park:tautulli"
+            - name: TP_THEME
+              value: "plex"
           volumeMounts:
             - mountPath: /config
               name: config

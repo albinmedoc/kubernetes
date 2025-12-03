@@ -36,6 +36,11 @@ spec:
             - secretRef:
                 name: prowlarr-secrets
                 optional: true
+          env:
+            - name: DOCKER_MODS
+              value: "ghcr.io/themepark-dev/theme.park:prowlarr"
+            - name: TP_THEME
+              value: "plex"
           volumeMounts:
             - mountPath: /config
               name: config

@@ -39,9 +39,11 @@ spec:
               name: media
           env:
             - name: DOCKER_MODS
-              value: "linuxserver/mods:radarr-striptracks"
+              value: "linuxserver/mods:radarr-striptracks|ghcr.io/themepark-dev/theme.park:radarr"
             - name: STRIPTRACKS_ARGS
               value: "--audio :swe+1d:eng+1:org+1:und+1 --subs :swe+1d:eng+1:org+1:und+1 --reorder"
+            - name: TP_THEME
+              value: "plex"
           envFrom:
             - secretRef:
                 name: radarr-secrets
