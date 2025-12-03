@@ -48,6 +48,8 @@ spec:
               value: "--audio :swe+1d:eng+1:org+1:und+1 --subs :swe+1d:eng+1:org+1:und+1 --reorder"
             - name: TP_THEME
               value: "plex"
+            - name: TP_ADDON
+              value: "sonarr-text-logo"
       volumes:
         - name: config
           persistentVolumeClaim:
