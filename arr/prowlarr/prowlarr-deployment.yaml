@@ -41,6 +41,8 @@ spec:
               value: "ghcr.io/themepark-dev/theme.park:prowlarr"
             - name: TP_THEME
               value: "plex"
+            - name: TP_ADDON
+              value: "prowlarr-text-logo"
           volumeMounts:
             - mountPath: /config
               name: config
