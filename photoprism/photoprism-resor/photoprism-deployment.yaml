@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: photoprism
-          image: photoprism/photoprism:250707
+          image: photoprism/photoprism:251130
           env:
             - name: PHOTOPRISM_SITE_URL
               value: https://resor.albinmedoc.se
