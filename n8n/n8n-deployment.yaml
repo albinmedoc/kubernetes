@@ -22,7 +22,7 @@ spec:
     spec:
       initContainers:
         - name: volume-permissions
-          image: busybox:latest
+          image: busybox:1.37.0
           command: ['sh', '-c', 'chown -R 1000:1000 /home/node/.n8n && chmod -R 755 /home/node/.n8n']
           volumeMounts:
             - mountPath: /home/node/.n8n
