@@ -39,6 +39,18 @@ spec:
             requests:
               cpu: 200m
               memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5678
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz/readiness
+              port: 5678
+            initialDelaySeconds: 10
+            periodSeconds: 5
           envFrom:
             - configMapRef:
                 name: n8n-config
