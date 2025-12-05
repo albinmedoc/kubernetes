@@ -34,6 +34,20 @@ spec:
             requests:
               cpu: 200m
               memory: 256Mi
+          livenessProbe:
+            exec:
+              command:
+                - ak
+                - healthcheck
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - ak
+                - healthcheck
+            initialDelaySeconds: 10
+            periodSeconds: 5
           envFrom:
             - secretRef:
                 name: authentik-secrets
