@@ -34,7 +34,7 @@ spec:
               memory: 256Mi
           livenessProbe:
             httpGet:
-              path: /ping
+              path: /api/system/ping
               port: 6767
             initialDelaySeconds: 30
             periodSeconds: 10
@@ -42,7 +42,7 @@ spec:
             failureThreshold: 3
           readinessProbe:
             httpGet:
-              path: /ping
+              path: /api/system/ping
               port: 6767
             initialDelaySeconds: 10
             periodSeconds: 5
