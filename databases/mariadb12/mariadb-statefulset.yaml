@@ -39,24 +39,24 @@ spec:
           livenessProbe:
             exec:
               command:
-                - mysqladmin
-                - ping
-                - -h
-                - localhost
-            initialDelaySeconds: 30
-            periodSeconds: 10
+                - healthcheck.sh
+                - --su-mysql
+                - --connect
+                - --innodb_initialized
+            initialDelaySeconds: 60
+            periodSeconds: 60
             timeoutSeconds: 5
             failureThreshold: 3
           readinessProbe:
             exec:
               command:
-                - mysqladmin
-                - ping
-                - -h
-                - localhost
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            timeoutSeconds: 3
+                - healthcheck.sh
+                - --su-mysql
+                - --connect
+                - --innodb_initialized
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
             failureThreshold: 3
       volumes:
         - name: database
