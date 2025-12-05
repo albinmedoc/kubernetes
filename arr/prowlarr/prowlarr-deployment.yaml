@@ -35,19 +35,19 @@ spec:
           livenessProbe:
             httpGet:
               path: /ping
-              port: 8989
-            initialDelaySeconds: 90
+              port: 9696
+            initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 5
-            failureThreshold: 6
+            failureThreshold: 3
           readinessProbe:
             httpGet:
               path: /ping
-              port: 8989
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 6
+              port: 9696
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
           envFrom:
             - secretRef:
                 name: prowlarr-secrets
