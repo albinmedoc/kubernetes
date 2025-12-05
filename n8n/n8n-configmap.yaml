@@ -15,3 +15,4 @@ data:
   TZ: Europe/Stockholm
   N8N_RUNNERS_ENABLED: "true"
   N8N_HIRING_BANNER_ENABLED: "false"
+  QUEUE_HEALTH_CHECK_ACTIVE: "true"
