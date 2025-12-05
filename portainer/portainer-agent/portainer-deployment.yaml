@@ -52,3 +52,13 @@ spec:
           limits:
             cpu: 500m
             memory: 512Mi
+        livenessProbe:
+          tcpSocket:
+            port: 9001
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 9001
+          initialDelaySeconds: 10
+          periodSeconds: 5
