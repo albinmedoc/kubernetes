@@ -33,6 +33,7 @@ spec:
           args:
             - "--global.checkNewVersion=false"
             - "--global.sendanonymoususage=false"
+            - "--ping=true"
 
             - "--entryPoints.web.address=:80"
             - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
@@ -73,6 +74,22 @@ spec:
             limits:
               cpu: 1000m
               memory: 512Mi
+          livenessProbe:
+            exec:
+              command:
+                - traefik
+                - healthcheck
+                - --ping
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - traefik
+                - healthcheck
+                - --ping
+            initialDelaySeconds: 10
+            periodSeconds: 5
           envFrom:
             - secretRef:
                 name: traefik-secrets
