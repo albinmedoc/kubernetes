@@ -1,0 +1,33 @@
+# Example ServiceMonitor for your own applications
+# Copy and modify this for each service you want to monitor
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: example-app
+  namespace: default
+  labels:
+    prometheus: "true"
+spec:
+  # Which namespaces to search for services
+  namespaceSelector:
+    matchNames:
+    - default  # Change to your application namespace
+
+  # Which services to monitor (based on labels)
+  selector:
+    matchLabels:
+      app: example-app  # Change to match your service labels
+
+  # Endpoint configuration
+  endpoints:
+  - port: metrics  # Name of the port in your Service that exposes metrics
+    interval: 30s  # How often to scrape
+    path: /metrics  # Path to metrics endpoint
+    scheme: http
+
+    # Optional: Add custom labels to all metrics from this service
+    # relabelings:
+    # - sourceLabels: [__meta_kubernetes_pod_name]
+    #   targetLabel: pod
+    #   action: replace

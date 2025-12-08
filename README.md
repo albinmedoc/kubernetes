@@ -25,6 +25,9 @@ kubectl get pods --all-namespaces
 - **MetalLB**: Bare-metal load balancer for on-premises clusters
 - **Metrics Server**: Cluster-wide resource usage metrics
 
+### Monitoring & Observability
+- **Prometheus Operator**: Kubernetes-native deployment and management of Prometheus monitoring stack ([setup guide](./kube-prometheus/README.md))
+
 ## 🚀 Deployment Patterns
 
 ### Standard Application Deployment
