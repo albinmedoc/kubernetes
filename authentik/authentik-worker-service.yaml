@@ -1,22 +1,18 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: authentik
+  name: authentik-worker
   namespace: authentik
   labels:
     app.kubernetes.io/name: authentik
-    app.kubernetes.io/component: authentik-server
+    app.kubernetes.io/component: authentik-worker
     app.kubernetes.io/part-of: authentik
     app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
     app.kubernetes.io/name: authentik
-    app.kubernetes.io/component: authentik-server
+    app.kubernetes.io/component: authentik-worker
   ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 9000
     - name: metrics
       protocol: TCP
       port: 9300

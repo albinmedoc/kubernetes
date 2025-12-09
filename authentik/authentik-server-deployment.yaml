@@ -62,7 +62,10 @@ spec:
             - secretRef:
                 name: authentik-secrets
           ports:
-            - containerPort: 9000
+            - name: http
+              containerPort: 9000
+            - name: metrics
+              containerPort: 9300
           volumeMounts:
             - mountPath: /media
               subPath: media

@@ -51,3 +51,6 @@ spec:
           envFrom:
             - secretRef:
                 name: authentik-secrets
+          ports:
+            - name: metrics
+              containerPort: 9300
