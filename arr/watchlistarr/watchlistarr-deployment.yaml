@@ -30,22 +30,6 @@ spec:
             requests:
               cpu: 50m
               memory: 64Mi
-          livenessProbe:
-            exec:
-              command:
-                - pgrep
-                - -f
-                - watchlistarr
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            exec:
-              command:
-                - pgrep
-                - -f
-                - watchlistarr
-            initialDelaySeconds: 10
-            periodSeconds: 5
           volumeMounts:
             - mountPath: /app/config
               name: config
