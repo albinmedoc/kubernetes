@@ -5,7 +5,7 @@ metadata:
   namespace: authentik
   labels:
     app.kubernetes.io/name: authentik
-    app.kubernetes.io/part-of: authentik
+    app.kubernetes.io/part-of: prometheus
     prometheus: "true"
 spec:
   endpoints:
