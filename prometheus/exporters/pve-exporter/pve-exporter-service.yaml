@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pve-exporter
+  namespace: prometheus-exporters
+  labels:
+    app.kubernetes.io/name: pve-exporter
+spec:
+  type: ClusterIP
+  ports:
+  - port: 9221
+    targetPort: metrics
+    protocol: TCP
+    name: metrics
+  selector:
+    app.kubernetes.io/name: pve-exporter
