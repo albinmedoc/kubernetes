@@ -60,18 +60,10 @@ data:
         source_labels = ["__meta_kubernetes_pod_node_name"]
         target_label  = "node"
       }
-
-      // Set the path to log files
-      rule {
-        source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
-        separator     = "/"
-        target_label  = "__path__"
-        replacement   = "/var/log/pods/*$1/*.log"
-      }
     }
 
-    // Read log files
-    loki.source.file "pods" {
+    // Collect logs via Kubernetes API (works with Talos)
+    loki.source.kubernetes "pods" {
       targets    = discovery.relabel.pods_logs.output
       forward_to = [loki.process.pods.receiver]
     }
