@@ -18,6 +18,10 @@ spec:
       app.kubernetes.io/component: authentik-server
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9300"
+        prometheus.io/path: "/metrics"
       labels:
         app.kubernetes.io/name: authentik
         app.kubernetes.io/component: authentik-server
