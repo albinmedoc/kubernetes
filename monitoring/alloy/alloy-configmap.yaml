@@ -1,0 +1,257 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alloy-config
+  namespace: monitoring
+data:
+  config.alloy: |
+    /********************************************
+     * LOGS COLLECTION (Loki)
+     ********************************************/
+
+    // Discover Kubernetes pods for logs
+    discovery.kubernetes "pods_logs" {
+      role = "pod"
+    }
+
+    // Relabel pods for log collection
+    discovery.relabel "pods_logs" {
+      targets = discovery.kubernetes.pods_logs.targets
+
+      // Only scrape pods that are running
+      rule {
+        source_labels = ["__meta_kubernetes_pod_phase"]
+        action        = "keep"
+        regex         = "Running"
+      }
+
+      // Add namespace label
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        target_label  = "namespace"
+      }
+
+      // Add pod name label
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        target_label  = "pod"
+      }
+
+      // Add container name label
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        target_label  = "container"
+      }
+
+      // Add app label
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name"]
+        target_label  = "app"
+      }
+
+      // Add component label
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_component"]
+        target_label  = "component"
+      }
+
+      // Add node name label
+      rule {
+        source_labels = ["__meta_kubernetes_pod_node_name"]
+        target_label  = "node"
+      }
+
+      // Set the path to log files
+      rule {
+        source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+        separator     = "/"
+        target_label  = "__path__"
+        replacement   = "/var/log/pods/*$1/*.log"
+      }
+    }
+
+    // Read log files
+    loki.source.file "pods" {
+      targets    = discovery.relabel.pods_logs.output
+      forward_to = [loki.process.pods.receiver]
+    }
+
+    // Process logs (parse container runtime format)
+    loki.process "pods" {
+      forward_to = [loki.write.loki.receiver]
+
+      stage.cri {}
+    }
+
+    // Send logs to Loki
+    loki.write "loki" {
+      endpoint {
+        url = "http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push"
+      }
+    }
+
+    /********************************************
+     * METRICS COLLECTION (Mimir)
+     ********************************************/
+
+    // Discover Kubernetes pods for metrics
+    discovery.kubernetes "pods_metrics" {
+      role = "pod"
+    }
+
+    // Relabel pods for metrics scraping
+    discovery.relabel "pods_metrics" {
+      targets = discovery.kubernetes.pods_metrics.targets
+
+      // Keep only pods with prometheus.io/scrape annotation
+      rule {
+        source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_scrape"]
+        action        = "keep"
+        regex         = "true"
+      }
+
+      // Set the scrape port from annotation or default
+      rule {
+        source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_port"]
+        action        = "replace"
+        regex         = "(.*)"
+        target_label  = "__meta_kubernetes_pod_container_port_number"
+        replacement   = "$1"
+      }
+
+      // Set the metrics path from annotation or default
+      rule {
+        source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_path"]
+        action        = "replace"
+        target_label  = "__metrics_path__"
+        regex         = "(.+)"
+      }
+
+      // Add namespace label
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        target_label  = "namespace"
+      }
+
+      // Add pod name label
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        target_label  = "pod"
+      }
+
+      // Add container name label
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        target_label  = "container"
+      }
+
+      // Add app label
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name"]
+        target_label  = "app"
+      }
+
+      // Add component label
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_component"]
+        target_label  = "component"
+      }
+
+      // Add node name label
+      rule {
+        source_labels = ["__meta_kubernetes_pod_node_name"]
+        target_label  = "node"
+      }
+    }
+
+    // Scrape metrics from pods
+    prometheus.scrape "pods" {
+      targets    = discovery.relabel.pods_metrics.output
+      forward_to = [prometheus.remote_write.mimir.receiver]
+    }
+
+    /********************************************
+     * PVE EXPORTER (Special scrape config)
+     ********************************************/
+
+    // Discover pve-exporter service
+    discovery.kubernetes "pve_exporter" {
+      role = "service"
+      namespaces {
+        names = ["monitoring"]
+      }
+    }
+
+    // Relabel pve-exporter service
+    discovery.relabel "pve_exporter" {
+      targets = discovery.kubernetes.pve_exporter.targets
+
+      // Keep only pve-exporter service
+      rule {
+        source_labels = ["__meta_kubernetes_service_name"]
+        action        = "keep"
+        regex         = "pve-exporter"
+      }
+
+      // Set the scrape address
+      rule {
+        source_labels = ["__meta_kubernetes_service_name", "__meta_kubernetes_namespace"]
+        separator     = "."
+        target_label  = "__address__"
+        replacement   = "$1.svc.cluster.local:9221"
+      }
+
+      // Set metrics path
+      rule {
+        target_label  = "__metrics_path__"
+        replacement   = "/pve"
+      }
+
+      // Add query parameters
+      rule {
+        target_label  = "__param_target"
+        replacement   = "192.168.86.106"
+      }
+
+      rule {
+        target_label  = "__param_module"
+        replacement   = "default"
+      }
+
+      rule {
+        target_label  = "__param_cluster"
+        replacement   = "1"
+      }
+
+      rule {
+        target_label  = "__param_node"
+        replacement   = "1"
+      }
+
+      // Add service name label
+      rule {
+        source_labels = ["__meta_kubernetes_service_name"]
+        target_label  = "job"
+      }
+
+      // Add namespace label
+      rule {
+        source_labels = ["__meta_kubernetes_namespace"]
+        target_label  = "namespace"
+      }
+    }
+
+    // Scrape pve-exporter with special config
+    prometheus.scrape "pve_exporter" {
+      targets    = discovery.relabel.pve_exporter.output
+      forward_to = [prometheus.remote_write.mimir.receiver]
+      scrape_interval = "30s"
+      scrape_timeout  = "10s"
+    }
+
+    // Send metrics to Mimir
+    prometheus.remote_write "mimir" {
+      endpoint {
+        url = "http://mimir.monitoring.svc.cluster.local:8080/api/v1/push"
+      }
+    }

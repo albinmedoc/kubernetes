@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus
+  name: monitoring
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/albinmedoc/kubernetes
-    path: prometheus
+    path: monitoring
     targetRevision: HEAD
     directory:
       recurse: true
