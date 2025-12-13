@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres
+  namespace: immich
+  labels:
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/component: volume
+    app.kubernetes.io/part-of: immich
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: truenas-iscsi
+  resources:
+    requests:
+      storage: 10Gi
