@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-config
+  namespace: immich-resor
+  labels:
+    app.kubernetes.io/name: immich
+    app.kubernetes.io/instance: resor
+data:
+  IMMICH_PORT: "2283"
+  DB_STORAGE_TYPE: HDD
+  TZ: "Europe/Stockholm"
