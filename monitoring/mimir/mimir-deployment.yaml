@@ -29,7 +29,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: mimir
-          image: grafana/mimir:2.14.1
+          image: grafana/mimir:3.0.1
           args:
             - -config.file=/etc/mimir/mimir.yaml
           ports:
