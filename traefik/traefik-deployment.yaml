@@ -19,6 +19,10 @@ spec:
         app.kubernetes.io/name: traefik
         app.kubernetes.io/component: ingress-controller
         app.kubernetes.io/managed-by: kubectl
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
     spec:
       serviceAccountName: traefik-account
       nodeSelector:
@@ -45,6 +49,9 @@ spec:
             - "--entryPoints.websecure.http.tls.certResolver=letsencrypt-dns"
 
             - "--api.insecure=true"
+
+            - "--metrics.prometheus=true"
+            - "--metrics.prometheus.entryPoint=traefik"
 
             - "--providers.kubernetescrd"
             - "--providers.kubernetescrd.allowCrossNamespace=true"

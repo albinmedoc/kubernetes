@@ -38,5 +38,6 @@ spec:
     app.kubernetes.io/component: ingress-controller
   ports:
     - protocol: TCP
+      name: metrics
       port: 8080
       targetPort: 8080
