@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sabnzbd-exporter
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: sabnzbd-exporter
+    app.kubernetes.io/component: exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sabnzbd-exporter
+      app.kubernetes.io/component: exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sabnzbd-exporter
+        app.kubernetes.io/component: exporter
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9710"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: sabnzbd-exporter
+          image: ghcr.io/onedr0p/exportarr:v2.3.0
+          args:
+            - sabnzbd
+          ports:
+            - name: metrics
+              containerPort: 9710
+          env:
+            - name: PORT
+              value: "9710"
+            - name: URL
+              value: "http://sabnzbd.arr.svc.cluster.local:8080"
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: arr-exporter-secrets
+                  key: SABNZBD_API_KEY
+          resources:
+            limits:
+              cpu: 200m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr-exporter
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: prowlarr-exporter
+    app.kubernetes.io/component: exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: prowlarr-exporter
+      app.kubernetes.io/component: exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: prowlarr-exporter
+        app.kubernetes.io/component: exporter
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9708"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: prowlarr-exporter
+          image: ghcr.io/onedr0p/exportarr:v2.3.0
+          args:
+            - prowlarr
+          ports:
+            - name: metrics
+              containerPort: 9708
+          env:
+            - name: PORT
+              value: "9708"
+            - name: URL
+              value: "http://prowlarr.arr.svc.cluster.local:9696"
+            - name: PROWLARR__BACKFILL
+              value: "true"
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: arr-exporter-secrets
+                  key: PROWLARR_API_KEY
+          resources:
+            limits:
+              cpu: 200m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi

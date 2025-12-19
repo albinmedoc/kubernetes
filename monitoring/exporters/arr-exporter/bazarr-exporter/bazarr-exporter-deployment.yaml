@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bazarr-exporter
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/name: bazarr-exporter
+    app.kubernetes.io/component: exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: bazarr-exporter
+      app.kubernetes.io/component: exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: bazarr-exporter
+        app.kubernetes.io/component: exporter
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9707"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: bazarr-exporter
+          image: ghcr.io/onedr0p/exportarr:v2.3.0
+          args:
+            - bazarr
+          ports:
+            - name: metrics
+              containerPort: 9707
+          env:
+            - name: PORT
+              value: "9707"
+            - name: URL
+              value: "http://bazarr.arr.svc.cluster.local:6767"
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: arr-exporter-secrets
+                  key: BAZARR_API_KEY
+          resources:
+            limits:
+              cpu: 200m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
