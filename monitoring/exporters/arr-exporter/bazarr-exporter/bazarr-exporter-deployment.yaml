@@ -35,6 +35,8 @@ spec:
               value: "9707"
             - name: URL
               value: "http://bazarr.arr.svc.cluster.local:6767"
+            - name: ENABLE_ADDITIONAL_METRICS
+              value: "true"
             - name: APIKEY
               valueFrom:
                 secretKeyRef:

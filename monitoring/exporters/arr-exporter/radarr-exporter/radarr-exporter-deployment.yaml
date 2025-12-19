@@ -35,6 +35,8 @@ spec:
               value: "9709"
             - name: URL
               value: "http://radarr.arr.svc.cluster.local:7878"
+            - name: ENABLE_ADDITIONAL_METRICS
+              value: "true"
             - name: APIKEY
               valueFrom:
                 secretKeyRef:

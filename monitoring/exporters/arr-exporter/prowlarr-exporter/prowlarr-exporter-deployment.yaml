@@ -37,6 +37,8 @@ spec:
               value: "http://prowlarr.arr.svc.cluster.local:9696"
             - name: PROWLARR__BACKFILL
               value: "true"
+            - name: ENABLE_ADDITIONAL_METRICS
+              value: "true"
             - name: APIKEY
               valueFrom:
                 secretKeyRef:

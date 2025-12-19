@@ -35,6 +35,8 @@ spec:
               value: "9711"
             - name: URL
               value: "http://sonarr.arr.svc.cluster.local:8989"
+            - name: ENABLE_ADDITIONAL_METRICS
+              value: "true"
             - name: APIKEY
               valueFrom:
                 secretKeyRef:

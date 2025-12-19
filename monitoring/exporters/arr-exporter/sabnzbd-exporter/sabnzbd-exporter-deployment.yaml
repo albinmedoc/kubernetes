@@ -35,6 +35,8 @@ spec:
               value: "9710"
             - name: URL
               value: "http://sabnzbd.arr.svc.cluster.local:8080"
+            - name: ENABLE_ADDITIONAL_METRICS
+              value: "true"
             - name: APIKEY
               valueFrom:
                 secretKeyRef:
