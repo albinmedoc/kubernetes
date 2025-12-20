@@ -21,12 +21,19 @@ kubectl get pods --all-namespaces
 
 ### Core Infrastructure
 - **Talos OS**: Immutable Linux distribution designed for Kubernetes
-- **Traefik**: Reverse proxy and load balancer with automatic service discovery
-- **MetalLB**: Bare-metal load balancer for on-premises clusters
-- **Metrics Server**: Cluster-wide resource usage metrics
+- **Traefik**: Reverse proxy and load balancer with automatic Let's Encrypt certificates
+- **Democratic CSI**: Storage provisioning using TrueNAS (iSCSI for databases, NFS for applications)
+- **Sealed Secrets**: Encrypted secret management for GitOps workflows
 
 ### Monitoring & Observability
-- **Prometheus Operator**: Kubernetes-native deployment and management of Prometheus monitoring stack ([setup guide](./kube-prometheus/README.md))
+- **Grafana**: Visualization and dashboarding for metrics and logs
+- **Mimir**: Long-term metrics storage and querying (Prometheus-compatible)
+- **Loki**: Log aggregation and querying system
+- **Grafana Alloy**: Unified telemetry collection agent (metrics and logs)
+
+### Authentication & Security
+- **Authentik**: Identity provider and single sign-on (SSO) solution
+- **Traefik Middleware**: Authentication middleware integration
 
 ## 🚀 Deployment Patterns
 
