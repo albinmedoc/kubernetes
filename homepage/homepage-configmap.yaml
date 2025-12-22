@@ -99,20 +99,25 @@ data:
             href: http://proxmox.albinmedoc.se
             description: Virtualization
             siteMonitor: https://192.168.86.106:8006
-            widget:
-              type: proxmox
-              url: https://192.168.86.106:8006
-              username: {{HOMEPAGE_VAR_PROXMOX_USERNAME}}
-              password: {{HOMEPAGE_VAR_PROXMOX_PASSWORD}}
+            widgets:
+              - type: proxmox
+                url: https://192.168.86.106:8006
+                username: {{HOMEPAGE_VAR_PROXMOX_TOKEN}}
+                password: {{HOMEPAGE_VAR_PROXMOX_SECRET}}
+              - type: apcups
+                url: tcp://192.168.86.106:3551
         - TrueNAS:
             icon: truenas.svg
             href: http://truenas.albinmedoc.se
             description: Storage Server
             siteMonitor: http://192.168.86.109
+            proxmoxNode: pve
+            proxmoxVMID: 100
             widget:
               type: truenas
               url: http://192.168.86.109
               key: {{HOMEPAGE_VAR_TRUENAS_API_KEY}}
+              enablePools: true
         - ArgoCD:
             icon: argo-cd.svg
             href: http://argocd.albinmedoc.se
@@ -157,12 +162,33 @@ data:
             href: http://adguard.albinmedoc.se
             description: DNS Filtering
             siteMonitor: http://192.168.86.238
+            proxmoxNode: pve
+            proxmoxVMID: 1100
+            proxmoxType: lxc
             widget:
               type: adguard
               url: http://192.168.86.238
               username: {{HOMEPAGE_VAR_ADGUARD_USERNAME}}
               password: {{HOMEPAGE_VAR_ADGUARD_PASSWORD}}
     - Application:
+        - Home Assistant:
+            icon: home-assistant.svg
+            href: http://ha.albinmedoc.se
+            description: Home Automation
+            siteMonitor: http:/192.168.86.159:8123
+            proxmoxNode: pve
+            proxmoxVMID: 300
+            widget:
+              type: homeassistant
+              url: http://192.168.86.159:8123
+              key: {{HOMEPAGE_VAR_HOMEASSISTANT_API_KEY}}
+              custom:
+                - template: "{{ states.person|length }}"
+                  label: users
+                - template: "{{ states.automation|length }}"
+                  label: automations
+                - template: "{{ states.script|length }}"
+                  label: scripts
         - Paperless-ngx:
             icon: paperless-ngx.svg
             href: http://paperless.albinmedoc.se
@@ -213,6 +239,20 @@ data:
             href: http://n8n.albinmedoc.se
             description: Workflow Automation
             siteMonitor: http://n8n.n8n.svc.cluster.local:5678
+            widget:
+              type: customapi
+              url: http://n8n.n8n.svc.cluster.local:5678/webhook/homepage
+              method: GET
+              mappings:
+                - field: workflows
+                  label: workflows
+                  format: number
+                - field: active_workflows
+                  label: active workflows
+                  format: number
+                - field: executions
+                  label: executions
+                  format: number
   widgets.yaml: |
     - search:
         provider: google
@@ -224,6 +264,6 @@ data:
   proxmox.yaml: |
     pve:
       url: https://192.168.86.106:8006
-      username: {{HOMEPAGE_VAR_PROXMOX_USERNAME}}
-      password: {{HOMEPAGE_VAR_PROXMOX_PASSWORD}}
+      token: {{HOMEPAGE_VAR_PROXMOX_TOKEN}}
+      secret: {{HOMEPAGE_VAR_PROXMOX_SECRET}}
   docker.yaml: ""
