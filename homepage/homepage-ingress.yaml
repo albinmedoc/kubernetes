@@ -1,0 +1,18 @@
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homepage
+  namespace: homepage
+  labels:
+    app.kubernetes.io/name: homepage
+    app.kubernetes.io/component: dashboard
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`hub.albinmedoc.se`)
+      kind: Rule
+      services:
+        - name: homepage
+          port: 3000
