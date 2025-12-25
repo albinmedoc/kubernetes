@@ -10,6 +10,11 @@ data:
   plex.yaml: |
     http:
       routers:
+        default-catch-all:
+          rule: "HostRegexp(`{host:.+}`)"
+          service: noop
+          entrypoints: websecure
+          priority: 1
         plex:
           rule: "Host(`flexflix.top`)"
           service: plex
@@ -39,6 +44,10 @@ data:
           entrypoints: websecure
 
       services:
+        noop:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:9999"
         plex:
           loadBalancer:
             servers:
