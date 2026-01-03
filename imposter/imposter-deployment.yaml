@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imposter
+  namespace: imposter
+  labels:
+    app.kubernetes.io/name: imposter
+    app.kubernetes.io/component: entertainment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: imposter
+      app.kubernetes.io/component: entertainment
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: imposter
+        app.kubernetes.io/component: entertainment
+    spec:
+      containers:
+        - name: imposter
+          image: ghcr.io/albinmedoc/find-the-impostor:v1.0.0
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          envFrom:
+            - secretRef:
+                name: imposter-secrets
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
