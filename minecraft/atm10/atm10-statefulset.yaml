@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: atm10
+  namespace: minecraft-atm10
+  labels:
+    app.kubernetes.io/name: minecraft-atm10
+    app.kubernetes.io/component: game-server
+    app.kubernetes.io/managed-by: kubectl
+spec:
+  serviceName: atm10
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: minecraft-atm10
+      app.kubernetes.io/component: game-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: minecraft-atm10
+        app.kubernetes.io/component: game-server
+    spec:
+      containers:
+        - name: minecraft
+          image: itzg/minecraft-server:java21
+          ports:
+            - containerPort: 25565
+              name: minecraft
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: atm10-config
+            - secretRef:
+                name: atm10-secrets
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          resources:
+            limits:
+              cpu: "4000m"
+              memory: "12Gi"
+            requests:
+              cpu: "2000m"
+              memory: "8Gi"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: atm10-data
