@@ -35,33 +35,7 @@ spec:
         - name: traefik
           image: traefik:v3.6.6
           args:
-            - "--global.checkNewVersion=false"
-            - "--global.sendanonymoususage=false"
-            - "--ping=true"
-
-            - "--entryPoints.web.address=:80"
-            - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
-            - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
-            - "--entryPoints.web.http.redirections.entrypoint.permanent=true"
-
-            - "--entryPoints.websecure.address=:443"
-            - "--entryPoints.websecure.http.tls=true"
-            - "--entryPoints.websecure.http.tls.certResolver=letsencrypt-dns"
-
-            - "--api.insecure=true"
-
-            - "--metrics.prometheus=true"
-            - "--metrics.prometheus.entryPoint=traefik"
-
-            - "--providers.kubernetescrd"
-            - "--providers.kubernetescrd.allowCrossNamespace=true"
-
-            - "--providers.file.directory=/config"
-
-            - "--certificatesresolvers.letsencrypt-dns.acme.dnsChallenge.provider=cloudflare"
-            - "--certificatesresolvers.letsencrypt-dns.acme.dnsChallenge.delayBeforeCheck=10"
-            - "--certificatesresolvers.letsencrypt-dns.acme.email=kontakt@albinmedoc.se"
-            - "--certificatesresolvers.letsencrypt-dns.acme.storage=/certs/acme-dns.json"
+            - "--configFile=/config/traefik.yaml"
           ports:
             - name: web
               containerPort: 80

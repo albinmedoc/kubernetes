@@ -7,7 +7,52 @@ metadata:
     app.kubernetes.io/name: traefik
     app.kubernetes.io/managed-by: kubectl
 data:
-  plex.yaml: |
+  traefik.yaml: |
+    global:
+      checkNewVersion: false
+      sendAnonymousUsage: false
+
+    ping: true
+
+    entryPoints:
+      web:
+        address: ":80"
+        http:
+          redirections:
+            entrypoint:
+              to: websecure
+              scheme: https
+              permanent: true
+      websecure:
+        address: ":443"
+        http:
+          tls:
+            certResolver: letsencrypt-dns
+      minecraft:
+        address: ":25565"
+
+    api:
+      insecure: true
+
+    metrics:
+      prometheus:
+        entryPoint: traefik
+
+    providers:
+      kubernetescrd:
+        allowCrossNamespace: true
+      file:
+        filename: /config/file-provider.yaml
+
+    certificatesResolvers:
+      letsencrypt-dns:
+        acme:
+          dnsChallenge:
+            provider: cloudflare
+            delayBeforeCheck: 10
+          email: kontakt@albinmedoc.se
+          storage: /certs/acme-dns.json
+  file-provider.yaml: |
     http:
       routers:
         default-catch-all:
