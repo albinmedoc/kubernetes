@@ -18,6 +18,9 @@ spec:
   - name: websecure
     port: 443
     nodePort: 30443
+  - name: minecraft
+    port: 25565
+    nodePort: 25565
   selector:
     app.kubernetes.io/name: traefik
     app.kubernetes.io/component: ingress-controller
