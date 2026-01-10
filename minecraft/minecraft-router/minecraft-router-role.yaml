@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: minecraft-router
+  labels:
+    app.kubernetes.io/name: minecraft-router
+    app.kubernetes.io/component: router
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["watch","list"]
+  - apiGroups: ["apps"]
+    resources: ["statefulsets"]
+    verbs: ["watch","list","get","update"]
+  - apiGroups: ["apps"]
+    resources: ["statefulsets/scale"]
+    verbs: ["get","update"]
