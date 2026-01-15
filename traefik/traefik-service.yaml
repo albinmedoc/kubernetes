@@ -21,10 +21,6 @@ spec:
   - name: minecraft
     port: 25565
     targetPort: minecraft
-  - name: bedrock
-    port: 19132
-    protocol: UDP
-    targetPort: bedrock
   selector:
     app.kubernetes.io/name: traefik
     app.kubernetes.io/component: ingress-controller
