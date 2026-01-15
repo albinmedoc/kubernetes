@@ -153,10 +153,10 @@ data:
             icon: traefik.svg
             href: http://traefik.albinmedoc.se
             description: Ingress Controller
-            siteMonitor: http://traefik-clusterip.traefik.svc.cluster.local:8080
+            siteMonitor: http://traefik.traefik.svc.cluster.local:8080
             widget:
               type: traefik
-              url: http://traefik-clusterip.traefik.svc.cluster.local:8080
+              url: http://traefik.traefik.svc.cluster.local:8080
         - AdGuard Home:
             icon: adguard-home.svg
             href: http://adguard.albinmedoc.se
