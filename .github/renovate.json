@@ -24,12 +24,6 @@
   ],
   "packageRules": [
     {
-      "description": "n8n - follow latest stable tag",
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["n8nio/n8n"],
-      "followTag": "stable"
-    },
-    {
       "description": "Auto-merge patch updates",
       "matchDatasources": [
         "docker"
