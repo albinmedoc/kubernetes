@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bedrock-config
+  namespace: minecraft-bedrock
+  labels:
+    app.kubernetes.io/name: minecraft-bedrock
+    app.kubernetes.io/component: configuration
+data:
+  EULA: "TRUE"
+  TYPE: "PAPER"
+  PLUGINS: |
+    https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
+    https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+    https://get.discordsrv.com
+  SPIGET_RESOURCES: "83557,116202"
+  
+  MEMORY: "8G"
+  MAX_MEMORY: "10G"
+  USE_AIKAR_FLAGS: "true"
+  ENABLE_ROLLING_LOGS: "true"
+  TZ: "Europe/Stockholm"
+  MOTD: |
+    §3§oFlexFlix vanilla server
+    §c§nJava§r & §5§nBedrock§r edition
+  ALLOW_FLIGHT: "FALSE"
+  DIFFICULTY: "normal"
+  ENFORCE_SECURE_PROFILE: "false"
+  ICON: "https://cdn.discordapp.com/icons/1317252826073661610/3a62e1381b400a96dc8c30db0fcc81d2.png"
+  MAX_PLAYERS: "20"
+  SERVER_NAME: "FlexFlix Bedrock"
+  SPAWN_PROTECTION: "0"

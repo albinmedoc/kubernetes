@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bedrock
+  namespace: minecraft-bedrock
+  labels:
+    app.kubernetes.io/name: minecraft-bedrock
+    app.kubernetes.io/component: game-server
+spec:
+  serviceName: bedrock
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: minecraft-bedrock
+      app.kubernetes.io/component: game-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: minecraft-bedrock
+        app.kubernetes.io/component: game-server
+    spec:
+      containers:
+        - name: minecraft
+          image: itzg/minecraft-server:java21
+          ports:
+            - containerPort: 25565
+              name: minecraft
+              protocol: TCP
+            - containerPort: 8100
+              name: bluemap
+              protocol: TCP
+            - containerPort: 19132
+              name: bedrock
+              protocol: UDP
+          envFrom:
+            - configMapRef:
+                name: bedrock-config
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          resources:
+            limits:
+              cpu: "4000m"
+              memory: "12Gi"
+            requests:
+              cpu: "2000m"
+              memory: "8Gi"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: bedrock-data
