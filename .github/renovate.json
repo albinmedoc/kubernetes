@@ -24,12 +24,10 @@
   ],
   "packageRules": [
     {
-      "description": "PhotoPrism version updates",
-      "matchPackageNames": [
-        "photoprism/photoprism"
-      ],
-      "allowedVersions": "/^\\d{6}$/",
-      "automerge": false
+      "description": "n8n - follow latest stable tag",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["n8nio/n8n"],
+      "followTag": "latest"
     },
     {
       "description": "Auto-merge patch updates",
