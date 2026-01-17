@@ -10,7 +10,7 @@ metadata:
 spec:
   type: LoadBalancer
   loadBalancerIP: 192.168.86.2
-  externalTrafficPolicy: Cluster
+  externalTrafficPolicy: Local
   ports:
   - name: web
     port: 80
