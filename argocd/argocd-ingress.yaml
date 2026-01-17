@@ -16,10 +16,3 @@ spec:
       middlewares:
         - name: local-network
           namespace: traefik
-    - kind: Rule
-      match: Host(`argocd.albinmedoc.se`) && Header(`Content-Type`, `application/grpc`)
-      priority: 11
-      services:
-        - name: argocd-server
-          port: 80
-          scheme: h2c
