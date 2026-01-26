@@ -49,9 +49,6 @@ spec:
             - containerPort: 3000
               name: http
               protocol: TCP
-          env:
-            - name: GF_SERVER_ROOT_URL
-              value: "https://grafana.albinmedoc.se"
           envFrom:
             - configMapRef:
                 name: grafana-config
