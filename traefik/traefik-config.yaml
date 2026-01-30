@@ -87,6 +87,10 @@ data:
           rule: "Host(`immich.albinmedoc.se`)"
           service: immich
           entrypoints: websecure
+        moltbot:
+          rule: "Host(`moltbot.albinmedoc.se`)"
+          service: moltbot
+          entrypoints: websecure
 
       services:
         noop:
@@ -114,6 +118,11 @@ data:
           loadBalancer:
             servers:
               - url: "http://192.168.86.109:30041"
+        moltbot:
+          loadBalancer:
+            servers:
+              - url: "http://192.168.86.52:18789"
+            passHostHeader: true
 
       serversTransports:
         proxmox:
