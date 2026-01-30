@@ -20,7 +20,7 @@ spec:
         app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
-        - image: dbgate/dbgate:7.0.0
+        - image: dbgate/dbgate:7.0.1
           name: dbgate
           ports:
             - containerPort: 3000
