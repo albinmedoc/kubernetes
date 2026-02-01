@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: imposter
-          image: ghcr.io/albinmedoc/find-the-impostor:v1.2.1
+          image: ghcr.io/albinmedoc/find-the-impostor:v1.3.0
           ports:
             - containerPort: 3000
               protocol: TCP
