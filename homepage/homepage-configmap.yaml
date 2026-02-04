@@ -230,7 +230,7 @@ data:
               key: {{HOMEPAGE_VAR_IMMICH_RESOR_API_KEY}}
               version: 2 
         - DB Gate:
-            icon: http://auth.albinmedoc.se/media/public/application-icons/dbgate.png
+            icon: sh-dbgate
             href: http://db.albinmedoc.se
             description: Database Client
             siteMonitor: http://dbgate.dbgate.svc.cluster.local:3000
