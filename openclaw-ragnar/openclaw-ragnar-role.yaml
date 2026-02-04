@@ -1,0 +1,20 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ragnar-multinamespace-role
+rules:
+- apiGroups: [""]
+  resources: [namespaces, pods, services, configmaps, secrets, persistentvolumeclaims]
+  verbs: [get, list, watch, create, update, delete]
+- apiGroups: [apps]
+  resources: [deployments, statefulsets]
+  verbs: [get, list, watch, create, update, delete]
+- apiGroups: [networking.k8s.io]
+  resources: [ingresses]
+  verbs: [get, list, watch, create, update, delete]
+- apiGroups: [traefik.io]
+  resources: [ingressroutes, middlewares, tlsoptions, serverstransports]
+  verbs: [get, list, watch, create, update, delete]
+- apiGroups: [storage.k8s.io]
+  resources: [storageclasses, volumeattachments, volumesnapshotclasses, volumesnapshots]
+  verbs: [get, list, watch]
