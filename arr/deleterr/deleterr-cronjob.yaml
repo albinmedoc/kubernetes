@@ -1,0 +1,37 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: deleterr
+  namespace: arr
+  labels:
+    app.kubernetes.io/name: deleterr
+    app.kubernetes.io/part-of: arr
+spec:
+  schedule: "0 3 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: deleterr
+              image: rfsbraz/deleterr:v0.0.27
+              imagePullPolicy: Always
+              tty: true
+              envFrom:
+                - secretRef:
+                    name: deleterr-secrets
+              volumeMounts:
+                - name: config
+                  mountPath: /config/config.yml
+                  subPath: config.yml
+          volumes:
+            - name: config
+              configMap:
+                name: deleterr
+            - name: secret
+              secret:
+                secretName: deleterr-secrets
+          restartPolicy: Never

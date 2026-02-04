@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deleterr
+  namespace: arr
+  labels:
+    app.kubernetes.io/name: deleterr
+    app.kubernetes.io/part-of: arr
+data:
+  settings.yaml: |
+    dry_run: true
+    plex_library_scan_after_actions: true
+    tautulli_library_scan_after_actions: true
+
+    plex:
+      url: "http://192.168.86.122:32400"
+      token: !env PLEX_TOKEN
+
+    tautulli:
+      url: "http://tautulli.arr.svc.cluster.local:8181"
+      api_key: !env TAUTULLI_TOKEN
+
+    radarr:
+      - name: "Radarr"
+        url: "http://radarr.arr.svc.cluster.local:7878"
+        api_key: !env RADARR_TOKEN
+
+    sonarr:
+      - name: "Sonarr"
+        url: "http://sonarr.arr.svc.cluster.local:8989"
+        api_key: !env SONARR_TOKEN
+
+    libraries:
+      - name: "Filmer"
+        radarr: "Radarr"
+        action_mode: "delete"
+        last_watched_threshold: 90
+        added_at_threshold: 90
+        apply_last_watch_threshold_to_collections: true
+        add_list_exclusion_on_delete: false
+        max_actions_per_run: 10
+        sort:
+          field: "size"
+          order: "desc"
+        exclude:
+          release_years: 1
+          radarr:
+            tags: ["preserve"]
+            monitored: true
+
+      - name: "Serier"
+        sonarr: "Sonarr"
+        series_type: "standard"
+        action_mode: "delete"
+        last_watched_threshold: 90
+        added_at_threshold: 90
+        add_list_exclusion_on_delete: false
+        max_actions_per_run: 10
+        exclude:
+          sonarr:
+            status: ["continuing", "upcoming"]
+            tags: ["preserve"]
+            monitored: true
