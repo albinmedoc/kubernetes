@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaresolverr
+  namespace: flaresolverr
+  labels:
+    app.kubernetes.io/name: flaresolverr
+    app.kubernetes.io/component: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: flaresolverr
+      app.kubernetes.io/component: web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: flaresolverr
+        app.kubernetes.io/component: web
+    spec:
+      containers:
+        - name: flaresolverr
+          image: ghcr.io/flaresolverr/flaresolverr:v3.4.6
+          ports:
+            - containerPort: 8191
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2Gi
+            requests:
+              cpu: 100m
+              memory: 512Mi
