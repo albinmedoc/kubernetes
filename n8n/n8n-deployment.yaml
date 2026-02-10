@@ -59,7 +59,7 @@ spec:
           volumeMounts:
             - mountPath: /home/node/.n8n
               name: data
-            - mountPath: /tmp/n8n-binary-data
+            - mountPath: /home/node/.n8n-files
               name: binary-data
       volumes:
         - name: data

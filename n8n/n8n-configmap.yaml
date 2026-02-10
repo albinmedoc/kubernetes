@@ -18,4 +18,4 @@ data:
   N8N_HIRING_BANNER_ENABLED: "false"
   QUEUE_HEALTH_CHECK_ACTIVE: "true"
   N8N_DEFAULT_BINARY_DATA_MODE: filesystem
-  N8N_BINARY_DATA_STORAGE_PATH: /tmp/n8n-binary-data
+  N8N_BINARY_DATA_STORAGE_PATH: /home/node/.n8n-files
