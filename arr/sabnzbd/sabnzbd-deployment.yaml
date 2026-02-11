@@ -37,8 +37,8 @@ spec:
               name: config
             - name: scripts
               mountPath: /scripts
-            - mountPath: /downloads
-              name: downloads
+            - mountPath: /media
+              name: media
           env:
             - name: DOCKER_MODS
               value: "ghcr.io/themepark-dev/theme.park:sabnzbd"
@@ -52,7 +52,6 @@ spec:
           configMap:
             name: sabnzbd-script
             defaultMode: 0755
-        - name: downloads
-          nfs:
-            path: /mnt/Datapool2/Media/Downloads/SABnzbd
-            server: 192.168.86.109
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-storage-pvc
