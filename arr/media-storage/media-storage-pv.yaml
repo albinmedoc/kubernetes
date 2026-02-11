@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-storage-pv
+  namespace: arr
+spec:
+  capacity:
+    storage: 100Ti
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - uid=1000
+    - gid=1000
+  csi:
+    driver: smb.csi.k8s.io
+    readOnly: false
+    volumeHandle: truenas-media-share
+    volumeAttributes:
+      source: "//192.168.86.109/Media"
+    nodeStageSecretRef:
+      name: media-storage-secrets
+      namespace: arr
