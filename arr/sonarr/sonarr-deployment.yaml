@@ -71,6 +71,5 @@ spec:
           persistentVolumeClaim:
             claimName: sonarr
         - name: media
-          nfs:
-            path: /mnt/Datapool2/Media
-            server: 192.168.86.109
+          persistentVolumeClaim:
+            claimName: media-storage-pvc
