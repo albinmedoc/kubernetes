@@ -6,7 +6,6 @@ metadata:
   labels:
     app.kubernetes.io/name: gluetun
     app.kubernetes.io/component: vpn
-    app.kubernetes.io/managed-by: kubectl
 spec:
   selector:
     app.kubernetes.io/name: gluetun
@@ -16,7 +15,3 @@ spec:
       protocol: TCP
       port: 8888
       targetPort: 8888
-    - name: shadowsocks
-      protocol: TCP
-      port: 8388
-      targetPort: 8388

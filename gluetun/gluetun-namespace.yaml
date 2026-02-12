@@ -4,4 +4,3 @@ metadata:
   name: gluetun
   labels:
     app.kubernetes.io/name: gluetun
-    app.kubernetes.io/managed-by: kubectl

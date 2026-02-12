@@ -6,7 +6,6 @@ metadata:
   labels:
     app.kubernetes.io/name: gluetun
     app.kubernetes.io/component: vpn
-    app.kubernetes.io/managed-by: kubectl
 spec:
   replicas: 1
   selector:
@@ -17,7 +16,6 @@ spec:
       labels:
         app.kubernetes.io/name: gluetun
         app.kubernetes.io/component: vpn
-        app.kubernetes.io/managed-by: kubectl
     spec:
       containers:
         - name: gluetun
@@ -25,8 +23,6 @@ spec:
           ports:
             - containerPort: 8888
               name: http-proxy
-            - containerPort: 8388
-              name: shadowsocks
           env:
             - name: VPN_SERVICE_PROVIDER
               value: surfshark
