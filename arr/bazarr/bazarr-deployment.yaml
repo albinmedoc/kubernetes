@@ -58,11 +58,11 @@ spec:
               name: config
             - mountPath: /media
               name: media
+              subPath: Completed
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: bazarr
         - name: media
-          nfs:
-            path: /mnt/Datapool2/Media/Completed
-            server: 192.168.86.109
+          persistentVolumeClaim:
+            claimName: media-storage-pvc
