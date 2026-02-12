@@ -11,7 +11,6 @@ spec:
     app.kubernetes.io/name: gluetun
     app.kubernetes.io/component: vpn
   ports:
-    - name: http-proxy
-      protocol: TCP
+    - protocol: TCP
       port: 8888
       targetPort: 8888

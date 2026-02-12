@@ -27,9 +27,13 @@ spec:
             - name: VPN_SERVICE_PROVIDER
               value: surfshark
             - name: VPN_TYPE
-              value: wireguard
+              value: openvpn
             - name: SERVER_COUNTRIES
               value: Sweden
+            - name: HTTPPROXY
+              value: "on"
+            - name: HTTPPROXY_LOG
+              value: "on"
           envFrom:
             - secretRef:
                 name: gluetun-secrets
