@@ -12,6 +12,9 @@ data:
     plex_library_scan_after_actions: true
     tautulli_library_scan_after_actions: true
 
+    scheduler:
+      enabled: false
+
     plex:
       url: "http://192.168.86.122:32400"
       token: !env PLEX_TOKEN
