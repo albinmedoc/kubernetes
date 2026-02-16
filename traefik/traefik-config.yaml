@@ -28,8 +28,6 @@ data:
         http:
           tls:
             certResolver: letsencrypt-dns
-      minecraft:
-        address: ":25565"
 
     api:
       insecure: true
@@ -129,15 +127,3 @@ data:
       serversTransports:
         proxmox:
           insecureSkipVerify: true
-    tcp:
-      routers:
-        minecraft:
-          rule: "HostSNI(`*`)"
-          service: minecraft-router
-          entryPoints:
-            - minecraft
-      services:
-        minecraft-router:
-          loadBalancer:
-            servers:
-              - address: "minecraft-router.minecraft-router.svc.cluster.local:25565"

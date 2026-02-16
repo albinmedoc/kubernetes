@@ -37,9 +37,6 @@ spec:
               containerPort: 443
             - name: traefik
               containerPort: 8080
-            - name: minecraft
-              containerPort: 25565
-              protocol: TCP
           volumeMounts:
             - name: config
               mountPath: /config

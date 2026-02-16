@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: minecraft-atm10
-  labels:
-    app.kubernetes.io/name: minecraft-atm10
-    app.kubernetes.io/component: game-server
-    app.kubernetes.io/managed-by: kubectl
