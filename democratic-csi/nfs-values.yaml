@@ -12,12 +12,11 @@ storageClasses:
     mountOptions:
       - nfsvers=4
       - noatime
-    secrets:
-      provisioner-secret:
-      controller-publish-secret:
-      node-stage-secret:
-      node-publish-secret:
-      controller-expand-secret:
+
+volumeSnapshotClasses:
+  - name: truenas-nfs
+    parameters:
+      detachedSnapshots: 'true'
 
 controller:
   driver:
@@ -35,22 +34,29 @@ driver:
   config:
     driver: freenas-api-nfs
     httpConnection:
-      protocol: http
+      allowInsecure: true
+      apiKey: $TRUENAS_API_KEY
       host: 192.168.86.109
       port: 80
-      apiKey: APITOKEN
-      allowInsecure: true
-    zfs:
-      datasetParentName: Datapool1/k8s/nfs/vols
-      detachedSnapshotsDatasetParentName: Datapool1/k8s/nfs/snaps
-      datasetProperties:
-        "org.freenas:description": "democratic-csi nfs volume"
+      protocol: http
+    instance_id: null
     nfs:
-      shareHost: 192.168.86.109
+      shareCommentTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
       shareAlldirs: false
-      shareAllowedHosts: []
-      shareAllowedNetworks: []
-      shareMaprootUser: root
-      shareMaprootGroup: wheel
-      shareMapallUser: ""
-      shareMapallGroup: ""
+      shareAllowedNetworks:
+        - 192.168.86.147
+        - 192.168.86.170
+        - 192.168.86.27
+      shareHost: 192.168.86.109
+      shareMapallGroup: kubernetes
+      shareMapallUser: kubernetes
+    zfs:
+      datasetEnableQuotas: true
+      datasetEnableReservation: false
+      datasetParentName: Datapool1/Kubernetes/nfs/volumes
+      datasetPermissionsGroup: 3001
+      datasetPermissionsMode: "0777"
+      datasetPermissionsUser: 3001
+      detachedSnapshotsDatasetParentName: Datapool1/Kubernetes/nfs/snapshots
+      datasetProperties:
+        "org.freenas:description": "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"

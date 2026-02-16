@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/component: database
     app.kubernetes.io/part-of: immich
 spec:
+  type: NodePort
   selector:
     app.kubernetes.io/name: postgres
     app.kubernetes.io/component: database

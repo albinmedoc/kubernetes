@@ -28,18 +28,6 @@ spec:
         app.kubernetes.io/part-of: authentik
         app.kubernetes.io/managed-by: kubectl
     spec:
-      initContainers:
-        - name: fix-permissions
-          image: busybox:1.37.0
-          command:
-            - sh
-            - -c
-            - |
-              chown -R 1000:1000 /data
-              chmod -R 755 /data
-          volumeMounts:
-            - name: data
-              mountPath: /data
       containers:
         - name: authentik-server
           image: ghcr.io/goauthentik/server:2025.12.4

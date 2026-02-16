@@ -48,12 +48,7 @@ See [Traefik Kubernetes CRD](https://doc.traefik.io/traefik/reference/install-co
 
 ```bash
 # Apply all Traefik resources
-kubectl apply -f traefik-namespace.yaml
-kubectl apply -f traefik-service-account.yaml
-kubectl apply -f traefik-cluster-role.yaml
-kubectl apply -f traefik-cluster-role-binding.yaml
-kubectl apply -f traefik-deployment.yaml
-kubectl apply -f traefik-service.yaml
+kubectl apply -f traefik/
 ```
 
 ### 5. Verify Installation

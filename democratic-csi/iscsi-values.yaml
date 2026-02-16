@@ -10,13 +10,6 @@ storageClasses:
     parameters:
       fsType: ext4
       detachedVolumesFromSnapshots: "false"
-    mountOptions: []
-    secrets:
-      provisioner-secret:
-      controller-publish-secret:
-      node-stage-secret:
-      node-publish-secret:
-      controller-expand-secret:
 
 controller:
   driver:
@@ -25,46 +18,48 @@ controller:
 
 node:
   hostPID: true
-  tolerations:
-    - key: node-role.kubernetes.io/control-plane
-      operator: Exists
-      effect: NoSchedule
   driver:
     extraEnv:
       - name: ISCSIADM_HOST_STRATEGY
         value: nsenter
       - name: ISCSIADM_HOST_PATH
         value: /usr/local/sbin/iscsiadm
-    iscsiDirHostPath: /etc/iscsi
+    iscsiDirHostPath: /var/iscsi
     iscsiDirHostPathType: ""
 
 driver:
   config:
     driver: freenas-api-iscsi
     httpConnection:
-      protocol: http
+      allowInsecure: true
+      apiKey: $TRUENAS_API_KEY
       host: 192.168.86.109
       port: 80
-      apiKey: APITOKEN
-      allowInsecure: true
-    zfs:
-      datasetParentName: Datapool1/k8s/iscsi/vols
-      detachedSnapshotsDatasetParentName: Datapool1/k8s/iscsi/snaps
-      zvolEnableReservation: false
-      zvolBlocksize: 16K
+      protocol: http
+    instance_id: null
     iscsi:
       targetPortal: "192.168.86.109:3260"
-      targetPortals: []
+      targetPortals: [] 
       interface:
       namePrefix: csi-
-      nameSuffix: "-talos"
+      nameSuffix: "-cluster"
       targetGroups:
         - targetGroupPortalGroup: 1
-          targetGroupInitiatorGroup: 2
+          targetGroupInitiatorGroup: 1
           targetGroupAuthType: None
+          targetGroupAuthGroup:
+      extentCommentTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
       extentInsecureTpc: true
       extentXenCompat: false
-      extentDisablePhysicalBlocksize: true
-      extentBlocksize: 512
       extentRpm: "SSD"
+      extentBlocksize: 512
       extentAvailThreshold: 0
+    zfs:
+      datasetParentName: Datapool1/Kubernetes/iscsi/volumes
+      detachedSnapshotsDatasetParentName: Datapool1/Kubernetes/iscsi/snapshots
+      zvolCompression:
+      zvolDedup:
+      zvolEnableReservation: false
+      zvolBlocksize:
+      datasetProperties:
+        "org.freenas:description": "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"

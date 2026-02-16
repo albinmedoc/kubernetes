@@ -28,6 +28,18 @@ All nodes must have the `iscsi-tools` system extension installed:
 2. API key configured for root user
 3. NFS & iSCSI service enabled
 
+### Snapshot Support Prerequisites
+
+Before installing democratic-csi, install the Kubernetes snapshot CRDs and controller:
+
+```bash
+# Install the snapshot CRDs
+kubectl kustomize https://github.com/kubernetes-csi/external-snapshotter/client/config/crd | kubectl create -f -
+
+# Install the snapshot controller
+kubectl kustomize https://github.com/kubernetes-csi/external-snapshotter/deploy/kubernetes/snapshot-controller | kubectl create -f -
+```
+
 ### Installation Democratic CSI
 ```bash
 # Add helm repository

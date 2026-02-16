@@ -189,26 +189,6 @@ data:
                   label: automations
                 - template: "{{ states.script|length }}"
                   label: scripts
-        - Paperless-ngx:
-            icon: paperless-ngx.svg
-            href: http://paperless.albinmedoc.se
-            description: Document Management
-            siteMonitor: http://paperless-ngx.paperless-ngx.svc.cluster.local:8000
-            widget:
-              type: paperlessngx
-              url: http://paperless-ngx.paperless-ngx.svc.cluster.local:8000
-              key: {{HOMEPAGE_VAR_PAPERLESS_API_KEY}}
-        - Grafana:
-            icon: grafana.svg
-            href: http://grafana.albinmedoc.se
-            description: Metrics Dashboard
-            siteMonitor: http://grafana.grafana.svc.cluster.local:3000
-            widget:
-              type: grafana
-              url: http://grafana.grafana.svc.cluster.local:3000
-              username: {{HOMEPAGE_VAR_GRAFANA_USERNAME}}
-              password: {{HOMEPAGE_VAR_GRAFANA_PASSWORD}}
-              version: 2
         - Immich minnen:
             icon: immich.svg
             href: http://minnen.albinmedoc.se
