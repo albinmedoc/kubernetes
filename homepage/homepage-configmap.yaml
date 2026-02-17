@@ -146,7 +146,7 @@ data:
             widget:
               type: portainer
               url: http://portainer.portainer-web.svc.cluster.local:9000
-              env: 3
+              env: 2
               kubernetes: true
               key: {{HOMEPAGE_VAR_PORTAINER_API_KEY}}
         - Traefik:
