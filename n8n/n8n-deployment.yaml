@@ -29,7 +29,7 @@ spec:
               name: data
       containers:
         - name: n8n
-          image: ghcr.io/albinmedoc/n8n:2.6.4
+          image: ghcr.io/albinmedoc/n8n:2.8.3
           ports:
             - containerPort: 5678
           resources:
