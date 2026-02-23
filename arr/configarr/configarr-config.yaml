@@ -12,6 +12,41 @@ data:
     trashGuideUrl: https://github.com/TRaSH-Guides/Guides
     recyclarrConfigUrl: https://github.com/recyclarr/config-templates
 
+
+    customFormatDefinitions:
+      - trash_id: 66da819a-4f44-4809-aca2-eb9f9025fa52
+        trash_scores:
+          default: -10000
+        trash_description: "Language: Prefer X but i'll take Y"
+        name: "Language: Not Original or Swedish"
+        includeCustomFormatWhenRenaming: false
+        specifications:
+          - name: Not Original
+            implementation: LanguageSpecification
+            negate: true
+            required: true
+            fields:
+              value: -2
+          - name: Not Swedish
+            implementation: LanguageSpecification
+            negate: true
+            required: true
+            fields:
+              value: 14
+      - trash_id: 317645d8-eec1-4edf-a5dc-26ef260f6d2b
+        trash_scores:
+          default: 10
+        trash_description: "Prefer Language X"
+        name: "Language: Prefer Swedish"
+        includeCustomFormatWhenRenaming: false
+        specifications:
+          - name: Swedish Language
+            implementation: LanguageSpecification
+            negate: false
+            required: false
+            fields:
+              value: 14
+
     sonarr:
       series:
         base_url: http://sonarr.arr.svc.cluster.local:8989
@@ -30,6 +65,18 @@ data:
           - template: sonarr-v4-quality-profile-web-2160p
           - template: sonarr-v4-custom-formats-web-2160p
 
+        custom_formats: # Custom format assignments
+          - trash_ids:
+              - 66da819a-4f44-4809-aca2-eb9f9025fa52
+            assign_scores_to:
+              - name: WEB-1080p
+              - name: WEB-2160p
+          - trash_ids:
+              - 317645d8-eec1-4edf-a5dc-26ef260f6d2b
+            assign_scores_to:
+              - name: WEB-1080p
+              - name: WEB-2160p
+
     radarr:
       movies:
         base_url: http://radarr.arr.svc.cluster.local:7878
@@ -39,11 +86,23 @@ data:
           type: movie
 
         include:
-          # WEB-1080p
+          # HD Bluray + WEB
           - template: radarr-quality-definition-movie
           - template: radarr-quality-profile-hd-bluray-web
           - template: radarr-custom-formats-hd-bluray-web
 
-          # WEB-2160p
+          # UHD Bluray + WEB
           - template: radarr-quality-profile-uhd-bluray-web
           - template: radarr-custom-formats-uhd-bluray-web
+
+        custom_formats: # Custom format assignments
+          - trash_ids:
+              - 66da819a-4f44-4809-aca2-eb9f9025fa52
+            assign_scores_to:
+              - name: HD Bluray + WEB
+              - name: UHD Bluray + WEB
+          - trash_ids:
+              - 317645d8-eec1-4edf-a5dc-26ef260f6d2b
+            assign_scores_to:
+              - name: HD Bluray + WEB
+              - name: UHD Bluray + WEB
