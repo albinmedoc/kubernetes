@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fetcharr
+  namespace: arr
+  labels:
+    app.kubernetes.io/name: fetcharr
+    app.kubernetes.io/part-of: arr
+data:
+  fetcharr.yaml: |
+    plex:
+      api_token: !env_var PLEX_TOKEN
+      sync_friends_watchlist: true
+
+    sonarr:
+      instance:
+        base_url: http://sonarr.arr.svc.cluster.local:8989
+        api_key: !env_var SONARR_API_KEY
+        quality_profile: WEB-1080p
+        monitored: true
+        search_immediately: true
+
+    radarr:
+      instance:
+        base_url: http://radarr.arr.svc.cluster.local:7878
+        api_key: !env_var RADARR_API_KEY
+        quality_profile: HD Bluray + WEB
+        monitored: true
+        search_immediately: true

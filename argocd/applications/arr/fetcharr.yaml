@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: watchlistarr
+  name: fetcharr
   namespace: argocd
 spec:
   project: arr
   source:
     repoURL: https://github.com/albinmedoc/kubernetes
-    path: arr/watchlistarr
+    path: arr/fetcharr
     targetRevision: HEAD
     directory:
       recurse: true
