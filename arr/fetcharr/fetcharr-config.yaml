@@ -19,6 +19,8 @@ data:
         quality_profile: WEB-1080p
         monitored: true
         search_immediately: true
+        tags:
+          - watchlisted
 
     radarr:
       instance:
@@ -27,3 +29,5 @@ data:
         quality_profile: HD Bluray + WEB
         monitored: true
         search_immediately: true
+        tags:
+          - watchlisted

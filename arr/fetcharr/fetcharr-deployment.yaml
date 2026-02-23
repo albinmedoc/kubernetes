@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: fetcharr
-          image: ghcr.io/fetcharr/fetcharr:0.1.16
+          image: ghcr.io/fetcharr/fetcharr:0.1.17
           resources:
             limits:
               cpu: 200m
