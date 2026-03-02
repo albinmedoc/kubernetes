@@ -27,11 +27,11 @@ spec:
             - containerPort: 3280
           resources:
             limits:
-              cpu: 200m
-              memory: 256Mi
+              cpu: 500m
+              memory: 512Mi
             requests:
-              cpu: 50m
-              memory: 64Mi
+              cpu: 100m
+              memory: 256Mi
           env:
             - name: ORIGIN
               value: "https://wishlist.albinmedoc.se"
