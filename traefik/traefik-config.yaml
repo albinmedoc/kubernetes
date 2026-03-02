@@ -50,6 +50,13 @@ data:
             delayBeforeCheck: 10
           email: kontakt@albinmedoc.se
           storage: /certs/acme-dns.json
+      letsencrypt-weblio:
+        acme:
+          dnsChallenge:
+            provider: directadmin
+            delayBeforeCheck: 10
+          email: albin@weblio.se
+          storage: /certs/acme-weblio.json
   file-provider.yaml: |
     http:
       routers:
