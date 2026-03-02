@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: migration-helper
+  namespace: migration-helper
+  labels:
+    app.kubernetes.io/name: migration-helper
+    app.kubernetes.io/component: migration
+    app.kubernetes.io/part-of: weblio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: migration-helper
+      app.kubernetes.io/component: migration
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: migration-helper
+        app.kubernetes.io/component: migration
+        app.kubernetes.io/part-of: weblio
+    spec:
+      imagePullSecrets:
+        - name: ghcr-credentials
+      containers:
+        - name: migration-helper
+          image: ghcr.io/weblio-ab/migration-helper:v1.1.0
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+          envFrom:
+            - secretRef:
+                name: migration-helper-secrets
