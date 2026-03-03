@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mega-bridge
+  namespace: mega-bridge
+  labels:
+    app.kubernetes.io/name: mega-bridge
+    app.kubernetes.io/component: download
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: truenas-iscsi
+  resources:
+    requests:
+      storage: 100Gi

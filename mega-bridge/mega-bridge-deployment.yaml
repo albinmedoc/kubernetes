@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mega-bridge
+  namespace: mega-bridge
+  labels:
+    app.kubernetes.io/name: mega-bridge
+    app.kubernetes.io/component: download
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mega-bridge
+      app.kubernetes.io/component: download
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mega-bridge
+        app.kubernetes.io/component: download
+    spec:
+      containers:
+        - name: mega-bridge
+          image: ghcr.io/albinmedoc/mega-bridge:v1.1.0
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mega-bridge
