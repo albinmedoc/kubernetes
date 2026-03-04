@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: mega-bridge
-          image: ghcr.io/albinmedoc/mega-bridge:v1.1.0
+          image: ghcr.io/albinmedoc/mega-bridge:v1.1.1
           ports:
             - containerPort: 3000
               protocol: TCP
