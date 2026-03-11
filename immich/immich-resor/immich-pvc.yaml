@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/instance: resor
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: truenas-nfs
+    - ReadWriteOnce
+  storageClassName: truenas-iscsi
   resources:
     requests:
       storage: 100Gi
