@@ -5,8 +5,8 @@ metadata:
   namespace: wishlist
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: truenas-nfs
+    - ReadWriteOnce
+  storageClassName: truenas-iscsi
   resources:
     requests:
       storage: 5Gi
