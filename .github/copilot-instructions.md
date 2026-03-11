@@ -47,16 +47,12 @@ Each application follows this consistent deployment pattern:
 ### 3. Persistent Storage
 When the application requires persistent storage:
 
-- **Use `truenas-iscsi` for**:
+- **Use `truenas-iscsi` for all applications**:
   - Databases (PostgreSQL, MariaDB, Redis)
-  - Applications requiring high performance
-  - Single-node access (ReadWriteOnce)
-
-- **Use `truenas-nfs` for**:
   - Web applications
   - File storage services
   - Media servers
-  - All non-database applications
+  - All persistent storage needs
 
 **PVC Template**:
 ```yaml
@@ -72,7 +68,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: truenas-iscsi  # or truenas-nfs for non-databases
+  storageClassName: truenas-iscsi
   resources:
     requests:
       storage: <size>Gi
@@ -201,8 +197,7 @@ When given an application request (e.g., a Docker Hub link or application name):
    - Other → Deployment
 
 4. **Add persistent storage if needed**:
-   - Database → `truenas-iscsi`
-   - Non-database → `truenas-nfs`
+   - All applications → `truenas-iscsi`
 
 5. **Create service and ingress ONLY if it's a web service**
 
@@ -218,7 +213,7 @@ If asked to create manifests for "Uptime Kuma" (a monitoring tool):
 
 1. Create `uptime-kuma-namespace.yaml`
 2. Create `uptime-kuma-deployment.yaml` (not a database, so Deployment)
-3. Create `uptime-kuma-pvc.yaml` (with `truenas-nfs` storage class)
+3. Create `uptime-kuma-pvc.yaml` (with `truenas-iscsi` storage class)
 4. Create `uptime-kuma-service.yaml` (it's a web service)
 5. Create `uptime-kuma-ingress.yaml` (needs external access)
 6. If it needs configuration, create configmap or secrets files
