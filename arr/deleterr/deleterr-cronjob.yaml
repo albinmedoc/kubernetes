@@ -17,7 +17,7 @@ spec:
         spec:
           containers:
             - name: deleterr
-              image: ghcr.io/rfsbraz/deleterr:0.2.14
+              image: ghcr.io/rfsbraz/deleterr:0.2.15
               imagePullPolicy: Always
               tty: true
               envFrom:
