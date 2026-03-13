@@ -19,6 +19,7 @@ data:
         quality_profile: WEB-1080p
         monitored: true
         search_immediately: true
+        update_existing: false
         tags:
           - watchlisted
 
