@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jellyfin
+  namespace: arr
+  labels:
+    app.kubernetes.io/name: jellyfin
+    app.kubernetes.io/part-of: arr
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`jellyfin.flexflix.top`)
+      kind: Rule
+      services:
+        - name: jellyfin
+          port: 8096
