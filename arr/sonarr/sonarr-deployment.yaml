@@ -56,7 +56,6 @@ spec:
           envFrom:
             - secretRef:
                 name: sonarr-secrets
-                optional: true
           env:
             - name: DOCKER_MODS
               value: "linuxserver/mods:radarr-striptracks|ghcr.io/themepark-dev/theme.park:sonarr"

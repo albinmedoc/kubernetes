@@ -51,7 +51,6 @@ spec:
           envFrom:
             - secretRef:
                 name: prowlarr-secrets
-                optional: true
           env:
             - name: DOCKER_MODS
               value: "ghcr.io/themepark-dev/theme.park:prowlarr"
