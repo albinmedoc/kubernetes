@@ -92,12 +92,6 @@ data:
           rule: "Host(`immich.albinmedoc.se`)"
           service: immich
           entrypoints: websecure
-        openclaw:
-          rule: "Host(`openclaw.albinmedoc.se`)"
-          service: openclaw
-          entrypoints: websecure
-          middlewares:
-            - traefik-local-network@kubernetescrd
 
       services:
         noop:
@@ -125,11 +119,6 @@ data:
           loadBalancer:
             servers:
               - url: "http://192.168.86.109:30041"
-        openclaw:
-          loadBalancer:
-            servers:
-              - url: "http://192.168.86.233:18789"
-            passHostHeader: true
 
       serversTransports:
         proxmox:
