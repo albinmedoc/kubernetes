@@ -10,7 +10,6 @@ data:
   settings.yaml: |
     dry_run: true
     plex_library_scan_after_actions: true
-    tautulli_library_scan_after_actions: true
 
     scheduler:
       enabled: false
@@ -18,10 +17,6 @@ data:
     plex:
       url: "http://192.168.86.122:32400"
       token: !env PLEX_TOKEN
-
-    tautulli:
-      url: "http://tautulli.arr.svc.cluster.local:8181"
-      api_key: !env TAUTULLI_TOKEN
 
     radarr:
       - name: "Radarr"

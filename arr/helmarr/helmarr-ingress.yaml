@@ -55,12 +55,3 @@ spec:
       middlewares:
         - name: authentik
           namespace: authentik
-
-    - match: Host(`helmarr.flexflix.top`) && Header(`HELMARR_APPLICATION`, `tautulli`)
-      kind: Rule
-      services:
-        - name: tautulli
-          port: 8181
-      middlewares:
-        - name: authentik
-          namespace: authentik
