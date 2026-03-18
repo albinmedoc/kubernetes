@@ -41,6 +41,9 @@ data:
         allowCrossNamespace: true
       file:
         filename: /config/file-provider.yaml
+      docker:
+        endpoint: "tcp://192.168.86.112:2375"
+        exposedByDefault: false
 
     certificatesResolvers:
       letsencrypt-dns:
