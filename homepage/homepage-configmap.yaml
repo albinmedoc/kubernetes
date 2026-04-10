@@ -179,7 +179,6 @@ data:
     - unifi_console:
         url: https://192.168.86.1
         key: {{HOMEPAGE_VAR_UNIFI_API_KEY}}
-        site: UniFi
   proxmox.yaml: |
     pve:
       url: https://192.168.86.106:8006
