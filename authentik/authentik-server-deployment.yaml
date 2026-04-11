@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: authentik-server
-          image: ghcr.io/goauthentik/server:2026.2.1
+          image: ghcr.io/goauthentik/server:2026.2.2
           args:
             - server
           resources:
