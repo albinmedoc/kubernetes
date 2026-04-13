@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/managed-by: kubectl
 spec:
   type: LoadBalancer
-  loadBalancerIP: 192.168.86.3
+  loadBalancerIP: 192.168.86.4
   externalTrafficPolicy: Local
   selector:
     app.kubernetes.io/name: postgres
