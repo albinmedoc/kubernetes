@@ -10,6 +10,8 @@ metadata:
     app.kubernetes.io/managed-by: kubectl
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/name: authentik
@@ -26,6 +28,16 @@ spec:
         app.kubernetes.io/part-of: authentik
         app.kubernetes.io/managed-by: kubectl
     spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: authentik
+                  app.kubernetes.io/component: authentik-server
+              namespaces:
+                - authentik
+              topologyKey: kubernetes.io/hostname
       containers:
         - name: authentik-worker
           image: ghcr.io/goauthentik/server:2026.2.2
@@ -58,3 +70,10 @@ spec:
           ports:
             - name: metrics
               containerPort: 9300
+          volumeMounts:
+            - mountPath: /data
+              name: data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: authentik
