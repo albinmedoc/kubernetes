@@ -12,7 +12,7 @@ data:
   BASE_URL: https://recept.albinmedoc.se
 
   DB_ENGINE: postgres
-  POSTGRES_SERVER: postgres.postgres.svc.cluster.local
+  POSTGRES_SERVER: 192.168.86.251
   POSTGRES_PORT: "5432"
   POSTGRES_DB: mealie
   POSTGRES_USER: mealie
