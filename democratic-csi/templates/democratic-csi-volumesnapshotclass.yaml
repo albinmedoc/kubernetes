@@ -4,5 +4,6 @@ metadata:
   name: truenas-iscsi
   annotations:
     snapshot.storage.kubernetes.io/is-default-class: "true"
+    velero.io/csi-volumesnapshot-class: "true"
 driver: org.democratic-csi.truenas-iscsi
 deletionPolicy: Delete

@@ -1,0 +1,104 @@
+velero:
+  initContainers:
+    - name: velero-plugin-for-aws
+      image: velero/velero-plugin-for-aws:v1.14.1
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
+
+  configuration:
+    features: EnableCSI
+    defaultBackupStorageLocation: backblaze
+    defaultItemOperationTimeout: 24h
+    uploaderType: kopia
+    defaultVolumesToFsBackup: false
+    defaultSnapshotMoveData: false
+    backupStorageLocation:
+      - name: backblaze
+        provider: aws
+        bucket: "Medoc-TrueNAS"
+        prefix: Kubernetes/Velero
+        default: true
+        credential:
+          name: velero-cloud-credentials
+          key: cloud
+        config:
+          region: eu-central-003
+          s3Url: "https://s3.eu-central-003.backblazeb2.com"
+          s3ForcePathStyle: "true"
+          checksumAlgorithm: ""
+
+  backupsEnabled: true
+  snapshotsEnabled: false
+
+  credentials:
+    useSecret: true
+    existingSecret: velero-cloud-credentials
+
+  deployNodeAgent: true
+  nodeAgent:
+    disableHostPath: true
+
+  schedules:
+    resources-daily:
+      disabled: false
+      schedule: "0 1 * * *"
+      useOwnerReferencesInBackup: false
+      template:
+        ttl: 336h
+        storageLocation: backblaze
+        includedNamespaces:
+          - "*"
+        excludedNamespaces:
+          - velero
+          - kube-system
+          - kube-public
+          - kube-node-lease
+          - argocd
+          - democratic-csi
+        snapshotVolumes: false
+        defaultVolumesToFsBackup: false
+        snapshotMoveData: false
+
+    offsite-pvc-weekly:
+      disabled: false
+      schedule: "0 2 * * 0"
+      useOwnerReferencesInBackup: false
+      template:
+        ttl: 1344h
+        storageLocation: backblaze
+        includedNamespaces:
+          - "*"
+        excludedNamespaces:
+          - velero
+          - kube-system
+          - kube-public
+          - kube-node-lease
+          - argocd
+          - democratic-csi
+        snapshotVolumes: true
+        snapshotMoveData: true
+        dataMover: velero
+        defaultVolumesToFsBackup: false
+
+    offsite-pvc-monthly:
+      disabled: false
+      schedule: "0 3 1 * *"
+      useOwnerReferencesInBackup: false
+      template:
+        ttl: 8760h
+        storageLocation: backblaze
+        includedNamespaces:
+          - "*"
+        excludedNamespaces:
+          - velero
+          - kube-system
+          - kube-public
+          - kube-node-lease
+          - argocd
+          - democratic-csi
+        snapshotVolumes: true
+        snapshotMoveData: true
+        dataMover: velero
+        defaultVolumesToFsBackup: false
