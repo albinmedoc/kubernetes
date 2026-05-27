@@ -53,7 +53,7 @@ The expected Secret is:
 democratic-csi-secrets
 ```
 
-Use `democratic-csi-secrets.yaml.example` as the plaintext template and commit the generated SealedSecret under `democratic-csi/templates/`. See [sealed-secrets/README.md](../sealed-secrets/README.md) for the shared sealing workflow.
+Use `templates/democratic-csi-secrets.yaml.example` as the plaintext template and commit only the generated SealedSecret under `democratic-csi/templates/`. The chart `.helmignore` excludes example and plaintext secret files from Helm rendering. See [sealed-secrets/README.md](../sealed-secrets/README.md) for the shared sealing workflow.
 
 ## Verification
 
