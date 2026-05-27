@@ -1,16 +1,14 @@
-# Democratic CSI - TrueNAS NFS & iSCSI Storage
+# Democratic CSI - TrueNAS iSCSI Storage
 
-This directory contains configuration for democratic-csi, which provides NFS & iSCSI-based persistent storage from TrueNAS for the Kubernetes cluster.
+This directory contains the Argo CD Helm wrapper for democratic-csi, which provides iSCSI-based persistent storage from TrueNAS for the Kubernetes cluster.
 
 ## Overview
 
 - **Storage Provider**: TrueNAS (192.168.86.109)
-- **Protocol**: NFS
-  - **ZFS Parent Dataset**: `Datapool1/k8s/nfs/vols`
 - **Protocol**: iSCSI
-  - **ZFS Parent Dataset**: `Datapool1/k8s/iscsi/vols`
-  - **Snapshots Dataset**: `Datapool1/k8s/iscsi/snaps`
-- **Storage Class**: `truenas-iscsi` & `truenas-nfs`
+  - **ZFS Parent Dataset**: `Datapool1/Kubernetes/iscsi/volumes`
+  - **Snapshots Dataset**: `Datapool1/Kubernetes/iscsi/snapshots`
+- **Storage Class**: `truenas-iscsi`
 
 ## Prerequisites
 
@@ -21,12 +19,11 @@ All nodes must have the `iscsi-tools` system extension installed:
 
 ### TrueNAS Configuration
 1. ZFS datasets created at:
-   - `Datapool1/k8s/nfs/vols`
-   - `Datapool1/k8s/iscsi/vols`
-   - `Datapool1/k8s/iscsi/snaps`
+   - `Datapool1/Kubernetes/iscsi/volumes`
+   - `Datapool1/Kubernetes/iscsi/snapshots`
 
 2. API key configured for root user
-3. NFS & iSCSI service enabled
+3. iSCSI service enabled
 
 ### Snapshot Support Prerequisites
 
@@ -40,27 +37,23 @@ kubectl kustomize https://github.com/kubernetes-csi/external-snapshotter/client/
 kubectl kustomize https://github.com/kubernetes-csi/external-snapshotter/deploy/kubernetes/snapshot-controller | kubectl create -f -
 ```
 
-### Installation Democratic CSI
-```bash
-# Add helm repository
-helm repo add democratic-csi https://democratic-csi.github.io/charts/
-helm repo update
+### Installation with Argo CD
 
-## Create namespace
-kubectl apply -f democratic-csi-namespace.yaml
+Argo CD deploys democratic-csi from the local Helm wrapper in this directory. The wrapper depends on the upstream `democratic-csi/democratic-csi` Helm chart and uses the `truenas-iscsi` release name, matching the previous manual Helm install.
 
-# NFS installation
-nano nfs-values.yaml ## Update with correct API-KEY
-helm install truenas-nfs democratic-csi/democratic-csi \
-  --namespace democratic-csi \
-  -f nfs-values.yaml
+The Argo CD Application creates the `democratic-csi` namespace with `CreateNamespace=true` and manages the privileged pod security labels with `managedNamespaceMetadata`.
 
-# iSCSI installation
-nano iscsi-values.yaml ## Update with correct API-KEY
-helm install truenas-iscsi democratic-csi/democratic-csi \
-  --namespace democratic-csi \
-  -f iscsi-values.yaml
+Only the TrueNAS API key is stored as a Secret. The non-secret democratic-csi driver config lives in `values.yaml`, with `apiKey: $TRUENAS_API_KEY`. The Helm chart injects `TRUENAS_API_KEY` from the Secret into the controller and node driver containers.
+
+democratic-csi expands environment variables in the driver config at runtime, so `apiKey: $TRUENAS_API_KEY` is resolved inside the driver pod.
+
+The expected Secret is:
+
+```text
+democratic-csi-secrets
 ```
+
+Use `democratic-csi-secrets.yaml.example` as the plaintext template and commit the generated SealedSecret beside the chart templates. See [sealed-secrets/README.md](../sealed-secrets/README.md) for the shared sealing workflow.
 
 ## Verification
 
@@ -74,27 +67,12 @@ kubectl get storageclass truenas-iscsi
 
 ### Usage
 
-Choose the appropriate storage class based on your needs:
-
-- truenas-nfs: Use for shared storage and applications needing easy file access (supports ReadWriteMany)
-- truenas-iscsi: Use for databases and high I/O applications (ReadWriteOnce only)
+Use `truenas-iscsi` for databases and high I/O applications. It supports `ReadWriteOnce`.
 
 ## Upgrade
 
-```bash
-helm repo update
-helm upgrade truenas-nfs democratic-csi/democratic-csi \
-  --namespace democratic-csi \
-  -f nfs-values.yaml
-helm upgrade truenas-iscsi democratic-csi/democratic-csi \
-  --namespace democratic-csi \
-  -f iscsi-values.yaml
-```
+Update `Chart.yaml` to the desired upstream chart version, then let Argo CD sync the Application.
 
 ## Uninstall
 
-```bash
-helm uninstall truenas-nfs -n democratic-csi
-helm uninstall truenas-iscsi -n democratic-csi
-kubectl delete namespace democratic-csi
-```
+Remove `argocd/applications/democratic-csi.yaml` from the app-of-apps source and let Argo CD prune the Application.
