@@ -57,3 +57,32 @@ rules:
       - scheduledbackups
       - poolers
     verbs: ["get", "list", "watch"]
+
+  - apiGroups: ["velero.io"]
+    resources:
+      - backups
+      - backupstoragelocations
+      - backuprepositories
+      - deletebackuprequests
+      - downloadrequests
+      - podvolumebackups
+      - podvolumerestores
+      - restores
+      - schedules
+      - serverstatusrequests
+      - volumesnapshotlocations
+      - datauploads
+      - datadownloads
+    verbs: ["get", "list", "watch"]
+
+  - apiGroups: ["snapshot.storage.k8s.io"]
+    resources:
+      - volumesnapshotclasses
+      - volumesnapshots
+      - volumesnapshotcontents
+    verbs: ["get", "list", "watch"]
+
+  - apiGroups: ["bitnami.com"]
+    resources:
+      - sealedsecrets
+    verbs: ["get", "list", "watch"]
