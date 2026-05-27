@@ -79,7 +79,7 @@ velero:
           - democratic-csi
         snapshotVolumes: true
         snapshotMoveData: true
-        dataMover: velero
+        datamover: velero
         defaultVolumesToFsBackup: false
 
     offsite-pvc-monthly:
@@ -100,5 +100,5 @@ velero:
           - democratic-csi
         snapshotVolumes: true
         snapshotMoveData: true
-        dataMover: velero
+        datamover: velero
         defaultVolumesToFsBackup: false
