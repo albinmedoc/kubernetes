@@ -15,9 +15,13 @@ spec:
     app.kubernetes.io/name: portainer-web
     app.kubernetes.io/component: container-manager
   ports:
-  - name: edge
-    port: 8000
-    targetPort: edge
+    - name: edge
+      port: 8000
+      targetPort: edge
+    - protocol: TCP
+      name: web
+      port: 9000
+      targetPort: web
 ---
 apiVersion: v1
 kind: Service
