@@ -26,7 +26,10 @@ spec:
         - name: portainer
           image: portainer/portainer-ce:2.42.0
           ports:
-            - containerPort: 9000
+            - name: web
+              containerPort: 9000
+            - name: edge
+              containerPort: 8000
           resources:
             limits:
               cpu: 500m
