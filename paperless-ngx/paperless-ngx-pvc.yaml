@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-ngx
+  namespace: paperless-ngx
+  labels:
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/component: document-management
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: truenas-iscsi
+  resources:
+    requests:
+      storage: 15Gi
