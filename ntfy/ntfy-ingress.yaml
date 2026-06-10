@@ -1,0 +1,17 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ntfy
+  namespace: ntfy
+  labels:
+    app.kubernetes.io/name: ntfy
+    app.kubernetes.io/component: notification
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`ntfy.albinmedoc.se`)
+      kind: Rule
+      services:
+        - name: ntfy
+          port: 80
