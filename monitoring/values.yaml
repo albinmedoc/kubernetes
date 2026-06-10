@@ -1,0 +1,58 @@
+kube-prometheus-stack:
+  fullnameOverride: kube-prometheus-stack
+
+  alertmanager:
+    alertmanagerSpec:
+      storage:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: truenas-iscsi
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 5Gi
+
+  grafana:
+    enabled: true
+    envFromSecret: grafana-secrets
+    envFromConfigMaps:
+      - name: grafana-config
+    admin:
+      existingSecret: grafana-secrets
+      userKey: GF_SECURITY_ADMIN_USER
+      passwordKey: GF_SECURITY_ADMIN_PASSWORD
+    persistence:
+      enabled: true
+      storageClassName: truenas-iscsi
+      accessModes:
+        - ReadWriteOnce
+      size: 10Gi
+
+  prometheus:
+    prometheusSpec:
+      retention: 15d
+      serviceMonitorSelector: {}
+      serviceMonitorNamespaceSelector: {}
+      serviceMonitorSelectorNilUsesHelmValues: false
+      podMonitorSelector: {}
+      podMonitorNamespaceSelector: {}
+      podMonitorSelectorNilUsesHelmValues: false
+      probeSelector: {}
+      probeNamespaceSelector: {}
+      probeSelectorNilUsesHelmValues: false
+      scrapeConfigSelector: {}
+      scrapeConfigNamespaceSelector: {}
+      scrapeConfigSelectorNilUsesHelmValues: false
+      ruleSelector: {}
+      ruleNamespaceSelector: {}
+      ruleSelectorNilUsesHelmValues: false
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: truenas-iscsi
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 50Gi
