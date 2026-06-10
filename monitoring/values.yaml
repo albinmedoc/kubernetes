@@ -30,6 +30,9 @@ kube-prometheus-stack:
       size: 10Gi
 
   prometheus:
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 192.168.86.6
     prometheusSpec:
       retention: 15d
       serviceMonitorSelector: {}
