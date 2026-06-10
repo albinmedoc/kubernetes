@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: scraparr
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: scraparr
+    app.kubernetes.io/component: metrics
+spec:
+  staticConfigs:
+    - labels:
+        job: scraparr
+      targets:
+        - 192.168.86.112:7100
