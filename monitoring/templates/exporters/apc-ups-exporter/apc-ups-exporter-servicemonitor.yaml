@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: apc-ups-exporter
+  namespace: apc-ups-exporter
+  labels:
+    app.kubernetes.io/name: apc-ups-exporter
+    app.kubernetes.io/component: metrics-exportes
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: apc-ups-exporter
+      app.kubernetes.io/component: metrics-exportes
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 15s
+      scrapeTimeout: 10s

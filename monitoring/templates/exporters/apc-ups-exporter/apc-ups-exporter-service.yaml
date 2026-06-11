@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: apc-ups-exporter
+  namespace: apc-ups-exporter
+  labels:
+    app.kubernetes.io/name: apc-ups-exporter
+    app.kubernetes.io/component: metrics-exportes
+spec:
+  selector:
+    app.kubernetes.io/name: apc-ups-exporter
+    app.kubernetes.io/component: metrics-exportes
+  ports:
+    - name: metrics
+      protocol: TCP
+      port: 5000
+      targetPort: metrics
