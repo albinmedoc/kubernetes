@@ -43,6 +43,17 @@ velero:
   nodeAgent:
     disableHostPath: true
 
+  metrics:
+    enabled: true
+    scrapeInterval: 30s
+    scrapeTimeout: 10s
+    serviceMonitor:
+      autodetect: false
+      enabled: true
+    nodeAgentPodMonitor:
+      autodetect: false
+      enabled: true
+
   schedules:
     resources-daily:
       disabled: false
