@@ -17,6 +17,16 @@ ArgoCD is a declarative, GitOps continuous delivery tool for Kubernetes. It foll
 
 Installed following the official guide: [ArgoCD Getting Started](https://argo-cd.readthedocs.io/en/stable/getting_started/#1-install-argo-cd)
 
+After installing the official Argo CD manifests, apply the repository-managed manifests in this directory:
+
+- `argocd-ingress.yaml`
+- `argocd-git-sealed-secrets.yaml`
+- `repositories/kubernetes-repository.yaml`
+- `projects/*.yaml`
+- `argocd-servicemonitor.yaml`
+
+Apply `argocd-servicemonitor.yaml` after the `monitoring.coreos.com` CRDs are installed by kube-prometheus-stack.
+
 ## Upgrading
 
 1. **Check Release Notes**: Always review the [ArgoCD Release Notes](https://github.com/argoproj/argo-cd/releases) before upgrading
@@ -28,3 +38,7 @@ For detailed upgrade instructions and version-specific considerations, refer to 
 
 - **GitHub Repository**: https://github.com/argoproj/argo-cd
 - **Documentation**: https://argo-cd.readthedocs.io/
+
+## Metrics
+
+Prometheus scrapes Argo CD through `argocd-servicemonitor.yaml`. The monitor lives in the `argocd` namespace and selects Argo CD's built-in metrics services.
