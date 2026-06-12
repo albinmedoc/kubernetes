@@ -31,6 +31,20 @@ The Grafana role mapping expects this Authentik group name:
 - `Grafana Admin` -> `GrafanaAdmin`
 - all other authenticated users -> `Viewer`
 
+## Plex Exporter
+
+The Plex Media Server exporter scrapes the Plex server at `http://192.168.86.122:32400` and exposes Prometheus metrics on port `9594`.
+
+Create and seal the Plex token secret before syncing the exporter:
+
+```bash
+cp monitoring/templates/exporters/plex-media-server-exporter/plex-media-server-exporter-secrets.yaml.example \
+  monitoring/templates/exporters/plex-media-server-exporter/plex-media-server-exporter-secrets.yaml
+kubeseal -f monitoring/templates/exporters/plex-media-server-exporter/plex-media-server-exporter-secrets.yaml \
+  -w monitoring/templates/exporters/plex-media-server-exporter/plex-media-server-exporter-sealed-secrets.yaml \
+  -o yaml
+```
+
 ## Upgrading
 
 Update the dependency version in `Chart.yaml`, review the upstream kube-prometheus-stack upgrade notes, then let Argo CD sync the Application.
