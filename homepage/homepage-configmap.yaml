@@ -43,8 +43,22 @@ data:
                 url: https://192.168.86.106:8006
                 username: {{HOMEPAGE_VAR_PROXMOX_TOKEN}}
                 password: {{HOMEPAGE_VAR_PROXMOX_SECRET}}
-              - type: apcups
-                url: tcp://192.168.86.106:3551
+              - type: prometheusmetric
+                url: http://192.168.86.6:9090
+                metrics:
+                  - label: Charge
+                    query: ups_battery_remaining_charge_percent{job="apc-ups-exporter"}
+                    format:
+                      type: percent
+                  - label: Load
+                    query: ups_power_load_percent{job="apc-ups-exporter"}
+                    format:
+                      type: percent
+                  - label: Time left
+                    query: ups_battery_remaining_time_minutes{job="apc-ups-exporter"}
+                    format:
+                      type: number
+                      suffix: m
         - TrueNAS:
             icon: truenas.svg
             href: http://truenas.albinmedoc.se
