@@ -8,5 +8,4 @@ metadata:
     app.kubernetes.io/instance: minnen
 data:
   IMMICH_PORT: "2283"
-  DB_STORAGE_TYPE: HDD
   TZ: "Europe/Stockholm"
