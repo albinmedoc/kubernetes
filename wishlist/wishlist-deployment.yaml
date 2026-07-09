@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: wishlist
-          image: cmintey/wishlist:v0.65.2
+          image: cmintey/wishlist:v0.66.0
           ports:
             - containerPort: 3280
           resources:
