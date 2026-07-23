@@ -1,0 +1,23 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: form-proxy-admin
+  namespace: form-proxy
+  labels:
+    app.kubernetes.io/name: form-proxy-admin
+    app.kubernetes.io/component: email
+    app.kubernetes.io/part-of: weblio
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    certResolver: letsencrypt-weblio
+  routes:
+    - match: Host(`admin.forms.weblio.se`)
+      kind: Rule
+      services:
+        - name: form-proxy-admin
+          port: 8080
+      middlewares:
+        - name: authentik
+          namespace: authentik

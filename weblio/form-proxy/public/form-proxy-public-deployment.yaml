@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: form-proxy-public
+  namespace: form-proxy
+  labels:
+    app.kubernetes.io/name: form-proxy-public
+    app.kubernetes.io/component: email
+    app.kubernetes.io/part-of: weblio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: form-proxy-public
+      app.kubernetes.io/component: email
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: form-proxy-public
+        app.kubernetes.io/component: email
+        app.kubernetes.io/part-of: weblio
+    spec:
+      imagePullSecrets:
+        - name: ghcr-credentials
+      containers:
+        - name: form-proxy-public
+          image: ghcr.io/weblio-ab/form-proxy-public-api:v0.0.1
+          ports:
+            - containerPort: 3001
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: form-proxy-secrets
+                  key: DATABASE_URL
