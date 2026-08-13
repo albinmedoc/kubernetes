@@ -24,7 +24,7 @@ spec:
         - name: ghcr-credentials
       containers:
         - name: form-proxy-admin
-          image: ghcr.io/weblio-ab/form-proxy-admin:v0.0.1
+          image: ghcr.io/weblio-ab/form-proxy-admin:v0.0.2
           ports:
             - containerPort: 8080
           resources:
