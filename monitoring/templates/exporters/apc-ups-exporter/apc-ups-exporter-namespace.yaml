@@ -4,4 +4,4 @@ metadata:
   name: apc-ups-exporter
   labels:
     app.kubernetes.io/name: apc-ups-exporter
-    app.kubernetes.io/component: metrics-exportes
+    app.kubernetes.io/component: metrics-exporter
