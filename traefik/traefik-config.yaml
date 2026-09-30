@@ -92,6 +92,10 @@ data:
           rule: "Host(`immich.albinmedoc.se`)"
           service: immich
           entrypoints: websecure
+        paperclip:
+          rule: "Host(`paperclip.albinmedoc.se`)"
+          service: paperclip
+          entrypoints: websecure
 
       services:
         noop:
@@ -119,6 +123,10 @@ data:
           loadBalancer:
             servers:
               - url: "http://192.168.86.109:30041"
+        paperclip:
+          loadBalancer:
+            servers:
+              - url: "http://192.168.86.209:3100/"
 
       serversTransports:
         proxmox:
