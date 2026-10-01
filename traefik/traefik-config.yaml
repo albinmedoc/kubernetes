@@ -126,7 +126,7 @@ data:
         paperclip:
           loadBalancer:
             servers:
-              - url: "http://192.168.86.209:3100/"
+              - url: "http://192.168.86.77:3100/"
 
       serversTransports:
         proxmox:
