@@ -15,6 +15,13 @@ spec:
     server: https://kubernetes.default.svc
     namespace: tailscale
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        app.kubernetes.io/name: tailscale
+        app.kubernetes.io/component: networking
+        pod-security.kubernetes.io/enforce: privileged
+        pod-security.kubernetes.io/audit: privileged
+        pod-security.kubernetes.io/warn: privileged
     automated:
       prune: true
       selfHeal: true
