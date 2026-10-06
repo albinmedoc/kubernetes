@@ -35,6 +35,8 @@ spec:
               containerPort: 80
             - name: websecure
               containerPort: 443
+            - name: tailscale
+              containerPort: 444
             - name: traefik
               containerPort: 8080
           volumeMounts:

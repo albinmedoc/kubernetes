@@ -1,0 +1,11 @@
+tailscale-operator:
+  oauthSecretVolume:
+    secret:
+      secretName: tailscale-secrets
+
+  operatorConfig:
+    defaultTags:
+      - tag:k8s-operator
+
+  proxyConfig:
+    defaultTags: tag:k8s

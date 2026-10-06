@@ -28,6 +28,11 @@ data:
         http:
           tls:
             certResolver: letsencrypt-dns
+      tailscale:
+        address: ":444"
+        http:
+          tls:
+            certResolver: letsencrypt-dns
 
     api:
       insecure: true
@@ -72,9 +77,7 @@ data:
         truenas:
           rule: "Host(`truenas.albinmedoc.se`)"
           service: truenas
-          entrypoints: websecure
-          middlewares:
-            - traefik-local-network@kubernetescrd
+          entrypoints: tailscale
         proxmox:
           rule: "Host(`proxmox.albinmedoc.se`)"
           service: proxmox

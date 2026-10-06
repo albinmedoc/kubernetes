@@ -2,6 +2,14 @@
 
 This guide covers installing Traefik as an ingress controller with MetalLB for load balancing.
 
+## Tailscale-only access
+
+Traefik listens on port `444` for HTTPS traffic from one Tailscale Layer 3 endpoint named `traefik`. The operator exposes the `traefik-tailscale` Service on port `443`, forwarding TCP to that entrypoint. Traefik terminates TLS using its existing certificates and routes `truenas.albinmedoc.se`, `proxmox.albinmedoc.se`, and `adguard.albinmedoc.se` to their backends. Their existing local-network routes remain in place. AdGuard continues to use Authentik authentication.
+
+Set internal DNS A and AAAA records for the three hostnames to the Tailscale IP of the `traefik` endpoint. Do not publish that address in public DNS. Connect the client to the tailnet, then use the usual HTTPS URLs. The Tailscale operator's device address is available in the Tailscale admin console or with `tailscale status` on a connected client.
+
+Tailnet policy controls which users and devices can reach the endpoint. The operator's default proxy tag is `tag:k8s`; ensure the policy permits the intended identities.
+
 ## Prerequisites
 
 - Kubernetes cluster running

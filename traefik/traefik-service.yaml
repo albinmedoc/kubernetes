@@ -40,3 +40,25 @@ spec:
       name: traefik
       port: 8080
       targetPort: traefik
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-tailscale
+  namespace: traefik
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: traefik
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/component: networking
+    app.kubernetes.io/part-of: traefik
+spec:
+  selector:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/component: ingress-controller
+  ports:
+    - protocol: TCP
+      name: tailscale
+      port: 443
+      targetPort: tailscale
