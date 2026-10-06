@@ -81,15 +81,12 @@ data:
         proxmox:
           rule: "Host(`proxmox.albinmedoc.se`)"
           service: proxmox
-          entrypoints: websecure
-          middlewares:
-            - traefik-local-network@kubernetescrd
+          entrypoints: tailscale
         adguard:
           rule: "Host(`adguard.albinmedoc.se`)"
           service: adguard
-          entrypoints: websecure
+          entrypoints: tailscale
           middlewares:
-            - traefik-local-network@kubernetescrd
             - authentik-authentik@kubernetescrd
         immich:
           rule: "Host(`immich.albinmedoc.se`)"

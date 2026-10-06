@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   entryPoints:
-    - websecure
+    - tailscale
   routes:
     - kind: Rule
       match: Host(`argocd.albinmedoc.se`)
@@ -13,6 +13,3 @@ spec:
       services:
         - name: argocd-server
           port: 80
-      middlewares:
-        - name: local-network
-          namespace: traefik
