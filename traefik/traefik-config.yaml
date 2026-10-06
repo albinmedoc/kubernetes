@@ -108,8 +108,9 @@ data:
               - url: "http://192.168.86.122:32400"
         truenas:
           loadBalancer:
+            serversTransport: truenas
             servers:
-              - url: "http://192.168.86.109"
+              - url: "https://192.168.86.109"
         proxmox:
           loadBalancer:
             serversTransport: proxmox
@@ -129,5 +130,7 @@ data:
               - url: "http://192.168.86.77:3100/"
 
       serversTransports:
+        truenas:
+          insecureSkipVerify: true
         proxmox:
           insecureSkipVerify: true
