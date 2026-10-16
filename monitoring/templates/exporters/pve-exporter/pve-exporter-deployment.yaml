@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: pve-exporter
-          image: ghcr.io/prometheus-pve/prometheus-pve-exporter:3.10.0
+          image: ghcr.io/prometheus-pve/prometheus-pve-exporter:3.10.1
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
