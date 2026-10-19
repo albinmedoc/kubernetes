@@ -59,6 +59,10 @@ spec:
     app.kubernetes.io/component: ingress-controller
   ports:
     - protocol: TCP
+      name: web
+      port: 80
+      targetPort: web
+    - protocol: TCP
       name: tailscale
       port: 443
       targetPort: tailscale
