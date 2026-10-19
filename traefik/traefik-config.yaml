@@ -96,6 +96,12 @@ data:
           rule: "Host(`paperclip.albinmedoc.se`)"
           service: paperclip
           entrypoints: websecure
+        paperclip-weblio:
+          rule: "Host(`paperclip.weblio.se`)"
+          service: paperclip-weblio
+          entrypoints: websecure
+          tls:
+            certResolver: letsencrypt-weblio
 
       services:
         noop:
@@ -127,7 +133,11 @@ data:
         paperclip:
           loadBalancer:
             servers:
-              - url: "http://192.168.86.77:3100/"
+              - url: "http://192.168.86.77:3100"
+        paperclip-weblio:
+          loadBalancer:
+            servers:
+              - url: "http://192.168.86.234:3100"
 
       serversTransports:
         truenas:
