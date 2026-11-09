@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: alertmanager-telegram-test
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: alertmanager-telegram-test
+    app.kubernetes.io/component: alerting
+    app.kubernetes.io/part-of: monitoring
+spec:
+  groups:
+    - name: alertmanager-telegram-test
+      rules:
+        - alert: HermesTelegramTest
+          expr: vector(1)
+          for: 1m
+          labels:
+            severity: test
+          annotations:
+            summary: Telegram notifications are working
+            description: This temporary alert verifies the Prometheus to Alertmanager to Telegram notification path.
