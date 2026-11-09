@@ -1,0 +1,95 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: homelab-critical-alerts
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: homelab-critical-alerts
+    app.kubernetes.io/component: alerting
+    app.kubernetes.io/part-of: monitoring
+spec:
+  groups:
+    - name: homelab-ups-critical
+      rules:
+        - alert: UPSOnBattery
+          expr: ups_status == 2
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: UPS is running on battery
+            description: The UPS has been running on battery for more than two minutes.
+
+        - alert: UPSLowRuntime
+          expr: ups_battery_remaining_time_minutes < 10
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: UPS runtime is critically low
+            description: The UPS reports less than ten minutes of remaining battery runtime.
+
+        - alert: UPSLowCharge
+          expr: ups_battery_remaining_charge_percent < 25
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: UPS battery charge is critically low
+            description: The UPS battery charge has remained below 25 percent for more than two minutes.
+
+        - alert: UPSStatusUnknown
+          expr: ups_status == -1
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: UPS reports an unknown status
+            description: The UPS exporter has reported an unknown UPS state for more than five minutes.
+
+        - alert: UPSExporterDown
+          expr: up{job="apc-ups-exporter"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: UPS monitoring is unavailable
+            description: Prometheus has been unable to scrape the APC UPS exporter for more than five minutes.
+
+    - name: homelab-proxmox-critical
+      rules:
+        - alert: ProxmoxNodeDown
+          expr: pve_up{id="node/pve"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Proxmox node is down
+            description: The Proxmox exporter has reported the pve node offline for more than five minutes.
+
+        - alert: ProxmoxExporterDown
+          expr: up{job="pve-exporter"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Proxmox monitoring is unavailable
+            description: Prometheus has been unable to scrape the Proxmox exporter for more than five minutes.
+
+        - alert: ProxmoxStorageDown
+          expr: pve_up{id=~"storage/.+"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Proxmox storage is unavailable
+            description: Proxmox storage {{ "{{ $labels.id }}" }} has been unavailable for more than five minutes.
+
+        - alert: ProxmoxStorageAlmostFull
+          expr: (pve_disk_usage_bytes{id=~"storage/.+"} / pve_disk_size_bytes{id=~"storage/.+"}) > 0.90
+          for: 15m
+          labels:
+            severity: critical
+          annotations:
+            summary: Proxmox storage is more than 90 percent full
+            description: Proxmox storage {{ "{{ $labels.id }}" }} has remained above 90 percent usage for more than fifteen minutes.

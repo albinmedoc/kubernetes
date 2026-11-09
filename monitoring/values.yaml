@@ -42,7 +42,8 @@ kube-prometheus-stack:
               - alertname = "Watchdog"
           - receiver: telegram
             matchers:
-              - alertname = "HermesTelegramTest"
+              - severity = "critical"
+            repeat_interval: 1h
       receivers:
         - name: "null"
         - name: telegram
