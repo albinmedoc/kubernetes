@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: raidnow-lite
+  labels:
+    app.kubernetes.io/name: raidnow-lite
+    app.kubernetes.io/component: web
+    app.kubernetes.io/managed-by: kubectl
