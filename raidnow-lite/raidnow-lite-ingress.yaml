@@ -16,6 +16,3 @@ spec:
       services:
         - name: raidnow-lite
           port: 4173
-      middlewares:
-        - name: local-network
-          namespace: traefik
