@@ -37,6 +37,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: raidnow-lite-config
+            - secretRef:
+                name: raidnow-lite-secrets
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
