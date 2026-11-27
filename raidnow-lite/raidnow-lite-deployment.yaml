@@ -29,7 +29,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: raidnow-lite
-          image: ghcr.io/albinmedoc/raidnow-lite:v0.7.0
+          image: ghcr.io/albinmedoc/raidnow-lite:v0.8.0
           ports:
             - name: http
               containerPort: 4173
